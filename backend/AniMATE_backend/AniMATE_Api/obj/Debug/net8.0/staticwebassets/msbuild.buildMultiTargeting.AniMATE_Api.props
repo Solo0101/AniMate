@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\AniMATE_Api.props" />
+</Project>
