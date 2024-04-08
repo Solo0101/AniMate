@@ -1,6 +1,8 @@
-﻿using AniMATE_Api.Data;
+﻿using AniMATE_Api.AuthModels;
+using AniMATE_Api.Data;
 using AniMATE_Api.Interfaces;
 using AniMATE_Api.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AniMATE_Api.Controllers;
@@ -11,13 +13,18 @@ public class UserController : ControllerBase
 {
     private readonly DataContext _context;
     private readonly IUserService _userService;
+    private readonly UserManager<User> _userManager;
+    private readonly SignInManager<User> _signInManager;
 
-    public UserController(IUserService userService)
+    public UserController(IUserService userService, DataContext context, UserManager<User> userManager, SignInManager<User> signInManager)
     {
         _userService = userService;
+        _context = context;
+        _userManager = userManager;
+        _signInManager = signInManager;
     }
 
-    [HttpGet]
+    [HttpGet("getAll")]
     [ProducesResponseType(200, Type = typeof(IEnumerable<User>))]
     public IActionResult  GetAllUsers()
     {
@@ -29,7 +36,7 @@ public class UserController : ControllerBase
         return Ok(users);
     }
     
-    [HttpGet("{id}")]
+    [HttpGet("get/{id}")]
     [ProducesResponseType(200, Type = typeof(User))]
     public IActionResult GetUserById(string id)
     {
@@ -41,19 +48,38 @@ public class UserController : ControllerBase
         return Ok(user);
     }
     
-    [HttpPost]
+    [HttpPost("register")]
     [ProducesResponseType(201, Type = typeof(User))]
-    public IActionResult CreateUser([FromBody] User user)
+    public async Task<IActionResult> CreateUser(RegisterModel model)
     {
-        var newUser = _userService.CreateUser(user);
-        if(newUser == null)
+        var newUser = _userService.CreateUser(model);
+        var result = await _userManager.CreateAsync(newUser, newUser.PasswordHash!);
+        if(!result.Succeeded)
         {
-            return BadRequest();
+            return BadRequest(result.Errors);
         }
+        
         return CreatedAtAction("GetUserById", new { id = newUser.Id }, newUser);
     }
     
-    [HttpPut("{id}")]
+    [HttpPost("login")]
+    [ProducesResponseType(200, Type = typeof(User))]
+    public async Task<IActionResult> LoginUser(LoginModel model)
+    {
+        var user = await _userManager.FindByEmailAsync(model.Email!);
+        if(user == null)
+        {
+            return NotFound();
+        }
+        var result = await _signInManager.CheckPasswordSignInAsync(user, model.Password!, false);
+        if(!result.Succeeded)
+        {
+            return BadRequest();
+        }
+        return Ok(user);
+    }
+    
+    [HttpPut("update/{id}")]
     [ProducesResponseType(200, Type = typeof(User))]
     public IActionResult UpdateUser(string id, [FromBody] User user)
     {
@@ -69,7 +95,7 @@ public class UserController : ControllerBase
         return Ok(updatedUser);
     }
     
-    [HttpDelete("{id}")]
+    [HttpDelete("delete/{id}")]
     [ProducesResponseType(204)]
     public IActionResult DeleteUser(string id)
     {

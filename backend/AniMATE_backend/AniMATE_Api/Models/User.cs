@@ -6,24 +6,25 @@ namespace AniMATE_Api.Models;
 public class User : IdentityUser
 {
        [Required]
-       public string Id { get; set; }
+       public string? Name { get; set; }
        
        [Required]
-       public string UserName { get; set; }
+       [StringLength(256, MinimumLength = 3)]
+       public string? Country { get; set; }
        
        [Required]
-       public string Country { get; set; }
+       [StringLength(256, MinimumLength = 3)]
+       public string? CountyOrState { get; set; }
        
        [Required]
-       public string County_or_State { get; set; }
+       [StringLength(256, MinimumLength = 3)]
+       public string? City { get; set; }
        
        [Required]
-       public string City { get; set; }
+       [StringLength(15, MinimumLength = 10)]
+       public override string? PhoneNumber { get; set; }
        
-       [Required]
-       public string PhoneNumber { get; set; }
-       
-       public ICollection<Pet> Pets { get; set; }
+       public ICollection<Pet>? Pets { get; set; }
        
        // TODO: Add image property
 }

@@ -12,16 +12,20 @@ public enum GenderType
 public class Pet
 {   
     [Required]
-    public string Id { get; set; }
+    [StringLength(1024)]
+    public string? Id { get; set; }
     
     [Required]
-    public string Name { get; set; }
+    [StringLength(256, MinimumLength = 3)]
+    public string? Name { get; set; }
     
     [Required]
-    public string AnimalType { get; set; } // TODO: Change to updatable enum
+    [StringLength(256, MinimumLength = 3)]
+    public string? AnimalType { get; set; } // TODO: Change to updatable enum
     
     [Required]
-    public string Breed { get; set; }
+    [StringLength(256, MinimumLength = 3)]
+    public string? Breed { get; set; }
     
     [Required]
     public int Age { get; set; }
@@ -29,9 +33,10 @@ public class Pet
     [Required]
     public GenderType Gender { get; set; }
     
-    public string Description { get; set; }
+    [StringLength(1024)]
+    public string? Description { get; set; }
     
-    public User Owner { get; set; }
+    public User? Owner { get; set; }
     
     // TODO: Add image property
     
