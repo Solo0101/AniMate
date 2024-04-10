@@ -6,6 +6,7 @@ namespace AniMATE_Api.Models;
 public class User : IdentityUser
 {
        [Required]
+       [StringLength(256, MinimumLength = 3)]
        public string? Name { get; set; }
        
        [Required]

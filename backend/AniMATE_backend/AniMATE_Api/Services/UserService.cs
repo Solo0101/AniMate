@@ -2,7 +2,6 @@
 using AniMATE_Api.Data;
 using AniMATE_Api.Interfaces;
 using AniMATE_Api.Models;
-using Microsoft.AspNetCore.Mvc;
 
 namespace AniMATE_Api.Services;
 
@@ -14,19 +13,19 @@ public class UserService : IUserService
     {
         _context = context;
     }
-    public ICollection<User> GetAllUsers()
+    public List<User> GetAllUsers()
     {
        return _context.Users.ToList();
     }
 
-    public User GetUserById(string id)
+    public User? GetUserById(string id)
     {
-       return _context.Users.Where(u => u.Id == id).FirstOrDefault();
+       return _context.Users.FirstOrDefault(u => u.Id == id);
     }
 
-    public User GetUserByEmail(string email)
+    public User? GetUserByEmail(string email)
     {
-       return _context.Users.Where(u => u.Email == email).FirstOrDefault();
+       return _context.Users.FirstOrDefault(u => u.Email == email);
     }
 
     public User CreateUser(RegisterModel model)
@@ -52,6 +51,12 @@ public class UserService : IUserService
 
     public void DeleteUser(string id)
     {
-       _context.Users.Remove(GetUserById(id));
+       _context.Users.Remove(GetUserById(id)!);
     }
+
+    public bool UserExists(string id)
+    {
+        return _context.Users.Any(u => u.Id == id);
+    }
+    
 }

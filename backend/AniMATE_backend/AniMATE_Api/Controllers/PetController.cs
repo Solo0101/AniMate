@@ -11,119 +11,192 @@ namespace AniMATE_Api.Controllers;
 public class PetController : ControllerBase
 {
     private readonly IPetService _petService;
+    private readonly IUserService _userService;
 
-    public PetController(IPetService petService)
+    public PetController(IPetService petService, IUserService userService)
     {
         _petService = petService;
+        _userService = userService;
     }
-    
-    [HttpGet]
+
+    [HttpGet("getAll")]
     [ProducesResponseType(200, Type = typeof(IEnumerable<Pet>))]
+    [ProducesResponseType(400)]
     public IActionResult GetAllPets()
     {
         var pets = _petService.GetAllPets();
-        if(ModelState.IsValid)
+        if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
-        } 
-        
+        }
+
         return Ok(pets);
     }
-    
+
     [HttpGet("{id}")]
     [ProducesResponseType(200, Type = typeof(Pet))]
+    [ProducesResponseType(400)]
     public IActionResult GetPetById(string id)
     {
-        var pet = _petService.GetPetById(id);
-        if(pet == null)
+        if (!_petService.PetExists(id))
         {
             return NotFound();
         }
+        var pet = _petService.GetPetById(id);
+
         return Ok(pet);
     }
-    
-    [HttpPost]
-    [ProducesResponseType(201, Type = typeof(Pet))]
-    public IActionResult CreatePet([FromBody] Pet pet)
+
+    [HttpPost("create")]
+    [ProducesResponseType(204, Type = typeof(Pet))]
+    [ProducesResponseType(400)]
+    public IActionResult CreatePet([FromBody] Pet petCreate, [FromQuery] string ownerId)
     {
-        var newPet = _petService.CreatePet(pet);
-        if(newPet == null)
+        if (petCreate == null)
         {
-            return BadRequest();
+            return BadRequest(ModelState);
         }
-        return CreatedAtAction("GetPetById", new { id = newPet.Id }, newPet);
+
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
+        petCreate.Owner = _userService.GetUserById(ownerId);
+
+        if (!_petService.CreatePet(petCreate, ownerId))
+        {
+            ModelState.AddModelError("", "Something went wrong while creating the pet!");
+            return StatusCode(500, ModelState);
+        }
+
+        return Ok("Pet created successfully!");
     }
-    
+
     [HttpPut("{id}")]
     [ProducesResponseType(200, Type = typeof(Pet))]
+    [ProducesResponseType(400)]
     public IActionResult UpdatePet(string id, [FromBody] Pet pet)
     {
-        if(id != pet.Id)
+        if (!ModelState.IsValid)
         {
             return BadRequest();
         }
+
         var updatedPet = _petService.UpdatePet(pet);
-        if(updatedPet == null)
+        if (updatedPet == null)
         {
             return NotFound();
         }
+
         return Ok(updatedPet);
     }
-    
+
     [HttpDelete("{id}")]
     [ProducesResponseType(204)]
+    [ProducesResponseType(400)]
     public IActionResult DeletePet(string id)
     {
         _petService.DeletePet(id);
         return NoContent();
     }
-    
+
     [HttpGet("owner/{ownerId}")]
     [ProducesResponseType(200, Type = typeof(IEnumerable<Pet>))]
+    [ProducesResponseType(400)]
     public IActionResult GetPetsByOwner(string ownerId)
     {
         var pets = _petService.GetPetsByOwner(ownerId);
-        if(pets == null)
+        if (pets.Count == 0)
         {
             return NotFound();
         }
+
         return Ok(pets);
     }
-    
+
     [HttpGet("type/{type}")]
     [ProducesResponseType(200, Type = typeof(IEnumerable<Pet>))]
+    [ProducesResponseType(400)]
     public IActionResult GetPetsByType(string type)
     {
         var pets = _petService.GetPetsByType(type);
-        if(pets == null)
+        if (pets.Count == 0)
         {
             return NotFound();
         }
+
         return Ok(pets);
     }
-    
+
     [HttpGet("breed/{breed}")]
     [ProducesResponseType(200, Type = typeof(IEnumerable<Pet>))]
+    [ProducesResponseType(400)]
     public IActionResult GetPetsByBreed(string breed)
     {
         var pets = _petService.GetPetsByBreed(breed);
-        if(pets == null)
+        if (pets.Count == 0)
         {
             return NotFound();
         }
+
         return Ok(pets);
     }
-    
+
     [HttpGet("age/{age}")]
     [ProducesResponseType(200, Type = typeof(IEnumerable<Pet>))]
+    [ProducesResponseType(400)]
     public IActionResult GetPetsByAge(int age)
     {
         var pets = _petService.GetPetsByAge(age);
-        if(pets == null)
+        if (pets.Count == 0)
         {
             return NotFound();
         }
+
         return Ok(pets);
     }
-    
+
+    [HttpGet("gender/{gender}")]
+    [ProducesResponseType(200, Type = typeof(IEnumerable<Pet>))]
+    [ProducesResponseType(400)]
+    public IActionResult GetPetsByGender(GenderType gender)
+    {
+        var pets = _petService.GetPetsByGender(gender);
+        if (pets.Count == 0)
+        {
+            return NotFound();
+        }
+
+        return Ok(pets);
+
+    }
+
+    [HttpGet("type/{type}/gender/{gender}")]
+    [ProducesResponseType(200, Type = typeof(IEnumerable<Pet>))]
+    [ProducesResponseType(400)]
+    public IActionResult GetPetsByTypeAndGender(string type, GenderType gender)
+    {
+        var pets = _petService.GetPetsByTypeAndGender(type, gender);
+        if (pets.Count == 0)
+        {
+            return NotFound();
+        }
+
+        return Ok(pets);
+    }
+
+    [HttpGet("type/{type}/breed/{breed}/gender/{gender}")]
+    [ProducesResponseType(200, Type = typeof(IEnumerable<Pet>))]
+    [ProducesResponseType(400)]
+    public IActionResult GetPetsByTypeBreedAndGender(string type, string breed, GenderType gender)
+    {
+        var pets = _petService.GetPetsByTypeBreedAndGender(type, breed, gender);
+        if (pets.Count == 0)
+        {
+            return NotFound();
+        }
+
+        return Ok(pets);
+    }
 }

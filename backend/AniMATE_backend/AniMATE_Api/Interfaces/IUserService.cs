@@ -6,10 +6,11 @@ namespace AniMATE_Api.Interfaces;
 
 public interface IUserService
 {
-    ICollection<User> GetAllUsers();
-    User GetUserById(string id);
-    User GetUserByEmail(string email);
+    List<User> GetAllUsers();
+    User? GetUserById(string id);
+    User? GetUserByEmail(string email);
     User CreateUser(RegisterModel model);
     User UpdateUser(User user);
     void DeleteUser(string id);
+    bool UserExists(string id);
 }

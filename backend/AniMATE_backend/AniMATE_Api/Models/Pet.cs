@@ -11,7 +11,7 @@ public enum GenderType
 
 public class Pet
 {   
-    [Required]
+    [Key]
     [StringLength(1024)]
     public string? Id { get; set; }
     

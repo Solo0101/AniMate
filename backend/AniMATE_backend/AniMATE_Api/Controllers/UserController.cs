@@ -1,5 +1,4 @@
 ﻿using AniMATE_Api.AuthModels;
-using AniMATE_Api.Data;
 using AniMATE_Api.Interfaces;
 using AniMATE_Api.Models;
 using Microsoft.AspNetCore.Identity;
@@ -11,21 +10,20 @@ namespace AniMATE_Api.Controllers;
 [ApiController]
 public class UserController : ControllerBase
 {
-    private readonly DataContext _context;
     private readonly IUserService _userService;
     private readonly UserManager<User> _userManager;
     private readonly SignInManager<User> _signInManager;
 
-    public UserController(IUserService userService, DataContext context, UserManager<User> userManager, SignInManager<User> signInManager)
+    public UserController(IUserService userService, UserManager<User> userManager, SignInManager<User> signInManager)
     {
         _userService = userService;
-        _context = context;
         _userManager = userManager;
         _signInManager = signInManager;
     }
 
     [HttpGet("getAll")]
     [ProducesResponseType(200, Type = typeof(IEnumerable<User>))]
+    [ProducesResponseType(400)]
     public IActionResult  GetAllUsers()
     {
         var users = _userService.GetAllUsers();
@@ -38,10 +36,11 @@ public class UserController : ControllerBase
     
     [HttpGet("get/{id}")]
     [ProducesResponseType(200, Type = typeof(User))]
+    [ProducesResponseType(400)]
     public IActionResult GetUserById(string id)
     {
         var user = _userService.GetUserById(id);
-        if(user == null)
+        if(!_userService.UserExists(id))
         {
             return NotFound();
         }
@@ -50,6 +49,7 @@ public class UserController : ControllerBase
     
     [HttpPost("register")]
     [ProducesResponseType(201, Type = typeof(User))]
+    [ProducesResponseType(400)]
     public async Task<IActionResult> CreateUser(RegisterModel model)
     {
         var newUser = _userService.CreateUser(model);
@@ -64,14 +64,15 @@ public class UserController : ControllerBase
     
     [HttpPost("login")]
     [ProducesResponseType(200, Type = typeof(User))]
+    [ProducesResponseType(400)]
     public async Task<IActionResult> LoginUser(LoginModel model)
     {
         var user = await _userManager.FindByEmailAsync(model.Email!);
-        if(user == null)
+        if(user != null && !_userService.UserExists(user.Id))
         {
             return NotFound();
         }
-        var result = await _signInManager.CheckPasswordSignInAsync(user, model.Password!, false);
+        var result = await _signInManager.CheckPasswordSignInAsync(user!, model.Password!, false);
         if(!result.Succeeded)
         {
             return BadRequest();
@@ -81,25 +82,32 @@ public class UserController : ControllerBase
     
     [HttpPut("update/{id}")]
     [ProducesResponseType(200, Type = typeof(User))]
+    [ProducesResponseType(400)]
     public IActionResult UpdateUser(string id, [FromBody] User user)
     {
-        if(id != user.Id)
-        {
-            return BadRequest();
-        }
-        var updatedUser = _userService.UpdateUser(user);
-        if(updatedUser == null)
+        if(!_userService.UserExists(id))
         {
             return NotFound();
+        }
+        var updatedUser = _userService.UpdateUser(user);
+        if(!ModelState.IsValid)
+        {
+            return BadRequest();
         }
         return Ok(updatedUser);
     }
     
     [HttpDelete("delete/{id}")]
     [ProducesResponseType(204)]
+    [ProducesResponseType(400)]
     public IActionResult DeleteUser(string id)
     {
+        if(!_userService.UserExists(id))
+        {
+            return NotFound();
+        }
         _userService.DeleteUser(id);
         return NoContent();
     }
+    
 }

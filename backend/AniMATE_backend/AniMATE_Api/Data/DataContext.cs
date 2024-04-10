@@ -10,11 +10,6 @@ namespace AniMATE_Api.Data
         {
             
         }
-        
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            base.OnModelCreating(builder);
-        }
         public DbSet<Pet> Pets { get; set; }
         
     }
