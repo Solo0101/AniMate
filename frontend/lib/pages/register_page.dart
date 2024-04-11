@@ -1,7 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/components/my_textfield.dart';
-import 'package:frontend/pages/login_page.dart';
+import 'package:frontend/constants/router_constants.dart';
 import 'package:flutter/gestures.dart';
 import 'package:frontend/services/validate_credentials.dart';
 
@@ -46,7 +45,7 @@ class RegisterPage extends StatelessWidget {
                 ),
               ),
             ),
-            Container(
+            SizedBox(
               height: MediaQuery.of(context).size.height * 0.65,
               child: Scrollbar(
                 thickness: 5.0,
@@ -56,9 +55,9 @@ class RegisterPage extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Padding(
+                      const Padding(
                         padding:
-                            const EdgeInsets.fromLTRB(35.0, 30.0, 0.0, 15.0),
+                            EdgeInsets.fromLTRB(35.0, 30.0, 0.0, 15.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -108,7 +107,7 @@ class RegisterPage extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Text(
+                                const Text(
                                   'Already have an account?',
                                   style: TextStyle(
                                     fontSize: 15.0,

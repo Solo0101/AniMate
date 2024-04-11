@@ -1,30 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/pages/register_page.dart';
+import 'package:frontend/shared/router.dart';
+
+import 'constants/style_constants.dart';
 
 void main() {
   runApp(const AniMATEApp());
 }
 
 class AniMATEApp extends StatelessWidget {
-  const AniMATEApp({Key? key}) : super(key: key);
+  const AniMATEApp({super.key});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
+    final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'AniMATE',
+      debugShowCheckedModeBanner: false,
+      navigatorKey: navigatorKey,
+      onGenerateRoute: RouteGenerator.generateRoute,
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
         primarySwatch: Colors.deepOrange,
-        fontFamily: 'HappyMonkey'
+        fontFamily: fontFamily
       ),
       darkTheme: ThemeData.dark(),
       home: RegisterPage(),
