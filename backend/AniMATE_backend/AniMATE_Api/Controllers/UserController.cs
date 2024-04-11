@@ -34,13 +34,34 @@ public class UserController : ControllerBase
         return Ok(users);
     }
     
-    [HttpGet("get/{id}")]
+    [HttpGet("{id}")]
     [ProducesResponseType(200, Type = typeof(User))]
     [ProducesResponseType(400)]
     public IActionResult GetUserById(string id)
     {
         var user = _userService.GetUserById(id);
         if(!_userService.UserExists(id))
+        {
+            return NotFound();
+        }
+        return Ok(user);
+    }
+    
+    [HttpGet($"get/{{email}}")]
+    [ProducesResponseType(200, Type = typeof(User))]
+    [ProducesResponseType(400)]
+    public IActionResult GetUserByEmail(string email)
+    {
+        var user = _userService.GetUserByEmail(email);
+        if(email == null)
+        {
+            return BadRequest();
+        }
+        if(user == null)
+        {
+            return NotFound();
+        }
+        if(!_userService.UserExists(user!.Id))
         {
             return NotFound();
         }
@@ -81,20 +102,34 @@ public class UserController : ControllerBase
     }
     
     [HttpPut("update/{id}")]
-    [ProducesResponseType(200, Type = typeof(User))]
+    [ProducesResponseType(204, Type = typeof(User))]
     [ProducesResponseType(400)]
-    public IActionResult UpdateUser(string id, [FromBody] User user)
+    [ProducesResponseType(404)]
+    public IActionResult UpdateUser(string id, [FromBody] User updatedUser)
     {
+        if(updatedUser == null)
+        {
+            return BadRequest(ModelState);
+        }
         if(!_userService.UserExists(id))
         {
             return NotFound();
         }
-        var updatedUser = _userService.UpdateUser(user);
+        if(updatedUser.Id != id)
+        {
+            return BadRequest();
+        }
         if(!ModelState.IsValid)
         {
             return BadRequest();
         }
-        return Ok(updatedUser);
+        if(!_userService.UpdateUser(updatedUser))
+        {
+            ModelState.AddModelError("", "Something went wrong while updating the user!");
+            return StatusCode(500, ModelState);
+        }
+        
+        return NoContent();
     }
     
     [HttpDelete("delete/{id}")]

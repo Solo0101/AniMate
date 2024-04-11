@@ -1,8 +1,6 @@
-﻿using AniMATE_Api.Data;
-using AniMATE_Api.Interfaces;
+﻿using AniMATE_Api.Interfaces;
 using AniMATE_Api.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace AniMATE_Api.Controllers;
 
@@ -74,22 +72,34 @@ public class PetController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    [ProducesResponseType(200, Type = typeof(Pet))]
+    [ProducesResponseType(204, Type = typeof(Pet))]
     [ProducesResponseType(400)]
-    public IActionResult UpdatePet(string id, [FromBody] Pet pet)
+    [ProducesResponseType(404)]
+    public IActionResult UpdatePet(string id, [FromBody] Pet updatedPet)
     {
+        if(updatedPet == null) 
+        {
+            return BadRequest(ModelState);
+        }
+        if (!_petService.PetExists(id))
+        {
+            return NotFound();
+        } 
+        if(updatedPet.Id != id)
+        {
+            return BadRequest();
+        }
         if (!ModelState.IsValid)
         {
             return BadRequest();
         }
-
-        var updatedPet = _petService.UpdatePet(pet);
-        if (updatedPet == null)
+        if(!_petService.UpdatePet(updatedPet))
         {
-            return NotFound();
+              ModelState.AddModelError("", "Something went wrong while updating the pet!");
+              return StatusCode(500, ModelState);
         }
 
-        return Ok(updatedPet);
+        return NoContent();
     }
 
     [HttpDelete("{id}")]

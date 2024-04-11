@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AniMATE_Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6738581952f73c6da3db8949492aa9346e365d42")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7966f2f25a69adbea01bac94645ef98936380d87")]
 [assembly: System.Reflection.AssemblyProductAttribute("AniMATE_Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AniMATE_Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -25,7 +25,7 @@ public class UserService : IUserService
 
     public User? GetUserByEmail(string email)
     {
-       return _context.Users.FirstOrDefault(u => u.Email == email);
+       return _context.Users.Where(u => u.Email == email).FirstOrDefault();
     }
 
     public User CreateUser(RegisterModel model)
@@ -44,9 +44,11 @@ public class UserService : IUserService
         return _context.Users.Add(user).Entity;
     }
 
-    public User UpdateUser(User user)
+    public bool UpdateUser(User user)
     {
-        return _context.Users.Update(user).Entity;
+        // TODO: Solve the issue with updating the user
+        _context.Users.Update(user);
+        return Save();
     }
 
     public void DeleteUser(string id)
@@ -58,5 +60,8 @@ public class UserService : IUserService
     {
         return _context.Users.Any(u => u.Id == id);
     }
-    
+    public bool Save()
+    {
+        return _context.SaveChanges() >= 0;
+    }
 }

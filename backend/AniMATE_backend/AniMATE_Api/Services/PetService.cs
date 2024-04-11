@@ -14,7 +14,7 @@ public class PetService : IPetService
     }
     public ICollection<Pet?> GetAllPets()
     {
-        return _context.Pets.ToList();
+        return _context.Pets.ToList()!;
     }
 
     public Pet? GetPetById(string id)
@@ -24,37 +24,37 @@ public class PetService : IPetService
 
     public ICollection<Pet?> GetPetsByOwner(string ownerId)
     {
-        return _context.Pets.Where(p => p.Owner!.Id == ownerId).ToList();
+        return _context.Pets.Where(p => p.Owner!.Id == ownerId).ToList()!;
     }
 
     public ICollection<Pet?> GetPetsByType(string type)
     {
-        return _context.Pets.Where(p => p.AnimalType == type).ToList();
+        return _context.Pets.Where(p => p.AnimalType == type).ToList()!;
     }
 
     public ICollection<Pet?> GetPetsByBreed(string breed)
     {
-        return _context.Pets.Where(p => p!.Breed == breed).ToList();
+        return _context.Pets.Where(p => p.Breed == breed).ToList()!;
     }
 
     public ICollection<Pet?> GetPetsByAge(int age)
     {
-       return _context.Pets.Where(p => p.Age == age).ToList();
+       return _context.Pets.Where(p => p.Age == age).ToList()!;
     }
 
     public ICollection<Pet?> GetPetsByGender(GenderType gender)
     {
-        return _context.Pets.Where(p => p.Gender == gender).ToList();
+        return _context.Pets.Where(p => p.Gender == gender).ToList()!;
     }
 
     public ICollection<Pet?> GetPetsByTypeAndGender(string type, GenderType gender)
     {
-        return _context.Pets.Where(p => p.AnimalType == type && p.Gender == gender).ToList();
+        return _context.Pets.Where(p => p.AnimalType == type && p.Gender == gender).ToList()!;
     }
 
     public ICollection<Pet?> GetPetsByTypeBreedAndGender(string type, string breed, GenderType gender)
     {
-        return _context.Pets.Where(p => p.AnimalType == type && p.Breed == breed && p.Gender == gender).ToList();
+        return _context.Pets.Where(p => p.AnimalType == type && p.Breed == breed && p.Gender == gender).ToList()!;
     }
 
     public bool CreatePet(Pet pet, string ownerId)
@@ -63,9 +63,10 @@ public class PetService : IPetService
         return Save();
     }
 
-    public Pet? UpdatePet(Pet pet)
+    public bool UpdatePet(Pet pet)
     {
-        return _context.Pets.Update(pet).Entity;
+       _context.Pets.Update(pet);
+       return Save();
     }
 
     public void DeletePet(string id)

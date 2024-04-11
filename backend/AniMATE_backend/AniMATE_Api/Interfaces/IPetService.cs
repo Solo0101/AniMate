@@ -14,7 +14,7 @@ public interface IPetService
     ICollection<Pet?> GetPetsByTypeAndGender(string type, GenderType gender);
     ICollection<Pet?> GetPetsByTypeBreedAndGender(string type, string breed, GenderType gender);
     bool CreatePet(Pet pet, string ownerId);
-    Pet? UpdatePet(Pet pet);
+     bool UpdatePet(Pet pet);
     void DeletePet(string id);
     bool PetExists(string id);
     bool Save();
