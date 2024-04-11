@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/components/my_textfield.dart';
 import 'package:frontend/pages/login_page.dart';
@@ -45,7 +44,7 @@ class RegisterPage extends StatelessWidget {
                 ),
               ),
             ),
-            Container(
+            SizedBox(
               height: MediaQuery.of(context).size.height * 0.65,
               child: Scrollbar(
                 thickness: 5.0,
@@ -54,9 +53,9 @@ class RegisterPage extends StatelessWidget {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      Padding(
+                      const Padding(
                         padding:
-                            const EdgeInsets.fromLTRB(35.0, 30.0, 0.0, 15.0),
+                            EdgeInsets.fromLTRB(35.0, 30.0, 0.0, 15.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -106,7 +105,7 @@ class RegisterPage extends StatelessWidget {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
+                                const Text(
                                   'Already have an account?',
                                   style: TextStyle(
                                     fontSize: 20.0,
@@ -116,7 +115,7 @@ class RegisterPage extends StatelessWidget {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    Text(
+                                    const Text(
                                       'Login ',
                                       style: TextStyle(
                                         fontSize: 20.0,
@@ -126,21 +125,21 @@ class RegisterPage extends StatelessWidget {
                                     RichText(
                                       text: TextSpan(
                                           text: 'here',
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             fontFamily: 'HappyMonkey',
                                             color: Colors.blue,
                                             fontSize: 20.0
                                           ),
-                                          recognizer: new TapGestureRecognizer()
+                                          recognizer: TapGestureRecognizer()
                                             ..onTap = () {
                                               Navigator.push(
                                                             context,
                                                             MaterialPageRoute(
-                                                                builder: (context) => LoginPage()));
+                                                                builder: (context) => const LoginPage()));
                                                       },
                                             ),
                                     ),
-                                    Text(
+                                    const Text(
                                       '!',
                                       style: TextStyle(
                                         fontSize: 20.0,
