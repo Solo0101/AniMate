@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/components/my_textfield.dart';
+import 'package:frontend/pages/login_page.dart';
 import 'package:frontend/constants/router_constants.dart';
 import 'package:flutter/gestures.dart';
 import 'package:frontend/services/validate_credentials.dart';
@@ -161,7 +163,12 @@ class RegisterPage extends StatelessWidget {
                                         MaterialPageRoute(
                                             builder: (context) => const ValidateCredentials()));
                                   }, child: Container(
-                                    decoration: const BoxDecoration(color: Color(0xFFBEC7C6), ),
+                                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                                    // margin: const EdgeInsets.symmetric(horizontal: 10),
+                                    decoration: BoxDecoration(
+                                        color: const Color(0xFFBEC7C6),
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
                                     child: const Row(
                                         children: [
                                           Text(
