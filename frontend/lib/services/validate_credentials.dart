@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ValidateCredentials extends StatelessWidget {
-  const ValidateCredentials({Key? key}) : super(key: key);
+  const ValidateCredentials({super.key});
 
   @override
   Widget build(BuildContext context) {
