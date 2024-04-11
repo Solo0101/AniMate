@@ -4,6 +4,7 @@ import 'package:frontend/constants/router_constants.dart';
 import 'package:flutter/gestures.dart';
 import 'package:frontend/constants/style_constants.dart';
 import 'package:frontend/services/validate_credentials.dart';
+import 'package:frontend/components/my_button.dart';
 
 class RegisterPage extends StatelessWidget {
   RegisterPage({super.key});
@@ -153,40 +154,7 @@ class RegisterPage extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  TextButton(
-                                      onPressed: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const ValidateCredentials()));
-                                      },
-                                      child: Container(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 10, horizontal: 15),
-                                        // margin: const EdgeInsets.symmetric(horizontal: 10),
-                                        decoration: BoxDecoration(
-                                          color: utilityButtonColor,
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                        ),
-                                        child: const Row(children: [
-                                          Text(
-                                            'Sign in',
-                                            style: TextStyle(
-                                                fontSize: 20.0,
-                                                color: buttonTextColor),
-                                          )
-                                        ]),
-                                      )),
-                                ],
-                              ),
-                            )
+                            const MyButton(buttonColor: utilityButtonColor, textColor: buttonTextColor, buttonText: 'Sign in', widget: ValidateCredentials()),
                           ],
                         ),
                       )

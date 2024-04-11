@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/components/my_button.dart';
 import 'package:frontend/components/my_textfield.dart';
 import 'package:frontend/constants/router_constants.dart';
 import 'package:flutter/gestures.dart';
@@ -122,36 +123,9 @@ class LoginPage extends StatelessWidget {
                           ],
                         ),
                         const SizedBox(height: 15),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            TextButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const ValidateCredentials()));
-                                },
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 10, horizontal: 15),
-                                  // margin: const EdgeInsets.symmetric(horizontal: 10),
-                                  decoration: BoxDecoration(
-                                    color: utilityButtonColor,
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  child: const Row(children: [
-                                    Text(
-                                      'Log in',
-                                      style: TextStyle(
-                                          fontSize: 20.0,
-                                          color: buttonTextColor),
-                                    )
-                                  ]),
-                                )),
-                          ],
-                        )
+                        const MyButton(buttonColor: utilityButtonColor, textColor: buttonTextColor, buttonText: 'Log in', widget: ValidateCredentials()),
+                        const MyButton(buttonColor: dangerousButtonColor, textColor: buttonTextColor, buttonText: 'Forgot Password', widget: ValidateCredentials())
+
                       ],
                     ),
                   )
