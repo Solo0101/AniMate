@@ -104,10 +104,10 @@ class RegisterPage extends StatelessWidget {
                             const EdgeInsets.fromLTRB(35.0, 15.0, 35.0, 20.0),
                         child: Column(
                           children: [
-                            Row(
+                            const Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                const Text(
+                                Text(
                                   'Already have an account?',
                                   style: TextStyle(
                                     fontSize: 15.0,
@@ -120,7 +120,7 @@ class RegisterPage extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Text(
+                                const Text(
                                   'Login ',
                                   style: TextStyle(
                                     fontSize: 15.0,
@@ -130,21 +130,18 @@ class RegisterPage extends StatelessWidget {
                                 RichText(
                                   text: TextSpan(
                                       text: 'here',
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontFamily: 'HappyMonkey',
                                         color: Colors.blue,
                                         fontSize: 15.0
                                       ),
-                                      recognizer: new TapGestureRecognizer()
+                                      recognizer: TapGestureRecognizer()
                                         ..onTap = () {
-                                          Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                            builder: (context) => LoginPage()));
+                                          Navigator.of(context).pushNamed(loginPageRoute);
                                                   },
                                         ),
                                 ),
-                                Text(
+                                const Text(
                                   '!',
                                   style: TextStyle(
                                     fontSize: 10.0,
@@ -162,10 +159,10 @@ class RegisterPage extends StatelessWidget {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => ValidateCredentials()));
+                                            builder: (context) => const ValidateCredentials()));
                                   }, child: Container(
-                                    decoration: BoxDecoration(color: Color(0xFFBEC7C6), ),
-                                    child: Row(
+                                    decoration: const BoxDecoration(color: Color(0xFFBEC7C6), ),
+                                    child: const Row(
                                         children: [
                                           Text(
                                               'Sign in',
