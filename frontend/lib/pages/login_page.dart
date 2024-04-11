@@ -6,10 +6,13 @@ import 'package:frontend/constants/style_constants.dart';
 import 'package:frontend/services/validate_credentials.dart';
 
 class LoginPage extends StatelessWidget {
-   LoginPage({super.key});
+  LoginPage({super.key});
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+
+  final double topContainerPercentage =
+      0.3; //bottom percentage will be the rest of the page
 
   @override
   Widget build(BuildContext context) {
@@ -20,36 +23,36 @@ class LoginPage extends StatelessWidget {
         child: Column(
           children: <Widget>[
             Container(
-              height: MediaQuery.of(context).size.height * 0.35,
+              height:
+                  MediaQuery.of(context).size.height * topContainerPercentage,
               color: primaryGreen,
               child: const Center(
                 child: SafeArea(
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(
-                        height: 50,
-                      ),
                       Text('AniMATE',
-                          style:
-                          TextStyle(fontSize: 40.0, color: primaryTextColor)),
+                          style: TextStyle(
+                              fontSize: 40.0, color: primaryTextColor)),
                       SizedBox(
                         height: 20,
                       ),
                       Text('Welcome!',
-                          style: TextStyle(fontSize: 25.0, color: primaryTextColor))
+                          style: TextStyle(
+                              fontSize: 25.0, color: primaryTextColor))
                     ],
                   ),
                 ),
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.65,
+              height: MediaQuery.of(context).size.height *
+                  (1 - topContainerPercentage),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Padding(
-                    padding:
-                    EdgeInsets.fromLTRB(35.0, 30.0, 0.0, 15.0),
+                    padding: EdgeInsets.fromLTRB(35.0, 30.0, 0.0, 15.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
@@ -72,12 +75,10 @@ class LoginPage extends StatelessWidget {
                     obscureText: true,
                   ),
                   Padding(
-                    padding:
-                    const EdgeInsets.fromLTRB(40.0, 15.0, 35.0, 20.0),
+                    padding: const EdgeInsets.fromLTRB(40.0, 15.0, 35.0, 20.0),
                     child: Column(
                       children: [
                         const Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Text(
                               'Don\'t have an account?',
@@ -88,9 +89,7 @@ class LoginPage extends StatelessWidget {
                             ),
                           ],
                         ),
-
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             const Text(
                               'Register ',
@@ -105,11 +104,11 @@ class LoginPage extends StatelessWidget {
                                 style: const TextStyle(
                                     fontFamily: 'HappyMonkey',
                                     color: Colors.blue,
-                                    fontSize: 15.0
-                                ),
+                                    fontSize: 15.0),
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
-                                    Navigator.of(context).pushNamed(registerPageRoute);
+                                    Navigator.of(context)
+                                        .pushNamed(registerPageRoute);
                                   },
                               ),
                             ),
@@ -122,37 +121,37 @@ class LoginPage extends StatelessWidget {
                             ),
                           ],
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              TextButton(onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => const ValidateCredentials()));
-                              }, child: Container(
-                                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                                // margin: const EdgeInsets.symmetric(horizontal: 10),
-                                decoration: BoxDecoration(
-                                  color: utilityButtonColor,
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                                child: const Row(
-                                    children: [
-                                      Text(
-                                        'Log in',
-                                        style: TextStyle(fontSize: 20.0, color: buttonTextColor),
-                                      )
-                                    ]
-
-                                ),
-                              )),
-                            ],
-                          ),
+                        const SizedBox(height: 15),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const ValidateCredentials()));
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 10, horizontal: 15),
+                                  // margin: const EdgeInsets.symmetric(horizontal: 10),
+                                  decoration: BoxDecoration(
+                                    color: utilityButtonColor,
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                  child: const Row(children: [
+                                    Text(
+                                      'Log in',
+                                      style: TextStyle(
+                                          fontSize: 20.0,
+                                          color: buttonTextColor),
+                                    )
+                                  ]),
+                                )),
+                          ],
                         )
-
                       ],
                     ),
                   )

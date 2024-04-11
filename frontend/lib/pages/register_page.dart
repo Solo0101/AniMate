@@ -15,6 +15,8 @@ class RegisterPage extends StatelessWidget {
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
 
+  final double topContainerPercentage = 0.3;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,30 +26,31 @@ class RegisterPage extends StatelessWidget {
         child: Column(
           children: <Widget>[
             Container(
-              height: MediaQuery.of(context).size.height * 0.35,
+              height:
+                  MediaQuery.of(context).size.height * topContainerPercentage,
               color: primaryGreen,
               child: const Center(
                 child: SafeArea(
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(
-                        height: 50,
-                      ),
                       Text('AniMATE',
-                          style:
-                              TextStyle(fontSize: 40.0, color: primaryTextColor)),
+                          style: TextStyle(
+                              fontSize: 40.0, color: primaryTextColor)),
                       SizedBox(
                         height: 20,
                       ),
                       Text('Welcome!',
-                          style: TextStyle(fontSize: 25.0, color: primaryTextColor))
+                          style: TextStyle(
+                              fontSize: 25.0, color: primaryTextColor))
                     ],
                   ),
                 ),
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.65,
+              height: MediaQuery.of(context).size.height *
+                  (1 - topContainerPercentage),
               child: Scrollbar(
                 thickness: 5.0,
                 thumbVisibility: true,
@@ -57,8 +60,7 @@ class RegisterPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Padding(
-                        padding:
-                            EdgeInsets.fromLTRB(35.0, 30.0, 0.0, 15.0),
+                        padding: EdgeInsets.fromLTRB(35.0, 30.0, 0.0, 15.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -117,7 +119,6 @@ class RegisterPage extends StatelessWidget {
                                 ),
                               ],
                             ),
-
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
@@ -130,17 +131,17 @@ class RegisterPage extends StatelessWidget {
                                 ),
                                 RichText(
                                   text: TextSpan(
-                                      text: 'here',
-                                      style: const TextStyle(
+                                    text: 'here',
+                                    style: const TextStyle(
                                         fontFamily: 'HappyMonkey',
                                         color: Colors.blue,
-                                        fontSize: 15.0
-                                      ),
-                                      recognizer: TapGestureRecognizer()
-                                        ..onTap = () {
-                                          Navigator.of(context).pushNamed(loginPageRoute);
-                                                  },
-                                        ),
+                                        fontSize: 15.0),
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () {
+                                        Navigator.of(context)
+                                            .pushNamed(loginPageRoute);
+                                      },
+                                  ),
                                 ),
                                 const Text(
                                   '!',
@@ -156,32 +157,35 @@ class RegisterPage extends StatelessWidget {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  TextButton(onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => const ValidateCredentials()));
-                                  }, child: Container(
-                                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                                    // margin: const EdgeInsets.symmetric(horizontal: 10),
-                                    decoration: BoxDecoration(
-                                        color: utilityButtonColor,
-                                      borderRadius: BorderRadius.circular(8.0),
-                                    ),
-                                    child: const Row(
-                                        children: [
+                                  TextButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const ValidateCredentials()));
+                                      },
+                                      child: Container(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 10, horizontal: 15),
+                                        // margin: const EdgeInsets.symmetric(horizontal: 10),
+                                        decoration: BoxDecoration(
+                                          color: utilityButtonColor,
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                        ),
+                                        child: const Row(children: [
                                           Text(
-                                              'Sign in',
-                                                  style: TextStyle(fontSize: 20.0, color: buttonTextColor),
+                                            'Sign in',
+                                            style: TextStyle(
+                                                fontSize: 20.0,
+                                                color: buttonTextColor),
                                           )
-                                        ]
-
-                                    ),
-                                  )),
+                                        ]),
+                                      )),
                                 ],
                               ),
                             )
-
                           ],
                         ),
                       )

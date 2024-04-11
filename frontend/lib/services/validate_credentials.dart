@@ -9,7 +9,7 @@ class ValidateCredentials extends StatelessWidget {
       color: Colors.white,
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width * 0.80,
-      child: Column(
+      child: const Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Row(
