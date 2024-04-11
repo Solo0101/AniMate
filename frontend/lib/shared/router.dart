@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:frontend/pages/home_page.dart';
 import 'package:frontend/pages/login_page.dart';
 import 'package:frontend/pages/register_page.dart';
 import 'package:frontend/constants/router_constants.dart';
@@ -12,8 +13,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const LoginPage());
       case registerPageRoute:
         return MaterialPageRoute(builder: (_) => RegisterPage());
-      case mainPageRoute:
-        // return MaterialPageRoute(builder: (_) => const MainPage());
+      case homePageRoute:
+        return MaterialPageRoute(builder: (_) => const HomePage());
       case splashScreenPageRoute:
         // return MaterialPageRoute(builder: (_) => const SplashScreen());
       case settingsPageRoute:

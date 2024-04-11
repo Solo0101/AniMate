@@ -1,9 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/components/my_textfield.dart';
-import 'package:frontend/pages/login_page.dart';
 import 'package:frontend/constants/router_constants.dart';
 import 'package:flutter/gestures.dart';
+import 'package:frontend/constants/style_constants.dart';
 import 'package:frontend/services/validate_credentials.dart';
 
 class RegisterPage extends StatelessWidget {
@@ -21,12 +20,12 @@ class RegisterPage extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
-        color: Colors.white,
+        color: backgroundColor,
         child: Column(
           children: <Widget>[
             Container(
               height: MediaQuery.of(context).size.height * 0.35,
-              color: const Color(0xFF626353),
+              color: primaryGreen,
               child: const Center(
                 child: SafeArea(
                   child: Column(
@@ -36,12 +35,12 @@ class RegisterPage extends StatelessWidget {
                       ),
                       Text('AniMATE',
                           style:
-                              TextStyle(fontSize: 40.0, color: Colors.white)),
+                              TextStyle(fontSize: 40.0, color: primaryTextColor)),
                       SizedBox(
                         height: 20,
                       ),
                       Text('Welcome!',
-                          style: TextStyle(fontSize: 25.0, color: Colors.white))
+                          style: TextStyle(fontSize: 25.0, color: primaryTextColor))
                     ],
                   ),
                 ),
@@ -66,7 +65,7 @@ class RegisterPage extends StatelessWidget {
                             Text('Sign in',
                                 style: TextStyle(
                                   fontSize: 30.0,
-                                  color: Color(0xFF626353),
+                                  color: primaryGreen,
                                 )),
                           ],
                         ),
@@ -103,7 +102,7 @@ class RegisterPage extends StatelessWidget {
                       ),
                       Padding(
                         padding:
-                            const EdgeInsets.fromLTRB(35.0, 15.0, 35.0, 20.0),
+                            const EdgeInsets.fromLTRB(40.0, 15.0, 35.0, 20.0),
                         child: Column(
                           children: [
                             const Row(
@@ -113,7 +112,7 @@ class RegisterPage extends StatelessWidget {
                                   'Already have an account?',
                                   style: TextStyle(
                                     fontSize: 15.0,
-                                    color: Color(0xFF626353),
+                                    color: primaryGreen,
                                   ),
                                 ),
                               ],
@@ -126,7 +125,7 @@ class RegisterPage extends StatelessWidget {
                                   'Login ',
                                   style: TextStyle(
                                     fontSize: 15.0,
-                                    color: Color(0xFF626353),
+                                    color: primaryGreen,
                                   ),
                                 ),
                                 RichText(
@@ -147,7 +146,7 @@ class RegisterPage extends StatelessWidget {
                                   '!',
                                   style: TextStyle(
                                     fontSize: 10.0,
-                                    color: Color(0xFF626353),
+                                    color: primaryGreen,
                                   ),
                                 ),
                               ],
@@ -166,14 +165,14 @@ class RegisterPage extends StatelessWidget {
                                     padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                                     // margin: const EdgeInsets.symmetric(horizontal: 10),
                                     decoration: BoxDecoration(
-                                        color: const Color(0xFFBEC7C6),
+                                        color: utilityButtonColor,
                                       borderRadius: BorderRadius.circular(8.0),
                                     ),
                                     child: const Row(
                                         children: [
                                           Text(
                                               'Sign in',
-                                                  style: TextStyle(fontSize: 20.0, color: Colors.black),
+                                                  style: TextStyle(fontSize: 20.0, color: buttonTextColor),
                                           )
                                         ]
 

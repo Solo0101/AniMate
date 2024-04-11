@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/constants/style_constants.dart';
 
 class MyTextField extends StatelessWidget {
   final controller;
@@ -27,11 +28,14 @@ class MyTextField extends StatelessWidget {
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: Colors.grey.shade400),
             ),
-            fillColor: const Color(0xAADDD4C3),
+            fillColor: primaryOverlayBackgroundColor,
             filled: true,
             hintText: hintText,
-            hintStyle: const TextStyle(color: Color(0xFF626353),
-            fontSize: 20.0)),
+            hintStyle: const TextStyle(
+                color: primaryGreen,
+                fontSize: 20.0
+            )
+        ),
       ),
     );
   }
