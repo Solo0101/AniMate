@@ -1,10 +1,167 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/components/my_textfield.dart';
+import 'package:frontend/constants/router_constants.dart';
+import 'package:flutter/gestures.dart';
+import 'package:frontend/constants/style_constants.dart';
+import 'package:frontend/services/validate_credentials.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+   LoginPage({super.key});
+
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: Container(
+        color: backgroundColor,
+        child: Column(
+          children: <Widget>[
+            Container(
+              height: MediaQuery.of(context).size.height * 0.35,
+              color: primaryGreen,
+              child: const Center(
+                child: SafeArea(
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 50,
+                      ),
+                      Text('AniMATE',
+                          style:
+                          TextStyle(fontSize: 40.0, color: primaryTextColor)),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text('Welcome!',
+                          style: TextStyle(fontSize: 25.0, color: primaryTextColor))
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.65,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Padding(
+                    padding:
+                    EdgeInsets.fromLTRB(35.0, 30.0, 0.0, 15.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text('Log in',
+                            style: TextStyle(
+                              fontSize: 30.0,
+                              color: primaryGreen,
+                            )),
+                      ],
+                    ),
+                  ),
+                  MyTextField(
+                    controller: emailController,
+                    hintText: 'E-mail',
+                    obscureText: false,
+                  ),
+                  MyTextField(
+                    controller: passwordController,
+                    hintText: 'Password',
+                    obscureText: true,
+                  ),
+                  Padding(
+                    padding:
+                    const EdgeInsets.fromLTRB(40.0, 15.0, 35.0, 20.0),
+                    child: Column(
+                      children: [
+                        const Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Don\'t have an account?',
+                              style: TextStyle(
+                                fontSize: 15.0,
+                                color: primaryGreen,
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'Register ',
+                              style: TextStyle(
+                                fontSize: 15.0,
+                                color: primaryGreen,
+                              ),
+                            ),
+                            RichText(
+                              text: TextSpan(
+                                text: 'here',
+                                style: const TextStyle(
+                                    fontFamily: 'HappyMonkey',
+                                    color: Colors.blue,
+                                    fontSize: 15.0
+                                ),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    Navigator.of(context).pushNamed(registerPageRoute);
+                                  },
+                              ),
+                            ),
+                            const Text(
+                              '!',
+                              style: TextStyle(
+                                fontSize: 10.0,
+                                color: primaryGreen,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              TextButton(onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => const ValidateCredentials()));
+                              }, child: Container(
+                                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                                // margin: const EdgeInsets.symmetric(horizontal: 10),
+                                decoration: BoxDecoration(
+                                  color: utilityButtonColor,
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                                child: const Row(
+                                    children: [
+                                      Text(
+                                        'Log in',
+                                        style: TextStyle(fontSize: 20.0, color: buttonTextColor),
+                                      )
+                                    ]
+
+                                ),
+                              )),
+                            ],
+                          ),
+                        )
+
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
