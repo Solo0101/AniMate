@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/components/my_textfield.dart';
-import 'package:frontend/pages/login_page.dart';
+import 'package:frontend/constants/router_constants.dart';
 import 'package:flutter/gestures.dart';
 
 class RegisterPage extends StatelessWidget {
@@ -130,12 +130,8 @@ class RegisterPage extends StatelessWidget {
                                             color: Colors.blue,
                                             fontSize: 20.0
                                           ),
-                                          recognizer: TapGestureRecognizer()
-                                            ..onTap = () {
-                                              Navigator.push(
-                                                            context,
-                                                            MaterialPageRoute(
-                                                                builder: (context) => const LoginPage()));
+                                          recognizer: TapGestureRecognizer()..onTap = () {
+                                              Navigator.of(context).pushNamed(loginPageRoute);
                                                       },
                                             ),
                                     ),
