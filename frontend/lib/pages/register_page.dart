@@ -15,7 +15,8 @@ class RegisterPage extends StatelessWidget {
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
 
-  final double topContainerPercentage = 0.3;
+  final double topContainerPercentage =
+      0.3; //bottom percentage will be the rest of the page
 
   @override
   Widget build(BuildContext context) {
