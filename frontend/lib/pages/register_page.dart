@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/components/my_textfield.dart';
 import 'package:frontend/pages/login_page.dart';
 import 'package:flutter/gestures.dart';
+import 'package:frontend/services/validate_credentials.dart';
 
 class RegisterPage extends StatelessWidget {
   RegisterPage({super.key});
@@ -53,6 +54,7 @@ class RegisterPage extends StatelessWidget {
                 radius: const Radius.circular(20.0),
                 child: SingleChildScrollView(
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Padding(
                         padding:
@@ -101,57 +103,83 @@ class RegisterPage extends StatelessWidget {
                       Padding(
                         padding:
                             const EdgeInsets.fromLTRB(35.0, 15.0, 35.0, 20.0),
-                        child: Row(
+                        child: Column(
                           children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Text(
                                   'Already have an account?',
                                   style: TextStyle(
-                                    fontSize: 20.0,
+                                    fontSize: 15.0,
                                     color: Color(0xFF626353),
                                   ),
                                 ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Login ',
-                                      style: TextStyle(
-                                        fontSize: 20.0,
-                                        color: Color(0xFF626353),
-                                      ),
-                                    ),
-                                    RichText(
-                                      text: TextSpan(
-                                          text: 'here',
-                                          style: TextStyle(
-                                            fontFamily: 'HappyMonkey',
-                                            color: Colors.blue,
-                                            fontSize: 20.0
-                                          ),
-                                          recognizer: new TapGestureRecognizer()
-                                            ..onTap = () {
-                                              Navigator.push(
-                                                            context,
-                                                            MaterialPageRoute(
-                                                                builder: (context) => LoginPage()));
-                                                      },
-                                            ),
-                                    ),
-                                    Text(
-                                      '!',
-                                      style: TextStyle(
-                                        fontSize: 20.0,
-                                        color: Color(0xFF626353),
-                                      ),
-                                    ),
-
-                                  ],
-                                )
                               ],
+                            ),
+
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Login ',
+                                  style: TextStyle(
+                                    fontSize: 15.0,
+                                    color: Color(0xFF626353),
+                                  ),
+                                ),
+                                RichText(
+                                  text: TextSpan(
+                                      text: 'here',
+                                      style: TextStyle(
+                                        fontFamily: 'HappyMonkey',
+                                        color: Colors.blue,
+                                        fontSize: 15.0
+                                      ),
+                                      recognizer: new TapGestureRecognizer()
+                                        ..onTap = () {
+                                          Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) => LoginPage()));
+                                                  },
+                                        ),
+                                ),
+                                Text(
+                                  '!',
+                                  style: TextStyle(
+                                    fontSize: 10.0,
+                                    color: Color(0xFF626353),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  TextButton(onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => ValidateCredentials()));
+                                  }, child: Container(
+                                    decoration: BoxDecoration(color: Color(0xFFBEC7C6), ),
+                                    child: Row(
+                                        children: [
+                                          Text(
+                                              'Sign in',
+                                                  style: TextStyle(fontSize: 20.0, color: Colors.black),
+                                          )
+                                        ]
+
+                                    ),
+                                  )),
+                                ],
+                              ),
                             )
+
                           ],
                         ),
                       )
