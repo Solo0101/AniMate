@@ -124,7 +124,7 @@ class LoginPage extends StatelessWidget {
                         ),
                         const SizedBox(height: 15),
                         const MyButton(buttonColor: utilityButtonColor, textColor: buttonTextColor, buttonText: 'Log in', widget: ValidateCredentials()),
-                        const MyButton(buttonColor: dangerousButtonColor, textColor: buttonTextColor, buttonText: 'Forgot Password', widget: ValidateCredentials())
+                        const MyButton(buttonColor: importantUtilityButtonColor, textColor: buttonTextColor, buttonText: 'Forgot Password', widget: ValidateCredentials())
 
                       ],
                     ),
