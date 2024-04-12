@@ -1,0 +1,24 @@
+class ApiConstants {
+  static const String baseUrl = '192.168.1.23:5230';
+
+  static const String appRegisterEndpoint = 'api/User/register';
+  static const String appLoginEndpoint = 'api/User/login';
+
+  // TODO: Figure all endpoints exact linnks with (eg. /{id} ...)
+  static const String appGetAllUsersEndpoint = 'api/User/getAll';
+  static const String appGetUserByIdEndpoint = 'api/User/';
+  static const String appUpdateUserByIdEndpoint = 'api/User/';
+  static const String appDeleteUserByIdEndpoint = 'api/User/';
+  static const String appGetUserByEmailEndpoint = 'api/User/get/email/';
+
+  static const String appGetAllPetsEndpoint = 'api/Pet/getAll';
+  static const String appGetPetByIdEndpoint = 'api/Pet/';
+  static const String appUpdatePetByIdEndpoint = 'api/Pet/';
+  static const String appDeletePetByIdEndpoint = 'api/Pet/';
+  static const String appGetPetByUserIdEndpoint = 'api/Pet/owner/';
+  static const String appGetPetByTypeEndpoint = 'api/Pet/type/';
+  static const String appGetPetByBreedEndpoint = 'api/Pet/breed/';
+  static const String appGetPetByAgeEndpoint = 'api/Pet/age/';
+  static const String appGetPetByGenderEndpoint = 'api/Pet/gender/';
+  // TODO: Add more endpoints
+}
