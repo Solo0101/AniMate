@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/pages/login_page.dart';
 import 'package:frontend/pages/register_page.dart';
+import 'package:frontend/pages/home_page.dart';
 import 'package:frontend/shared/router.dart';
 
 import 'constants/style_constants.dart';
@@ -26,7 +28,7 @@ class AniMATEApp extends StatelessWidget {
         fontFamily: fontFamily
       ),
       darkTheme: ThemeData.dark(),
-      home: RegisterPage(),
+      home: LoginPage(),
     );
   }
 }
