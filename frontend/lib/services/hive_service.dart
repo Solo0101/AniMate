@@ -42,8 +42,8 @@ class HiveService {
     await _instance.petBox.delete(id);
   }
 
-  Future<List<Pet>> fetchPetsAndSaveThemLocally(WidgetRef ref) async {
-    List<Pet>? pets = await ApiService.fetchAllPets(ref);
+  Future<List<Pet>> fetchPetsAndSaveThemLocally(String ownerId, WidgetRef ref) async {
+    List<Pet>? pets = await ApiService.fetchPetsByUser(ownerId , ref);
     for (var pet in pets ?? []) {
       upsertPetInBox(pet);
     }

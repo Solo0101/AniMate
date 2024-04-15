@@ -4,7 +4,7 @@ class ApiConstants {
   static const String appRegisterEndpoint = 'api/User/register';
   static const String appLoginEndpoint = 'api/User/login';
 
-  // TODO: Figure all endpoints exact linnks with (eg. /{id} ...)
+  // TODO: Figure all endpoints exact links with (eg. /{id} ...)
   static const String appGetAllUsersEndpoint = 'api/User/getAll';
   static const String appGetUserByIdEndpoint = 'api/User/';
   static const String appUpdateUserByIdEndpoint = 'api/User/';
