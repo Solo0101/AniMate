@@ -10,7 +10,7 @@ WORKDIR /app
 COPY ["AniMATE_Api/AniMATE_Api.csproj", "AniMATE_Api/"]
 RUN dotnet restore "AniMATE_Api/AniMATE_Api.csproj"
 COPY . .
-WORKDIR "/app/AniMATE_Api"
+WORKDIR "/app/."
 RUN dotnet build "AniMATE_Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
@@ -21,3 +21,4 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "AniMATE_Api.dll"]
+#/app/AniMATE_Api/bin/Release/net8.0/AniMATE_Api.dll
