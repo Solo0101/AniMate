@@ -1,0 +1,6 @@
+﻿services:
+  animate_api:
+    image: animate_api
+    build:
+      context: .
+      dockerfile: AniMATE_Api/Dockerfile
