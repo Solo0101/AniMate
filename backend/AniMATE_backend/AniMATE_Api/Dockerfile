@@ -10,12 +10,12 @@ WORKDIR /app
 COPY ["AniMATE_Api/AniMATE_Api.csproj", "AniMATE_Api/"]
 RUN dotnet restore "AniMATE_Api/AniMATE_Api.csproj"
 COPY . .
-WORKDIR "/app/."
+WORKDIR "/app/AniMATE_Api"
 RUN dotnet build "AniMATE_Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "AniMATE_Api.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "AniMATE_Api.csproj" -c $BUILD_CONFIGURATION -o /app/publish
 
 FROM base AS final
 WORKDIR /app
