@@ -14,7 +14,7 @@ WORKDIR "/app/AniMATE_Api"
 RUN dotnet build "AniMATE_Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
-ARG BUILD_CONFIGURATION=Release
+ARG BUILD_CONFIGURATION=Development
 RUN dotnet publish "AniMATE_Api.csproj" -c $BUILD_CONFIGURATION -o /app/publish
 
 FROM base AS final
