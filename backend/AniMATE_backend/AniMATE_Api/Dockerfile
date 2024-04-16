@@ -20,4 +20,4 @@ RUN dotnet publish "AniMATE_Api.csproj" -c $BUILD_CONFIGURATION -o /app/publish 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "AniMATE_Api.dll"]
+ENTRYPOINT ["dotnet", "watch", "run"]
