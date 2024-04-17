@@ -25,4 +25,3 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "/app/AniMATE_Api.dll"]
-#test comment
