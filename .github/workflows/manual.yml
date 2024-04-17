@@ -1,5 +1,5 @@
 name: example-workflow
-on: [push, pull_request]
+on: [push]
 jobs:
   production-deploy:
     if: github.repository == 'backend/AniMATE_backend'
