@@ -1,6 +1,7 @@
 ﻿services:
   animate_api:
     image: animate_api
+    restart: always
     build:
       context: .
       dockerfile: AniMATE_Api/Dockerfile
