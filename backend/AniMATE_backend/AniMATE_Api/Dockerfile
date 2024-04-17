@@ -14,7 +14,8 @@ COPY . .
 WORKDIR /app/AniMATE_Api/
 RUN dotnet build "AniMATE_Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
 RUN dotnet tool install --global dotnet-ef --version 8.* --add-source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-eng/nuget/v3/index.json
-RUN dotnet-ef database update
+ENV PATH="${PATH}:/root/.dotnet/tools"
+RUN dotnet ef database update
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Development
