@@ -2,7 +2,6 @@ name: example-workflow
 on: [push]
 jobs:
   production-deploy:
-    if: github.repository == 'backend/AniMATE_backend'
     runs-on: ubuntu-latest
     steps:
       - run: ssh adrian@31.14.16.189 -p10922 -o "StrictHostKeyChecking no" -o PasswordAuthentication=no -o PreferredAuthentications=publickey "sudo ~/bin/update_AniMATE.sh"
