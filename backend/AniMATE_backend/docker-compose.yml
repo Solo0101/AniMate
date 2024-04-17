@@ -9,4 +9,4 @@
     - "8080:8080"
 #    - "8081:8081"
     volumes: 
-    - /opt/docker/AniMATE/backend/AniMATE_backend/AniMATE_Api/Database/Database.db:/app/Database.db
+    - /opt/docker/AniMATE/backend/AniMATE_backend/AniMATE_Api/Database.db:/app/Database.db
