@@ -10,6 +10,10 @@ WORKDIR /app
 COPY ["AniMATE_Api/AniMATE_Api.csproj", "AniMATE_Api/"]
 RUN dotnet restore "AniMATE_Api/AniMATE_Api.csproj"
 COPY . .
+
+WORKDIR /app/build/src/
+RUN dotnet ef database update
+
 WORKDIR "/app/AniMATE_Api"
 RUN dotnet build "AniMATE_Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
