@@ -129,7 +129,7 @@ class LoginPage extends ConsumerWidget {
                                   ),
                                 ],
                               ),
-                            ),
+                            ],),
                             const Text(
                               '!',
                               style: TextStyle(
@@ -142,7 +142,6 @@ class LoginPage extends ConsumerWidget {
                         const SizedBox(height: 15),
                         const MyButton(buttonColor: utilityButtonColor, textColor: buttonTextColor, buttonText: 'Log in', widget: ValidateCredentials()),
                         const MyButton(buttonColor: importantUtilityButtonColor, textColor: buttonTextColor, buttonText: 'Forgot Password', widget: ValidateCredentials())
-
                       ],
                     ),
               )
