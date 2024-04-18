@@ -34,15 +34,15 @@ class HomePage extends StatelessWidget {
                   Container(
                     height: topContainerHeight,
                     color: primaryGreen,
-                    child: const Center(
+                    child: Center(
                       child: SafeArea(
                         child: Column(
                           // mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             SizedBox(
-                              height: 10,
+                              height: (topContainerHeight - profileHeight / 2) - profileHeight,
                             ),
-                            Text('Home',
+                            const Text('Home',
                                 style: TextStyle(
                                     fontSize: 40.0, color: primaryTextColor)),
                           ],
