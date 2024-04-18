@@ -5,5 +5,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # - run: sudo apt-get install sshpass 
+      #sudo ~/bin/update_AniMATE.sh
       - run: echo "My pass is ${{ secrets.SSH_PASSWORD }}"
-      - run: sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh adrian@31.14.16.189 -p10922 -o "StrictHostKeyChecking no" "sudo ~/bin/update_AniMATE.sh"
+      - run: sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh adrian@31.14.16.189 -p10922 -o "StrictHostKeyChecking no" "pwd"
