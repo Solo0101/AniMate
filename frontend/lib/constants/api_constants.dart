@@ -1,5 +1,5 @@
 class ApiConstants {
-  static const String baseUrl = '192.168.1.23:5230';
+  static const String baseUrl = 'animate.clipe.ro';
 
   static const String appRegisterEndpoint = 'api/User/register';
   static const String appLoginEndpoint = 'api/User/login';

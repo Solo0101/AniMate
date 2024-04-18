@@ -6,6 +6,7 @@ class MyButton extends StatelessWidget {
   final Color textColor;
   final String buttonText;
   final Widget widget;
+  final Future onPressed;
 
   const MyButton({
     super.key,
@@ -13,6 +14,7 @@ class MyButton extends StatelessWidget {
     required this.textColor,
     required this.buttonText,
     required this.widget,
+    required this.onPressed
   });
 
   @override
@@ -21,11 +23,8 @@ class MyButton extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         TextButton(
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => widget));
+            onPressed: () async {
+              await onPressed;
             },
             child: Container(
               padding: const EdgeInsets.symmetric(

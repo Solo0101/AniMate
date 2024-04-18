@@ -12,8 +12,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 enum AuthResponse { success, invalidCredentials, randomError }
 
 class AuthService {
-  static Future<AuthResponse> login(String email, String password,
-      WidgetRef ref) async {
+  static Future<AuthResponse> login(String email, String password, WidgetRef ref) async {
     Map<String, String> requestBody = {
       'email': email,
       'password': password,
@@ -25,10 +24,11 @@ class AuthService {
       'accept': '*/*',
       'Content-Type': 'application/json-patch+json'
     });
-
+  //TODO: check for response formart
     var responseMap = jsonDecode(response.body);
     var data = responseMap["data"];
-
+    print(response.statusCode);
+    print(data);
     if (response.statusCode == 200) {
       String applicationToken = data["token"];
 
@@ -49,12 +49,21 @@ class AuthService {
   }
 
   static Widget initialRouting() {
+
     var user = HiveService().getUser();
     if (user == null) {
-      return const LoginPage();
+      return LoginPage();
     } else {
       return const HomePage();
       //}
     }
+  }
+
+  static Future<AuthResponse> register(String email, String name, String location, String phoneNumber, String password, String confirmPassword, WidgetRef context) {
+    return Future.value(AuthResponse.success);
+  }
+
+  static Future<AuthResponse> forgotPassword(String text, WidgetRef context) {
+    return Future.value(AuthResponse.success);
   }
 }

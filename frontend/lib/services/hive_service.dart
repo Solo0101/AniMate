@@ -15,19 +15,23 @@ class HiveService {
 
   HiveService._internal();
 
-  Future<void> init() async{
+  Future<void> initHive() async{
     Hive.registerAdapter(UserAdapter());
     Hive.registerAdapter(PetAdapter());
-    userBox = Hive.box<User>('user');
-    petBox = Hive.box<Pet>('pet');
+    userBox = await Hive.openBox('user');
+    petBox = await Hive.openBox('pet');
+    // userBox = Hive.box<User>('user');
+    // petBox = Hive.box<Pet>('pet');
   }
 
   User? getUser(){
-    return userBox.get('user');
+    User? currentUser = userBox.get('user');
+    return currentUser?.getValue();
+
   }
 
-  Future upsertUserInBox(User newUser) async{
-    await _instance.userBox.put('user', newUser.getValue());
+  Future upsertUserInBox(User newUser) async {
+    return await _instance.userBox.put('user', newUser.getValue());
   }
 
   List<Pet> getPets(){
