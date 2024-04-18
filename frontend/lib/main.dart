@@ -28,7 +28,7 @@ class AniMATEApp extends StatelessWidget {
         fontFamily: fontFamily
       ),
       darkTheme: ThemeData.dark(),
-      home: LoginPage(),
+      home: HomePage(),
     );
   }
 }
