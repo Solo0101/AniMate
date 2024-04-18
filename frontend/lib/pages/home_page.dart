@@ -1,10 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/components/my_textfield.dart';
+import 'package:frontend/components/pet_icon.dart';
 import 'package:frontend/constants/router_constants.dart';
 import 'package:flutter/gestures.dart';
 import 'package:frontend/constants/style_constants.dart';
 import 'package:frontend/services/validate_credentials.dart';
+import 'package:frontend/components/pet_icon.dart';
+import 'package:frontend/pages/pet_profile_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -19,6 +21,7 @@ class HomePage extends StatelessWidget {
         MediaQuery.of(context).size.height * topContainerPercentage;
     final double bottomContainerHeight =
         MediaQuery.of(context).size.height * (1 - topContainerPercentage);
+    final double screenSizeWidth = MediaQuery.of(context).size.width;
 
     final top = topContainerHeight - profileHeight / 2;
 
@@ -63,17 +66,19 @@ class HomePage extends StatelessWidget {
                     ),
                   )
                 ]),
-            SizedBox(
-              height: bottomContainerHeight,
+
+             Padding(
+              padding: EdgeInsets.fromLTRB(screenSizeWidth * 0.1, profileHeight / 2 + 20, 0.0, screenSizeWidth * 0.1),
               child: const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(35.0, 30.0, 0.0, 15.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [],
-                    ),
+                  Wrap(
+                    children: [
+                      PetIcon(petIconImage: 'lib/src/images/alb.jpeg', petName: 'petName', widget: PetProfilePage()),
+                      PetIcon(petIconImage: 'lib/src/images/dobberman.jpeg', petName: 'petName', widget: PetProfilePage()),
+                      PetIcon(petIconImage: 'lib/src/images/idk.jpeg', petName: 'petName', widget: PetProfilePage()),
+                      PetIcon(petIconImage: 'lib/src/images/labrador.jpeg', petName: 'petName', widget: PetProfilePage()),
+                    ],
                   ),
                 ],
               ),
