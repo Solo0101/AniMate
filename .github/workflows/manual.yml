@@ -1,5 +1,5 @@
-name: example-workflow
-on: [push]
+name: production-deploy-workflow
+on: [push, pull_request]
 jobs:
   production-deploy:
     runs-on: ubuntu-latest
