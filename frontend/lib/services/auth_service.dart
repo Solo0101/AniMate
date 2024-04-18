@@ -24,7 +24,7 @@ class AuthService {
       'accept': '*/*',
       'Content-Type': 'application/json-patch+json'
     });
-
+  //TODO: check for response formart
     var responseMap = jsonDecode(response.body);
     var data = responseMap["data"];
     print(response.statusCode);
