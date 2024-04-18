@@ -66,9 +66,9 @@ class HomePage extends StatelessWidget {
                     ),
                   )
                 ]),
-
+              SizedBox(height: profileHeight / 2 + 20),
              Padding(
-              padding: EdgeInsets.fromLTRB(screenSizeWidth * 0.1, profileHeight / 2 + 20, 0.0, screenSizeWidth * 0.1),
+               padding: EdgeInsets.symmetric(horizontal: screenSizeWidth * 0.1),
               child: const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

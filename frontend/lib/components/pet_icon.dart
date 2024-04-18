@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class PetIcon extends StatelessWidget {
@@ -15,20 +16,41 @@ class PetIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return
-        Container(
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-          margin: const EdgeInsets.symmetric(horizontal: 10),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(8.0),
+        Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Column(
+            children: [
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => widget));
+                },
+                child: Card(
+                  elevation: 3.0,
+                  child: Column(children: [
+                    Container(
+                      width: 125,
+                      height: 125,
+                      child: AspectRatio(
+                        aspectRatio: 4.0/3.0,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(8.0),
+                          child: Image.asset(petIconImage, fit: BoxFit.cover, width: 10, height: 10,),
+                        ),
+                      )
+                    ),
+
+                  ]),
+                ),
+              ),
+              Text(
+                petName,
+                style: const TextStyle(fontSize: 10.0, color: Colors.black),
+              )
+            ],
           ),
-          child: Column(children: [
-            Image(image: Image.asset(petIconImage).image, width: 100, height: 100),
-            Text(
-              petName,
-              style: const TextStyle(fontSize: 10.0, color: Colors.black),
-            )
-          ]),
         );
   }
 }
