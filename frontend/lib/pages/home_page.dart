@@ -40,7 +40,7 @@ class HomePage extends StatelessWidget {
                           // mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             SizedBox(
-                              height: (topContainerHeight - profileHeight / 2) - profileHeight,
+                              height: (topContainerHeight - profileHeight / 2) - profileHeight + 10,
                             ),
                             const Text('Home',
                                 style: TextStyle(
