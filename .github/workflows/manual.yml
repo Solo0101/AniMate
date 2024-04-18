@@ -4,4 +4,5 @@ jobs:
   production-deploy:
     runs-on: ubuntu-latest
     steps:
-      - run: ssh adrian@31.14.16.189 -p10922 -o "StrictHostKeyChecking no" -o PasswordAuthentication=no -o PreferredAuthentications=publickey "sudo ~/bin/update_AniMATE.sh"
+      - run: apt-get install sshpass
+      - run: sshpass -p ${{ secrets.SSH_PASSWORD }} ssh adrian@31.14.16.189 -p10922 -o "StrictHostKeyChecking no" "sudo ~/bin/update_AniMATE.sh"
