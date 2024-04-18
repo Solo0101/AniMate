@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend/components/my_textfield.dart';
 import 'package:frontend/constants/router_constants.dart';
 import 'package:flutter/gestures.dart';
 import 'package:frontend/constants/style_constants.dart';
+import 'package:frontend/services/auth_service.dart';
 import 'package:frontend/services/validate_credentials.dart';
 import 'package:frontend/components/my_button.dart';
 
-class RegisterPage extends StatelessWidget {
+class RegisterPage extends ConsumerWidget {
   RegisterPage({super.key});
 
   final emailController = TextEditingController();
@@ -15,12 +17,13 @@ class RegisterPage extends StatelessWidget {
   final locationController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
+  final AuthService authService = AuthService();
 
   final double topContainerPercentage =
       0.3; //bottom percentage will be the rest of the page
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
@@ -154,7 +157,21 @@ class RegisterPage extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            const MyButton(buttonColor: utilityButtonColor, textColor: buttonTextColor, buttonText: 'Sign in', widget: ValidateCredentials()),
+                            MyButton(
+                                buttonColor: utilityButtonColor,
+                                textColor: buttonTextColor,
+                                buttonText: 'Sign Up',
+                                widget: const ValidateCredentials(),
+                                onPressed: AuthService.register(
+                                  emailController.text,
+                                  fullNameController.text,
+                                  phoneNumberController.text,
+                                  locationController.text,
+                                  passwordController.text,
+                                  confirmPasswordController.text,
+                                  ref
+                                )
+                            ),
                           ],
                         ),
                       )

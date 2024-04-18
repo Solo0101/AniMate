@@ -18,6 +18,5 @@ class SecureStorageNotifier extends StateNotifier<FlutterSecureStorage> {
 }
 
 final StateNotifierProvider<SecureStorageNotifier, FlutterSecureStorage>
-secureStorageProvider =
-StateNotifierProvider((_) => SecureStorageNotifier());
+secureStorageProvider = StateNotifierProvider((_) => SecureStorageNotifier());
 
