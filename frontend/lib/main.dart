@@ -33,7 +33,7 @@ class AniMATEApp extends StatelessWidget {
         fontFamily: fontFamily
       ),
       darkTheme: ThemeData.dark(),
-      home: AuthService.initialRouting()
+      home: HomePage(),
     );
   }
 
