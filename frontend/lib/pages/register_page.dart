@@ -154,7 +154,11 @@ class RegisterPage extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            const MyButton(buttonColor: utilityButtonColor, textColor: buttonTextColor, buttonText: 'Sign in', widget: ValidateCredentials()),
+                            const MyButton(
+                                buttonColor: utilityButtonColor,
+                                textColor: buttonTextColor,
+                                buttonText: 'Sign in',
+                                widget: ValidateCredentials()),
                           ],
                         ),
                       )

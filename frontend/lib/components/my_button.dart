@@ -23,13 +23,10 @@ class MyButton extends StatelessWidget {
         TextButton(
             onPressed: () {
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => widget));
+                  context, MaterialPageRoute(builder: (context) => widget));
             },
             child: Container(
-              padding: const EdgeInsets.symmetric(
-                  vertical: 10, horizontal: 15),
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
               // margin: const EdgeInsets.symmetric(horizontal: 10),
               decoration: BoxDecoration(
                 color: buttonColor,
@@ -38,9 +35,8 @@ class MyButton extends StatelessWidget {
               child: Row(children: [
                 Text(
                   buttonText,
-                  style: const TextStyle(
-                      fontSize: 20.0,
-                      color: buttonTextColor),
+                  style:
+                      const TextStyle(fontSize: 20.0, color: buttonTextColor),
                 )
               ]),
             )),

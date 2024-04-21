@@ -50,7 +50,7 @@ class LoginPage extends StatelessWidget {
               height: MediaQuery.of(context).size.height *
                   (1 - topContainerPercentage),
               child: Scrollbar(
-                thickness: 5.0,
+                  thickness: 5.0,
                   thumbVisibility: true,
                   radius: const Radius.circular(20.0),
                   child: SingleChildScrollView(
@@ -81,7 +81,8 @@ class LoginPage extends StatelessWidget {
                           obscureText: true,
                         ),
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(40.0, 15.0, 35.0, 20.0),
+                          padding:
+                              const EdgeInsets.fromLTRB(40.0, 15.0, 35.0, 20.0),
                           child: Column(
                             children: [
                               const Row(
@@ -128,17 +129,22 @@ class LoginPage extends StatelessWidget {
                                 ],
                               ),
                               const SizedBox(height: 15),
-                              const MyButton(buttonColor: utilityButtonColor, textColor: buttonTextColor, buttonText: 'Log in', widget: ValidateCredentials()),
-                              const MyButton(buttonColor: importantUtilityButtonColor, textColor: buttonTextColor, buttonText: 'Forgot Password', widget: ValidateCredentials())
-
+                              const MyButton(
+                                  buttonColor: utilityButtonColor,
+                                  textColor: buttonTextColor,
+                                  buttonText: 'Log in',
+                                  widget: ValidateCredentials()),
+                              const MyButton(
+                                  buttonColor: importantUtilityButtonColor,
+                                  textColor: buttonTextColor,
+                                  buttonText: 'Forgot Password',
+                                  widget: ValidateCredentials())
                             ],
                           ),
                         )
                       ],
                     ),
-              )
-
-              ),
+                  )),
             )
           ],
         ),
