@@ -191,13 +191,13 @@ public class UserController : ControllerBase
         ];
 
         // If any roles are provided, add them to the list of claims. Each role is a separate claim.
-        if (roles.Any())
-        {
-            foreach (var role in roles)
-            {
-                claims.Add(new Claim(ClaimTypes.Role, role));
-            }
-        }
+        // if (roles.Any())
+        // {
+        //     foreach (var role in roles)
+        //     {
+        //         claims.Add(new Claim(ClaimTypes.Role, role));
+        //     }
+        // }
 
         // Create the JWT security token and encode it.
         // The JWT includes the claims defined above, the issuer and audience from the config, and an expiration time.
