@@ -1,4 +1,5 @@
-﻿using AniMATE_Api.Interfaces;
+﻿using AniMATE_Api.Helper;
+using AniMATE_Api.Interfaces;
 using AniMATE_Api.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,6 +7,7 @@ namespace AniMATE_Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class PetController : ControllerBase
 {
     private readonly IPetService _petService;

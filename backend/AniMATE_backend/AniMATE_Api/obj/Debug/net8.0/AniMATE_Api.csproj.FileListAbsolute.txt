@@ -135,4 +135,14 @@ D:\ProiecteTeme\UPT_CURSURI\Anul_3\Semestrul_2\IC\AniMate\backend\AniMATE_backen
 D:\ProiecteTeme\UPT_CURSURI\Anul_3\Semestrul_2\IC\AniMate\backend\AniMATE_backend\AniMATE_Api\bin\Debug\net8.0\Scrutor.dll
 D:\ProiecteTeme\UPT_CURSURI\Anul_3\Semestrul_2\IC\AniMate\backend\AniMATE_backend\AniMATE_Api\bin\Debug\net8.0\Swashbuckle.AspNetCore.Filters.dll
 D:\ProiecteTeme\UPT_CURSURI\Anul_3\Semestrul_2\IC\AniMate\backend\AniMATE_backend\AniMATE_Api\bin\Debug\net8.0\Swashbuckle.AspNetCore.Filters.Abstractions.dll
-D:\ProiecteTeme\UPT_CURSURI\Anul_3\Semestrul_2\IC\AniMate\backend\AniMATE_backend\AniMATE_Api\obj\Debug\net8.0\AniMATE_.0BD48D79.Up2Date
+D:\ProiecteTeme\UPT_CURSURI\Anul_3\Semestrul_2\IC\AniMate\backend\AniMATE_backend\AniMATE_Api\obj\Debug\net8.0\AniMATE_Api.csproj.CopyComplete
+D:\ProiecteTeme\UPT_CURSURI\Anul_3\Semestrul_2\IC\AniMate\backend\AniMATE_backend\AniMATE_Api\bin\Debug\net8.0\AniMATE_Api.staticwebassets.runtime.json
+D:\ProiecteTeme\UPT_CURSURI\Anul_3\Semestrul_2\IC\AniMate\backend\AniMATE_backend\AniMATE_Api\bin\Debug\net8.0\AutoMapper.dll
+D:\ProiecteTeme\UPT_CURSURI\Anul_3\Semestrul_2\IC\AniMate\backend\AniMATE_backend\AniMATE_Api\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\ProiecteTeme\UPT_CURSURI\Anul_3\Semestrul_2\IC\AniMate\backend\AniMATE_backend\AniMATE_Api\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+D:\ProiecteTeme\UPT_CURSURI\Anul_3\Semestrul_2\IC\AniMate\backend\AniMATE_backend\AniMATE_Api\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\ProiecteTeme\UPT_CURSURI\Anul_3\Semestrul_2\IC\AniMate\backend\AniMATE_backend\AniMATE_Api\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+D:\ProiecteTeme\UPT_CURSURI\Anul_3\Semestrul_2\IC\AniMate\backend\AniMATE_backend\AniMATE_Api\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+D:\ProiecteTeme\UPT_CURSURI\Anul_3\Semestrul_2\IC\AniMate\backend\AniMATE_backend\AniMATE_Api\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\ProiecteTeme\UPT_CURSURI\Anul_3\Semestrul_2\IC\AniMate\backend\AniMATE_backend\AniMATE_Api\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+D:\ProiecteTeme\UPT_CURSURI\Anul_3\Semestrul_2\IC\AniMate\backend\AniMATE_backend\AniMATE_Api\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
