@@ -8,12 +8,13 @@ import 'package:frontend/constants/style_constants.dart';
 import 'package:frontend/services/validate_credentials.dart';
 import 'package:frontend/services/auth_service.dart';
 
+import 'home_page.dart';
+
 class LoginPage extends ConsumerWidget {
   LoginPage({super.key});
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  final AuthService authService = AuthService();
 
   final double topContainerPercentage = 0.3; //bottom percentage will be the rest of the page
 
@@ -129,19 +130,54 @@ class LoginPage extends ConsumerWidget {
                                   ),
                                 ],
                               ),
-                            ],),
-                            const Text(
-                              '!',
-                              style: TextStyle(
-                                fontSize: 10.0,
-                                color: primaryGreen,
-                              ),
-                            ),
-                          ],
+                          ]),
                         ),
                         const SizedBox(height: 15),
-                        const MyButton(buttonColor: utilityButtonColor, textColor: buttonTextColor, buttonText: 'Log in', widget: ValidateCredentials()),
-                        const MyButton(buttonColor: importantUtilityButtonColor, textColor: buttonTextColor, buttonText: 'Forgot Password', widget: ValidateCredentials())
+                        MyButton(
+                          buttonColor: utilityButtonColor,
+                          textColor: buttonTextColor,
+                          buttonText: 'Log in',
+                          onPressed: () async {
+                            var loginResponse = await AuthService.login(emailController.text, passwordController.text, ref);
+                            if(context.mounted) {
+                              if (loginResponse == AuthResponse.success) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text('Logged in successfully!'),
+                                      duration: Duration(seconds: 2),
+                                    )
+                                );
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const HomePage()),
+                                );
+                              } else if (loginResponse == AuthResponse.invalidCredentials) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text('Invalid credentials!'),
+                                      duration: Duration(seconds: 2),
+                                    )
+                                );
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text('An error occurred'),
+                                      duration: Duration(seconds: 2),
+                                    )
+                                );
+                              }
+                            }
+                          }
+                        ),
+                        MyButton(
+                          buttonColor: importantUtilityButtonColor,
+                          textColor: buttonTextColor,
+                          buttonText: 'Forgot Password',
+                          onPressed: () {
+                            AuthService.forgotPassword(emailController.text, ref);
+                          }
+                        ),
                       ],
                     ),
               )

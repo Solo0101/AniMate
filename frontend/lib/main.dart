@@ -15,12 +15,12 @@ void main() async {
   runApp(const ProviderScope(child: AniMATEApp()));
 }
 
-class AniMATEApp extends StatelessWidget {
+class AniMATEApp extends ConsumerWidget {
   const AniMATEApp({super.key});
 
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
 
     final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
     return MaterialApp(
@@ -32,8 +32,8 @@ class AniMATEApp extends StatelessWidget {
         primarySwatch: Colors.deepOrange,
         fontFamily: fontFamily
       ),
-      darkTheme: ThemeData.dark(),
-      home: HomePage(),
+      // darkTheme: ThemeData.dark(),
+      home: AuthService.initialRouting(ref),
     );
   }
 
