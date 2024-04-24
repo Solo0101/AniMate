@@ -1,5 +1,5 @@
-﻿using AniMATE_Api.AuthModels;
-using AniMATE_Api.Data;
+﻿using AniMATE_Api.Data;
+using AniMATE_Api.DTOs;
 using AniMATE_Api.Interfaces;
 using AniMATE_Api.Models;
 
@@ -28,25 +28,27 @@ public class UserService : IUserService
        return _context.Users.Where(u => u.Email == email).FirstOrDefault();
     }
 
-    public User CreateUser(RegisterModel model)
+    public User CreateUser(RegisterDto dto)
     {
         var user = new User();
         {
-            user.Email = model.Email;
-            user.PasswordHash = model.Password;
-            user.Name = model.Name;
-            user.UserName = model.Email;
-            user.Country = model.Country;
-            user.CountyOrState = model.CountyOrState;
-            user.City = model.City;
-            user.PhoneNumber = model.PhoneNumber;
+            user.Email = dto.Email;
+            user.PasswordHash = dto.Password;
+            user.Name = dto.Name;
+            user.UserName = dto.Email;
+            user.Country = dto.Country;
+            user.CountyOrState = dto.CountyOrState;
+            user.City = dto.City;
+            user.PhoneNumber = dto.PhoneNumber;
         }
         return _context.Users.Add(user).Entity;
     }
 
     public bool UpdateUser(User user)
     {
-        // TODO: Solve the issue with updating the user
+        user.UserName = user.Email;
+        user.NormalizedEmail = user.Email?.ToUpper();
+        user.NormalizedUserName = user.Email?.ToUpper();
         _context.Users.Update(user);
         return Save();
     }

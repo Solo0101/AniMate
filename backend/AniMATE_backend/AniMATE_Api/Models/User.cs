@@ -7,25 +7,25 @@ public class User : IdentityUser
 {
        [Required]
        [StringLength(256, MinimumLength = 3)]
-       public string? Name { get; set; }
+       public string Name { get; set; } = string.Empty;
        
        [Required]
        [StringLength(256, MinimumLength = 3)]
-       public string? Country { get; set; }
+       public string Country { get; set; } = string.Empty;
        
        [Required]
        [StringLength(256, MinimumLength = 3)]
-       public string? CountyOrState { get; set; }
+       public string CountyOrState { get; set; } = string.Empty;
        
        [Required]
        [StringLength(256, MinimumLength = 3)]
-       public string? City { get; set; }
+       public string City { get; set; } = string.Empty;
        
        [Required]
        [StringLength(15, MinimumLength = 10)]
        public override string? PhoneNumber { get; set; }
        
-       public ICollection<Pet>? Pets { get; set; }
+       public ICollection<Pet> Pets { get; set; } = new List<Pet>();
        
        // TODO: Add image property
 }
