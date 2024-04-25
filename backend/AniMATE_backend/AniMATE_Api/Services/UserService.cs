@@ -25,23 +25,12 @@ public class UserService : IUserService
 
     public User? GetUserByEmail(string email)
     {
-       return _context.Users.Where(u => u.Email == email).FirstOrDefault();
+       return _context.Users.FirstOrDefault(u => u.Email == email);
     }
 
-    public User CreateUser(RegisterDto dto)
+    public User CreateUser(User newUser)
     {
-        var user = new User();
-        {
-            user.Email = dto.Email;
-            user.PasswordHash = dto.Password;
-            user.Name = dto.Name;
-            user.UserName = dto.Email;
-            user.Country = dto.Country;
-            user.CountyOrState = dto.CountyOrState;
-            user.City = dto.City;
-            user.PhoneNumber = dto.PhoneNumber;
-        }
-        return _context.Users.Add(user).Entity;
+        return _context.Users.Add(newUser).Entity;
     }
 
     public bool UpdateUser(User user)

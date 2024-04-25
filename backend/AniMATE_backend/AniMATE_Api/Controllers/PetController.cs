@@ -1,22 +1,26 @@
-﻿using AniMATE_Api.Helper;
+﻿using AniMATE_Api.DTOs;
 using AniMATE_Api.Interfaces;
 using AniMATE_Api.Models;
+using AniMATE_Api.Views;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AniMATE_Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-[Authorize]
+// [Helper.Authorize]
 public class PetController : ControllerBase
 {
     private readonly IPetService _petService;
     private readonly IUserService _userService;
+    private readonly IMapper _mapper;
 
-    public PetController(IPetService petService, IUserService userService)
+    public PetController(IPetService petService, IUserService userService, IMapper mapper)
     {
         _petService = petService;
         _userService = userService;
+        _mapper = mapper;
     }
 
     [HttpGet("getAll")]
@@ -29,12 +33,12 @@ public class PetController : ControllerBase
         {
             return BadRequest(ModelState);
         }
-
+        
         return Ok(pets);
     }
 
     [HttpGet("{id}")]
-    [ProducesResponseType(200, Type = typeof(Pet))]
+    [ProducesResponseType(200, Type = typeof(PetView))]
     [ProducesResponseType(400)]
     public IActionResult GetPetById(string id)
     {
@@ -43,16 +47,17 @@ public class PetController : ControllerBase
             return NotFound();
         }
         var pet = _petService.GetPetById(id);
-
-        return Ok(pet);
+        var response = _mapper.Map<PetView>(pet);
+        return Ok(response);
     }
 
     [HttpPost("create")]
-    [ProducesResponseType(204, Type = typeof(Pet))]
+    [ProducesResponseType(204, Type = typeof(PetView))]
     [ProducesResponseType(400)]
-    public IActionResult CreatePet([FromBody] Pet petCreate, [FromQuery] string ownerId)
+    public IActionResult CreatePet([FromBody] PetDto petCreate, [FromQuery] string ownerId)
     {
-        if (petCreate == null)
+        var request = _mapper.Map<Pet>(petCreate);
+        if (request == null)
         {
             return BadRequest(ModelState);
         }
@@ -62,9 +67,9 @@ public class PetController : ControllerBase
             return BadRequest(ModelState);
         }
 
-        petCreate.Owner = _userService.GetUserById(ownerId);
+        request.Owner = _userService.GetUserById(ownerId)!;
 
-        if (!_petService.CreatePet(petCreate, ownerId))
+        if (!_petService.CreatePet(request, ownerId))
         {
             ModelState.AddModelError("", "Something went wrong while creating the pet!");
             return StatusCode(500, ModelState);
@@ -74,12 +79,13 @@ public class PetController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    [ProducesResponseType(204, Type = typeof(Pet))]
+    [ProducesResponseType(204, Type = typeof(PetView))]
     [ProducesResponseType(400)]
     [ProducesResponseType(404)]
-    public IActionResult UpdatePet(string id, [FromBody] Pet updatedPet)
-    {
-        if(updatedPet == null) 
+    public IActionResult UpdatePet(string id, [FromBody] PetDto updatedPet)
+    {   
+        var request = _mapper.Map<Pet>(updatedPet);
+        if(request == null) 
         {
             return BadRequest(ModelState);
         }
@@ -87,7 +93,7 @@ public class PetController : ControllerBase
         {
             return NotFound();
         } 
-        if(updatedPet.Id != id)
+        if(request.Id != id)
         {
             return BadRequest();
         }
@@ -95,12 +101,12 @@ public class PetController : ControllerBase
         {
             return BadRequest();
         }
-        if(!_petService.UpdatePet(updatedPet))
+        if(!_petService.UpdatePet(request))
         {
               ModelState.AddModelError("", "Something went wrong while updating the pet!");
               return StatusCode(500, ModelState);
         }
-
+        
         return NoContent();
     }
 
@@ -123,8 +129,8 @@ public class PetController : ControllerBase
         {
             return NotFound();
         }
-
-        return Ok(pets);
+        var response = _mapper.Map<IEnumerable<PetView>>(pets);
+        return Ok(response);
     }
 
     [HttpGet("type/{type}")]
@@ -137,8 +143,8 @@ public class PetController : ControllerBase
         {
             return NotFound();
         }
-
-        return Ok(pets);
+        var response = _mapper.Map<ICollection<PetView>>(pets);
+        return Ok(response);
     }
 
     [HttpGet("breed/{breed}")]
@@ -165,8 +171,8 @@ public class PetController : ControllerBase
         {
             return NotFound();
         }
-
-        return Ok(pets);
+        var response = _mapper.Map<ICollection<PetView>>(pets);
+        return Ok(response);
     }
 
     [HttpGet("gender/{gender}")]
@@ -179,8 +185,8 @@ public class PetController : ControllerBase
         {
             return NotFound();
         }
-
-        return Ok(pets);
+        var response = _mapper.Map<ICollection<PetView>>(pets);
+        return Ok(response);
 
     }
 
@@ -194,8 +200,8 @@ public class PetController : ControllerBase
         {
             return NotFound();
         }
-
-        return Ok(pets);
+        var response = _mapper.Map<IEnumerable<PetView>>(pets);
+        return Ok(response);
     }
 
     [HttpGet("type/{type}/breed/{breed}/gender/{gender}")]
@@ -208,7 +214,7 @@ public class PetController : ControllerBase
         {
             return NotFound();
         }
-
-        return Ok(pets);
+        var response = _mapper.Map<IEnumerable<PetView>>(pets);
+        return Ok(response);
     }
 }

@@ -43,7 +43,6 @@ builder.Services.AddSwaggerGen(options =>
                 }
             },
             new string[] {}
-
         }
     });
     

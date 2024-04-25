@@ -87,7 +87,8 @@ public class UserController : ControllerBase
     public async Task<IActionResult> CreateUser(RegisterDto userRegisterDto)
     {
         var existingUser = await _userManager.FindByEmailAsync(userRegisterDto.Email);
-        if (existingUser != null)
+        var request = _mapper.Map<User>(userRegisterDto);
+        if (request != null)
         {
             return BadRequest("User with this email already exists!");
         }
@@ -95,7 +96,7 @@ public class UserController : ControllerBase
         {
             return BadRequest(ModelState);
         }
-        var newUser = _userService.CreateUser(userRegisterDto);
+        var newUser = _userService.CreateUser(request!);
         var result = await _userManager.CreateAsync(newUser, newUser.PasswordHash!);
         if(!result.Succeeded)
         {
@@ -135,7 +136,7 @@ public class UserController : ControllerBase
     [ProducesResponseType(204, Type = typeof(User))]
     [ProducesResponseType(400)]
     [ProducesResponseType(404)]
-    [Helper.Authorize]
+    // [Helper.Authorize]
     public IActionResult UpdateUser(string id, [FromBody] ManageUserDto updatedUser)
     {
         if(updatedUser == null)
@@ -167,7 +168,7 @@ public class UserController : ControllerBase
     [HttpDelete("delete/{id}")]
     [ProducesResponseType(204)]
     [ProducesResponseType(400)]
-    [Helper.Authorize]
+    // [Helper.Authorize]
     public IActionResult DeleteUser(string id)
     {
         if(!_userService.UserExists(id))

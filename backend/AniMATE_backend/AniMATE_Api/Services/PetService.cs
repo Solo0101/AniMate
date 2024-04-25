@@ -12,53 +12,55 @@ public class PetService : IPetService
     {
         _context = context;
     }
-    public ICollection<Pet?> GetAllPets()
+    public ICollection<Pet> GetAllPets()
     {
-        return _context.Pets.ToList()!;
+        return _context.Pets.ToList();
     }
 
     public Pet? GetPetById(string id)
     {
-        return _context.Pets.Where(p => p.Id == id).FirstOrDefault();
+        return _context.Pets.FirstOrDefault(p => p.Id == id);
     }
 
-    public ICollection<Pet?> GetPetsByOwner(string ownerId)
+    public ICollection<Pet> GetPetsByOwner(string ownerId)
     {
-        return _context.Pets.Where(p => p.Owner!.Id == ownerId).ToList()!;
+        return _context.Pets.Where(p => p.Owner.Id == ownerId).ToList();
     }
 
-    public ICollection<Pet?> GetPetsByType(string type)
+    public ICollection<Pet> GetPetsByType(string type)
     {
-        return _context.Pets.Where(p => p.AnimalType == type).ToList()!;
+        return _context.Pets.Where(p => p.AnimalType == type).ToList();
     }
 
-    public ICollection<Pet?> GetPetsByBreed(string breed)
+    public ICollection<Pet> GetPetsByBreed(string breed)
     {
-        return _context.Pets.Where(p => p.Breed == breed).ToList()!;
+        return _context.Pets.Where(p => p.Breed == breed).ToList();
     }
 
-    public ICollection<Pet?> GetPetsByAge(int age)
+    public ICollection<Pet> GetPetsByAge(int age)
     {
-       return _context.Pets.Where(p => p.Age == age).ToList()!;
+       return _context.Pets.Where(p => p.Age == age).ToList();
     }
 
-    public ICollection<Pet?> GetPetsByGender(GenderType gender)
+    public ICollection<Pet> GetPetsByGender(GenderType gender)
     {
-        return _context.Pets.Where(p => p.Gender == gender).ToList()!;
+        return _context.Pets.Where(p => p.Gender == gender).ToList();
     }
 
-    public ICollection<Pet?> GetPetsByTypeAndGender(string type, GenderType gender)
+    public ICollection<Pet> GetPetsByTypeAndGender(string type, GenderType gender)
     {
-        return _context.Pets.Where(p => p.AnimalType == type && p.Gender == gender).ToList()!;
+        return _context.Pets.Where(p => p.AnimalType == type && p.Gender == gender).ToList();
     }
 
-    public ICollection<Pet?> GetPetsByTypeBreedAndGender(string type, string breed, GenderType gender)
+    public ICollection<Pet> GetPetsByTypeBreedAndGender(string type, string breed, GenderType gender)
     {
-        return _context.Pets.Where(p => p.AnimalType == type && p.Breed == breed && p.Gender == gender).ToList()!;
+        return _context.Pets.Where(p => p.AnimalType == type && p.Breed == breed && p.Gender == gender).ToList();
     }
 
     public bool CreatePet(Pet pet, string ownerId)
     { 
+        pet.Id = Guid.NewGuid().ToString();
+        pet.Owner = _context.Users.FirstOrDefault(u => u.Id == ownerId)!;
         _context.Pets.Add(pet);
         return Save();
     }
@@ -69,9 +71,10 @@ public class PetService : IPetService
        return Save();
     }
 
-    public void DeletePet(string id)
+    public bool DeletePet(string id)
     {
         _context.Pets.Remove(GetPetById(id)!);
+        return Save();
     }
 
     public bool PetExists(string id)
