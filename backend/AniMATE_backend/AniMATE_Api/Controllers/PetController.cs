@@ -68,7 +68,8 @@ public class PetController : ControllerBase
         }
 
         request.Owner = _userService.GetUserById(ownerId)!;
-
+        request.Owner.Pets.Add(request);
+        
         if (!_petService.CreatePet(request, ownerId))
         {
             ModelState.AddModelError("", "Something went wrong while creating the pet!");
