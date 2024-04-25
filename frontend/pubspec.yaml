@@ -71,6 +71,7 @@ flutter:
   assets:
     - lib/src/fonts/
     - lib/components/
+    - lib/src/images/
 
 
   fonts:
