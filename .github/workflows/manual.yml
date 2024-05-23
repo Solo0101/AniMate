@@ -1,5 +1,9 @@
 name: production-deploy-workflow
-on: [push, pull_request]
+on: 
+  push:
+    branches: 
+      - 'backend'    
+
 jobs:
   production-deploy:
     runs-on: ubuntu-latest
