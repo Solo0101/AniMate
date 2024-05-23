@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:frontend/Models/user.dart';
+import 'package:frontend/models/user.dart';
 import 'package:frontend/services/hive_service.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';

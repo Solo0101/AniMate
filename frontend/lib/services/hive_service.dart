@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 
-import 'package:frontend/Models/user.dart';
-import 'package:frontend/Models/pet.dart';
+import 'package:frontend/models/user.dart';
+import 'package:frontend/models/pet.dart';
 import 'package:frontend/services/api_service.dart';
 
 class HiveService {
