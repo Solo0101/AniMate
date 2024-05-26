@@ -93,27 +93,27 @@ class PetProfilePage extends StatelessWidget {
                         children: [
                           MyTextField(
                               controller: petNameController,
-                              hintText: 'Pet name',
+                              hintText: pet.name,
                               obscureText: false),
                           MyTextField(
                               controller: petTypeController,
-                              hintText: 'Pet type',
+                              hintText: pet.type,
                               obscureText: false),
                           MyTextField(
                               controller: petAgeController,
-                              hintText: 'Pet age',
+                              hintText: pet.age.toString(),
                               obscureText: false),
                           MyTextField(
                               controller: petSexController,
-                              hintText: 'Pet sex',
+                              hintText: pet.gender,
                               obscureText: false),
                           MyTextField(
                               controller: petRaceController,
-                              hintText: 'Pet race',
+                              hintText: pet.race,
                               obscureText: false),
                           MyTextField(
                               controller: petDescriptionController,
-                              hintText: 'Pet desciption',
+                              hintText: pet.description,
                               obscureText: false),
 
                           const MyButton(

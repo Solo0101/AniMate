@@ -28,21 +28,33 @@ class HomePage extends StatelessWidget {
 
     Pet p1 = Pet(
         name: 'Mufasa1',
+        gender: 'M',
+        type: 'dog',
+        race: 'black',
         age: 14,
         imageLink: 'lib/src/images/alb.jpeg',
         description: 'pet1 - description');
     Pet p2 = Pet(
         name: 'Georgica2',
+        gender: 'M',
+        type: 'dog',
+        race: 'black',
         age: 14,
         imageLink: 'lib/src/images/dobberman.jpeg',
         description: 'pet2 - description');
     Pet p3 = Pet(
         name: 'Maesto3',
+        gender: 'M',
+        type: 'dog',
+        race: 'black',
         age: 14,
         imageLink: 'lib/src/images/idk.jpeg',
         description: 'pet3 - description');
     Pet p4 = Pet(
         name: 'Chubby4',
+        gender: 'M',
+        type: 'dog',
+        race: 'black',
         age: 14,
         imageLink: 'lib/src/images/labrador.jpeg',
         description: 'pet4 - description');
