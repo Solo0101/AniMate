@@ -44,6 +44,7 @@ class MyTextField extends StatelessWidget {
               ),
               fillColor: primaryOverlayBackgroundColor,
               filled: true,
+
               hintText: hintText,
               hintStyle:
                   TextStyle(color: placeholderTextColor, fontSize: 20.0)),

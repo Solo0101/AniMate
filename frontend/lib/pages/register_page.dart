@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/components/my_scrollbar.dart';
 import 'package:frontend/components/my_textfield.dart';
 import 'package:frontend/constants/router_constants.dart';
 import 'package:flutter/gestures.dart';
@@ -53,10 +54,7 @@ class RegisterPage extends StatelessWidget {
             SizedBox(
               height: MediaQuery.of(context).size.height *
                   (1 - topContainerPercentage),
-              child: Scrollbar(
-                thickness: 5.0,
-                thumbVisibility: true,
-                radius: const Radius.circular(20.0),
+              child: MyScrollbar(
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
