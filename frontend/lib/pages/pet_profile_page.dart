@@ -4,10 +4,6 @@ import 'package:frontend/components/my_button.dart';
 import 'package:frontend/components/my_scrollbar.dart';
 import 'package:frontend/components/my_textfield.dart';
 import 'package:frontend/constants/style_constants.dart';
-import 'package:frontend/pages/home_page.dart';
-
-import '../services/delete_pet.dart';
-import '../services/save_pet_information.dart';
 
 class PetProfilePage extends StatelessWidget {
   final Pet pet;
@@ -34,7 +30,7 @@ class PetProfilePage extends StatelessWidget {
         MediaQuery.of(context).size.height * topContainerPercentage;
     final double bottomContainerHeight =
         MediaQuery.of(context).size.height * (1 - topContainerPercentage);
-    final double screenSizeWidth = MediaQuery.of(context).size.width;
+    // final double screenSizeWidth = MediaQuery.of(context).size.width;
 
     final top = topContainerHeight - profileHeight / 2;
 
@@ -116,16 +112,16 @@ class PetProfilePage extends StatelessWidget {
                               hintText: pet.description,
                               obscureText: false),
 
-                          const MyButton(
+                          MyButton(
                               buttonColor: utilityButtonColor,
                               textColor: buttonTextColor,
                               buttonText: 'Save',
-                              widget: SavePetInformation()),
-                          const MyButton(
+                              onPressed: () {}),
+                          MyButton(
                               buttonColor: importantUtilityButtonColor,
                               textColor: buttonTextColor,
                               buttonText: 'Delete Pet',
-                              widget: DeletePet()),
+                              onPressed: () {}),
                         ],
                       )
                     ],
