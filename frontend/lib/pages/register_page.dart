@@ -58,10 +58,7 @@ class RegisterPage extends ConsumerWidget {
             SizedBox(
               height: MediaQuery.of(context).size.height *
                   (1 - topContainerPercentage),
-              child: Scrollbar(
-                thickness: 5.0,
-                thumbVisibility: true,
-                radius: const Radius.circular(20.0),
+              child: MyScrollbar(
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,

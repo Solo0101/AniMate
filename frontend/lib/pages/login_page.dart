@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend/components/my_button.dart';
+import 'package:frontend/components/my_scrollbar.dart';
 import 'package:frontend/components/my_textfield.dart';
 import 'package:frontend/constants/router_constants.dart';
 import 'package:flutter/gestures.dart';
@@ -52,10 +53,7 @@ class LoginPage extends ConsumerWidget {
             SizedBox(
               height: MediaQuery.of(context).size.height *
                   (1 - topContainerPercentage),
-              child: Scrollbar(
-                thickness: 5.0,
-                  thumbVisibility: true,
-                  radius: const Radius.circular(20.0),
+              child: MyScrollbar(
                   child: SingleChildScrollView(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -84,7 +82,8 @@ class LoginPage extends ConsumerWidget {
                           obscureText: true,
                         ),
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(40.0, 15.0, 35.0, 20.0),
+                          padding:
+                              const EdgeInsets.fromLTRB(40.0, 15.0, 35.0, 20.0),
                           child: Column(
                             children: [
                               const Row(
@@ -180,9 +179,7 @@ class LoginPage extends ConsumerWidget {
                         ),
                       ],
                     ),
-              )
-
-              ),
+                  )),
             )
           ],
         ),

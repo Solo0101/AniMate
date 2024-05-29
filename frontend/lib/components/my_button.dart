@@ -33,9 +33,8 @@ class MyButton extends StatelessWidget {
               child: Row(children: [
                 Text(
                   buttonText,
-                  style: const TextStyle(
-                      fontSize: 20.0,
-                      color: buttonTextColor),
+                  style:
+                      const TextStyle(fontSize: 20.0, color: buttonTextColor),
                 )
               ]),
             )),
