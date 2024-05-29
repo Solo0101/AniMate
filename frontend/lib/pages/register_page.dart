@@ -8,6 +8,7 @@ import 'package:frontend/pages/home_page.dart';
 import 'package:frontend/services/auth_service.dart';
 import 'package:frontend/services/validate_credentials.dart';
 import 'package:frontend/components/my_button.dart';
+import 'package:frontend/components/my_scrollbar.dart';
 
 class RegisterPage extends ConsumerWidget {
   RegisterPage({super.key});
