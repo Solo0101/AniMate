@@ -47,7 +47,7 @@ class PetIcon extends StatelessWidget {
               ),
               Text(
                 petName,
-                style: const TextStyle(fontSize: 10.0, color: Colors.black),
+                style: const TextStyle(fontSize: 15.0, color: Colors.black),
               )
             ],
           ),
