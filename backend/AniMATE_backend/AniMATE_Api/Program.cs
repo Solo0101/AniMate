@@ -6,6 +6,7 @@ using AniMATE_Api.Models;
 using AniMATE_Api.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
@@ -52,6 +53,10 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddTransient<IFileService, FileService>();
+
+builder.Services.AddTransient<IPetService, PetService>();
+
 builder.Services.AddAuthorization();
 
 builder.Services.AddIdentityApiEndpoints<User>().AddEntityFrameworkStores<DataContext>();
@@ -76,7 +81,12 @@ var app = builder.Build();
 
 // if (app.Environment.IsDevelopment())
 // {
-    app.UseStaticFiles();
+    app.UseStaticFiles(new StaticFileOptions
+        {
+         FileProvider = new PhysicalFileProvider(
+             Path.Combine(builder.Environment.ContentRootPath, "Uploads")),
+         RequestPath = "/Resources"
+        });
 
     app.UseSwagger();
 

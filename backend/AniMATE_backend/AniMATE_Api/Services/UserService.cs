@@ -33,12 +33,19 @@ public class UserService : IUserService
         return _context.Users.Add(newUser).Entity;
     }
 
-    public bool UpdateUser(User user)
+    public bool UpdateUser(User newUser)
     {
-        user.UserName = user.Email;
-        user.NormalizedEmail = user.Email?.ToUpper();
-        user.NormalizedUserName = user.Email?.ToUpper();
-        _context.Users.Update(user);
+        var oldUser = GetUserById(newUser.Id);
+        oldUser!.City = newUser.City;
+        oldUser.Country = newUser.Country;
+        oldUser.Email = newUser.Email;
+        oldUser.Name = newUser.Name;
+        oldUser.PhoneNumber = newUser.PhoneNumber;
+        oldUser.CountyOrState = newUser.CountyOrState;
+        oldUser.UserName = newUser.Email;
+        oldUser.NormalizedEmail = newUser.Email?.ToUpper();
+        newUser.NormalizedUserName = newUser.UserName?.ToUpper();
+        _context.Users.Update(oldUser);
         return Save();
     }
 

@@ -133,7 +133,7 @@ public class UserController : ControllerBase
     }
     
     [HttpPut("update/{id}")]
-    [ProducesResponseType(204, Type = typeof(User))]
+    [ProducesResponseType(204)]
     [ProducesResponseType(400)]
     [ProducesResponseType(404)]
     // [Helper.Authorize]
