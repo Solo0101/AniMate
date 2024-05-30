@@ -131,16 +131,12 @@ public class UserController : ControllerBase
             return NotFound();
         }
         var result = await _signInManager.CheckPasswordSignInAsync(user, userLoginDto.Password!, false);
-        string encodedToken;
         if(!result.Succeeded)
         {
             return BadRequest();
         }
-        else
-        {
-            encodedToken = GenerateEncodedToken(user.Id, "Mobile", DateTime.UtcNow.AddYears(1));
+        var encodedToken = GenerateEncodedToken(user.Id, "Mobile", DateTime.UtcNow.AddYears(1));
 
-        }
         var response = _mapper.Map<LoginResponseView>(user);
         response.Token = encodedToken;
         return Ok(response);
