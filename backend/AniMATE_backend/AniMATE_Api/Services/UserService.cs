@@ -57,9 +57,10 @@ public class UserService : IUserService
         return Save();
     }
 
-    public void DeleteUser(string id)
+    public bool DeleteUser(string id)
     {
        _context.Users.Remove(GetUserById(id)!);
+       return Save(); 
     }
 
     public bool UserExists(string id)
@@ -68,6 +69,16 @@ public class UserService : IUserService
     }
     public bool Save()
     {
-        return _context.SaveChanges() >= 0;
+        var saved = 0;
+        try
+        {
+            saved = _context.SaveChanges();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+            return false;    
+        }
+        return saved > 0;
     }
 }

@@ -11,6 +11,7 @@ namespace AniMATE_Api.Data
             
         }
         public DbSet<Pet> Pets { get; set; }
+        public DbSet<Match> Matches { get; set; }
         
     }
 }
