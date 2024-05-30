@@ -30,6 +30,7 @@
 
     <ItemGroup>
       <Folder Include="wwwroot\swagger-ui\" />
+      <Folder Include="wwwroot\uploads\" />
     </ItemGroup>
 
 </Project>

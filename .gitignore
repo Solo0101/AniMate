@@ -1,4 +1,12 @@
 
-backend/AniMATE_backend/AniMATE_Api/bin/Debug/net8.0/AniMATE_Api.dll
+backend/AniMATE_backend/AniMATE_Api/Database.db
 
-backend/AniMATE_backend/AniMATE_Api/bin/Debug/net8.0/AniMATE_Api.exe
+backend/AniMATE_backend/AniMATE_Api/Database.db-shm
+
+backend/AniMATE_backend/AniMATE_Api/Database.db-wal
+
+backend/AniMATE_backend/AniMATE_Api/obj/Debug/net8.0/AniMATE_Api.AssemblyInfo.cs
+
+backend/AniMATE_backend/AniMATE_Api/obj/Debug/net8.0/AniMATE_Api.AssemblyInfoInputs.cache
+
+backend/AniMATE_backend/AniMATE_Api/obj/rider.project.restore.info

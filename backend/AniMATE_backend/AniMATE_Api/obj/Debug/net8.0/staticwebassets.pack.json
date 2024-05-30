@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\swagger-ui\\SwaggerDark.css"
     },
     {
+      "Id": "D:\\ProiecteTeme\\UPT_CURSURI\\Anul_3\\Semestrul_2\\IC\\AniMate\\backend\\AniMATE_backend\\AniMATE_Api\\wwwroot\\uploads\\pets\\f1869868-6f91-4a77-aba7-b3981fde653d.jpg",
+      "PackagePath": "staticwebassets\\uploads\\pets\\f1869868-6f91-4a77-aba7-b3981fde653d.jpg"
+    },
+    {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.AniMATE_Api.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },

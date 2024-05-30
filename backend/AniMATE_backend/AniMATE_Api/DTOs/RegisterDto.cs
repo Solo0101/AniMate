@@ -19,4 +19,6 @@ public class RegisterDto
     public string City { get; set; } = string.Empty;
     
     public string PhoneNumber { get; set; } = string.Empty;
+    
+    public IFormFile? ImageFile { get; set; }
 }

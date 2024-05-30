@@ -8,10 +8,12 @@ namespace AniMATE_Api.Services;
 public class UserService : IUserService
 {
     private readonly DataContext _context;
-    
-    public UserService(DataContext context)
+    private readonly IFileService _fileService;
+
+    public UserService(DataContext context, IFileService fileService)
     {
         _context = context;
+        _fileService = fileService;
     }
     public List<User> GetAllUsers()
     {
@@ -33,12 +35,25 @@ public class UserService : IUserService
         return _context.Users.Add(newUser).Entity;
     }
 
-    public bool UpdateUser(User user)
+    public bool UpdateUser(User newUser)
     {
-        user.UserName = user.Email;
-        user.NormalizedEmail = user.Email?.ToUpper();
-        user.NormalizedUserName = user.Email?.ToUpper();
-        _context.Users.Update(user);
+        var oldUser = GetUserById(newUser.Id);
+        oldUser!.City = newUser.City;
+        oldUser.Country = newUser.Country;
+        oldUser.Email = newUser.Email;
+        oldUser.Name = newUser.Name;
+        oldUser.PhoneNumber = newUser.PhoneNumber;
+        oldUser.CountyOrState = newUser.CountyOrState;
+        oldUser.UserName = newUser.Email;
+        oldUser.NormalizedEmail = newUser.Email?.ToUpper();
+        oldUser.NormalizedUserName = newUser.UserName?.ToUpper();
+        _context.Users.Update(oldUser);
+        if (oldUser.Image != newUser.Image)
+        {
+            if (oldUser.Image != string.Empty)
+                _fileService.DeleteImage(newUser.Image, "users");
+            oldUser.Image = newUser.Image;
+        }
         return Save();
     }
 

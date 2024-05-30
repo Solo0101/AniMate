@@ -23,14 +23,17 @@ public class UserController : ControllerBase
     private readonly SignInManager<User> _signInManager;
     private readonly IConfiguration _config;
     private readonly IMapper _mapper;
+    private readonly IFileService _fileService;
 
-    public UserController(IUserService userService, UserManager<User> userManager, SignInManager<User> signInManager, IConfiguration config, IMapper mapper)
+
+    public UserController(IUserService userService, UserManager<User> userManager, SignInManager<User> signInManager, IConfiguration config, IMapper mapper, IFileService fileService)
     {
         _userService = userService;
         _userManager = userManager;
         _signInManager = signInManager;
         _config = config;
         _mapper = mapper;
+        _fileService = fileService;
     }
 
     [HttpGet("getAll")]
@@ -84,11 +87,11 @@ public class UserController : ControllerBase
     [ProducesResponseType(201, Type = typeof(User))]
     [ProducesResponseType(400)]
     [AllowAnonymous]
-    public async Task<IActionResult> CreateUser(RegisterDto userRegisterDto)
+    public async Task<IActionResult> CreateUser([FromForm] RegisterDto userRegisterDto)
     {
         var existingUser = await _userManager.FindByEmailAsync(userRegisterDto.Email);
         var request = _mapper.Map<User>(userRegisterDto);
-        if (request != null)
+        if (existingUser != null)
         {
             return BadRequest("User with this email already exists!");
         }
@@ -96,6 +99,17 @@ public class UserController : ControllerBase
         {
             return BadRequest(ModelState);
         }
+        
+        if (userRegisterDto.ImageFile != null)
+        {
+            var fileResult = await _fileService.SaveImage(userRegisterDto.ImageFile, "users");
+
+            if (fileResult.Item1 == 1)
+            {
+                request!.Image = fileResult.Item2;
+            }
+        }
+        
         var newUser = _userService.CreateUser(request!);
         var result = await _userManager.CreateAsync(newUser, newUser.PasswordHash!);
         if(!result.Succeeded)
@@ -133,11 +147,11 @@ public class UserController : ControllerBase
     }
     
     [HttpPut("update/{id}")]
-    [ProducesResponseType(204, Type = typeof(User))]
+    [ProducesResponseType(204)]
     [ProducesResponseType(400)]
     [ProducesResponseType(404)]
     // [Helper.Authorize]
-    public IActionResult UpdateUser(string id, [FromBody] ManageUserDto updatedUser)
+    public async Task<IActionResult> UpdateUser(string id, [FromForm] ManageUserDto updatedUser)
     {
         if(updatedUser == null)
         {
@@ -156,6 +170,17 @@ public class UserController : ControllerBase
         {
             return BadRequest();
         }
+
+        if (updatedUser.ImageFile != null)
+        {
+            var fileResult = await _fileService.SaveImage(updatedUser.ImageFile, "users");
+
+            if (fileResult.Item1 == 1)
+            {
+                userUpdateValue.Image = fileResult.Item2;
+            }
+        }
+
         if(!_userService.UpdateUser(userUpdateValue))
         {
             ModelState.AddModelError("", "Something went wrong while updating the user!");

@@ -7,10 +7,12 @@ namespace AniMATE_Api.Services;
 public class PetService : IPetService
 {
     private readonly DataContext _context;
-    
-    public PetService(DataContext context)
+    private readonly IFileService _fileService;
+
+    public PetService(DataContext context, IFileService fileService)
     {
         _context = context;
+        _fileService = fileService;
     }
     public ICollection<Pet> GetAllPets()
     {
@@ -67,8 +69,24 @@ public class PetService : IPetService
 
     public bool UpdatePet(Pet pet)
     {
-       _context.Pets.Update(pet);
-       return Save();
+        var oldPet = GetPetById(pet.Id);
+        if (oldPet != null)
+        {
+            oldPet.Name = pet.Name;
+            oldPet.AnimalType = pet.AnimalType;
+            oldPet.Breed = pet.Breed;
+            oldPet.Age = pet.Age;
+            oldPet.Description = pet.Description;
+            if (oldPet.Image != pet.Image)
+            {
+                if (oldPet.Image != string.Empty)
+                    _fileService.DeleteImage(oldPet.Image, "pets");
+                oldPet.Image = pet.Image;
+            }
+            _context.Pets.Update(oldPet);
+        }
+
+        return Save();
     }
 
     public bool DeletePet(string id)
@@ -84,7 +102,16 @@ public class PetService : IPetService
 
     public bool Save()
     {
-        var saved = _context.SaveChanges();
+        var saved = 0;
+        try
+        {
+            saved = _context.SaveChanges();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+            return false;    
+        }
         return saved > 0;
     }
 }

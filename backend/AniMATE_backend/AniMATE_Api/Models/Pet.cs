@@ -36,9 +36,11 @@ public class Pet
     [StringLength(1024)]
     public string Description { get; set; } = string.Empty;
     
+
+    [StringLength(1024)]
+    public string Image { get; set; } = string.Empty;
+
     public User Owner { get; set; } = null!;
-    
-    // TODO: Add image property
     
     // TODO: Add matches property
     

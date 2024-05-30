@@ -27,5 +27,6 @@ public class User : IdentityUser
        
        public ICollection<Pet> Pets { get; set; } = new List<Pet>();
        
-       // TODO: Add image property
+       [StringLength(1024)]
+       public string Image { get; set; } = string.Empty;
 }

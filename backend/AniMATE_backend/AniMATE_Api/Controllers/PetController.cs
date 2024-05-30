@@ -1,6 +1,8 @@
 ﻿using AniMATE_Api.DTOs;
+using AniMATE_Api.Helper;
 using AniMATE_Api.Interfaces;
 using AniMATE_Api.Models;
+using AniMATE_Api.Services;
 using AniMATE_Api.Views;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -15,12 +17,14 @@ public class PetController : ControllerBase
     private readonly IPetService _petService;
     private readonly IUserService _userService;
     private readonly IMapper _mapper;
+    private readonly IFileService _fileService;
 
-    public PetController(IPetService petService, IUserService userService, IMapper mapper)
+    public PetController(IPetService petService, IUserService userService, IMapper mapper, IFileService fileService)
     {
         _petService = petService;
         _userService = userService;
         _mapper = mapper;
+        _fileService = fileService;
     }
 
     [HttpGet("getAll")]
@@ -52,9 +56,9 @@ public class PetController : ControllerBase
     }
 
     [HttpPost("create")]
-    [ProducesResponseType(204, Type = typeof(PetView))]
+    [ProducesResponseType(204)]
     [ProducesResponseType(400)]
-    public IActionResult CreatePet([FromBody] PetDto petCreate, [FromQuery] string ownerId)
+    public async Task<IActionResult> CreatePet([FromForm] PetDto petCreate, [FromQuery] string ownerId)
     {
         var request = _mapper.Map<Pet>(petCreate);
         if (request == null)
@@ -66,7 +70,19 @@ public class PetController : ControllerBase
         {
             return BadRequest(ModelState);
         }
+        
+        var fileResult = await _fileService.SaveImage(petCreate.ImageFile, "pets");
 
+        if (fileResult.Item1 == 1)
+        {
+            request.Image = fileResult.Item2;
+        }
+        else
+        {
+            ModelState.AddModelError("", fileResult.Item2);
+            return BadRequest(ModelState);
+        }
+        
         request.Owner = _userService.GetUserById(ownerId)!;
         request.Owner.Pets.Add(request);
         
@@ -78,12 +94,12 @@ public class PetController : ControllerBase
 
         return Ok("Pet created successfully!");
     }
-
+    
     [HttpPut("{id}")]
-    [ProducesResponseType(204, Type = typeof(PetView))]
+    [ProducesResponseType(204)]
     [ProducesResponseType(400)]
     [ProducesResponseType(404)]
-    public IActionResult UpdatePet(string id, [FromBody] PetDto updatedPet)
+    public async Task<IActionResult> UpdatePet(string id, [FromForm] PetDto updatedPet)
     {   
         var request = _mapper.Map<Pet>(updatedPet);
         if(request == null) 
@@ -94,14 +110,17 @@ public class PetController : ControllerBase
         {
             return NotFound();
         } 
-        if(request.Id != id)
-        {
-            return BadRequest();
-        }
+        
         if (!ModelState.IsValid)
         {
             return BadRequest();
         }
+        var fileResult = await _fileService.SaveImage(updatedPet.ImageFile, "pets");
+        if (fileResult.Item1 == 1)
+        {
+            request.Image = fileResult.Item2;
+        }
+        request.Id = id;
         if(!_petService.UpdatePet(request))
         {
               ModelState.AddModelError("", "Something went wrong while updating the pet!");
