@@ -10,7 +10,7 @@ public interface IUserService
     User? GetUserByEmail(string email);
     User CreateUser(User newUser);
     bool UpdateUser(User user);
-    void DeleteUser(string id);
+    bool DeleteUser(string id);
     bool UserExists(string id);
     bool Save();
 }

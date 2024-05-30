@@ -41,8 +41,4 @@ public class Pet
     public string Image { get; set; } = string.Empty;
 
     public User Owner { get; set; } = null!;
-    
-    // TODO: Add matches property
-    
-    // TODO: ?Add pedigree property
 }
