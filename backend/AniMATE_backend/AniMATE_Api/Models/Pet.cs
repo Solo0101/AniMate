@@ -36,17 +36,11 @@ public class Pet
     [StringLength(1024)]
     public string Description { get; set; } = string.Empty;
     
-    [Required]
+
     [StringLength(1024)]
     public string Image { get; set; } = string.Empty;
 
-    [Required]
-    [NotMapped] 
-    public IFormFile ImageFile { get; set; } = null!;
-
     public User Owner { get; set; } = null!;
-    
-    // TODO: Add image property
     
     // TODO: Add matches property
     

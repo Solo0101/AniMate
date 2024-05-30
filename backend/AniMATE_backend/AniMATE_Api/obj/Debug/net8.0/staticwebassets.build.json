@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "sp5dcOaeUunrpq3Ja5qVVtjB1CX60geDg+oy4DyEcts=",
+  "Hash": "1HZZDOYDrJHiZmURVXjLHJSGDJ8DBRwq9UvZc8gSvz8=",
   "Source": "AniMATE_Api",
   "BasePath": "_content/AniMATE_Api",
   "Mode": "Default",
@@ -34,6 +34,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\swagger-ui\\SwaggerDark.css"
+    },
+    {
+      "Identity": "D:\\ProiecteTeme\\UPT_CURSURI\\Anul_3\\Semestrul_2\\IC\\AniMate\\backend\\AniMATE_backend\\AniMATE_Api\\wwwroot\\uploads\\pets\\f1869868-6f91-4a77-aba7-b3981fde653d.jpg",
+      "SourceId": "AniMATE_Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\ProiecteTeme\\UPT_CURSURI\\Anul_3\\Semestrul_2\\IC\\AniMate\\backend\\AniMATE_backend\\AniMATE_Api\\wwwroot\\",
+      "BasePath": "_content/AniMATE_Api",
+      "RelativePath": "uploads/pets/f1869868-6f91-4a77-aba7-b3981fde653d.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\pets\\f1869868-6f91-4a77-aba7-b3981fde653d.jpg"
     }
   ]
 }

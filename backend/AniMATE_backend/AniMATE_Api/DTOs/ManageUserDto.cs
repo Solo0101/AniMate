@@ -9,5 +9,5 @@ public class ManageUserDto
     public string CountyOrState { get; set; } = string.Empty;
     public string City { get; set; } = string.Empty;
     public string PhoneNumber { get; set; } = string.Empty;
-    // public string Image { get; set; } = string.Empty;
+    public IFormFile? ImageFile { get; set; }
 }

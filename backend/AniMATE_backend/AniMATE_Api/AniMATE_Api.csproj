@@ -29,8 +29,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Uploads\" />
       <Folder Include="wwwroot\swagger-ui\" />
+      <Folder Include="wwwroot\uploads\" />
     </ItemGroup>
 
 </Project>

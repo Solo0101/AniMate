@@ -2,6 +2,6 @@
 
 public interface IFileService
 {
-    public Tuple<int, string> SaveImage(IFormFile imageFile);
-    public bool DeleteImage(string fileName);
+    public Task<Tuple<int, string>> SaveImage(IFormFile imageFile, string subpath);
+    public bool DeleteImage(string fileName, string subpath);
 }

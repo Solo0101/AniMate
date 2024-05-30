@@ -32,6 +32,7 @@ builder.Services.AddSwaggerGen(options =>
         In = ParameterLocation.Header,
         Description = "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer 12345abcdef\"",
     });
+    
     options.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
         {
@@ -46,6 +47,8 @@ builder.Services.AddSwaggerGen(options =>
             new string[] {}
         }
     });
+        
+    options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "AniMATE_Api", Version = "v1" });
     
     options.OperationFilter<SecurityRequirementsOperationFilter>();
 });
@@ -84,8 +87,8 @@ var app = builder.Build();
     app.UseStaticFiles(new StaticFileOptions
         {
          FileProvider = new PhysicalFileProvider(
-             Path.Combine(builder.Environment.ContentRootPath, "Uploads")),
-         RequestPath = "/Resources"
+             Path.Combine(builder.Environment.WebRootPath, "uploads")),
+         RequestPath = "/resources"
         });
 
     app.UseSwagger();
@@ -102,7 +105,7 @@ app.MapIdentityApi<User>();
 
 app.UseHttpsRedirection();
 
-app.UseMiddleware<JwtMiddleware>();
+// app.UseMiddleware<JwtMiddleware>();
 
 app.UseAuthorization();
 
