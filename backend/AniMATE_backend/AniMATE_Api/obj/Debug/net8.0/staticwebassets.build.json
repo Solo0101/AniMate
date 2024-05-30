@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "1HZZDOYDrJHiZmURVXjLHJSGDJ8DBRwq9UvZc8gSvz8=",
+  "Hash": "fhQcJxg3HHBqZCyyKNG0jxV5DZFyeViU/4JsCKi3zNU=",
   "Source": "AniMATE_Api",
   "BasePath": "_content/AniMATE_Api",
   "Mode": "Default",
@@ -53,6 +53,44 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\pets\\f1869868-6f91-4a77-aba7-b3981fde653d.jpg"
+    },
+    {
+      "Identity": "D:\\ProiecteTeme\\UPT_CURSURI\\Anul_3\\Semestrul_2\\IC\\AniMate\\backend\\AniMATE_backend\\AniMATE_Api\\wwwroot\\uploads\\users\\1195d482-a713-4e88-a4dc-2ab43f40be78.png",
+      "SourceId": "AniMATE_Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\ProiecteTeme\\UPT_CURSURI\\Anul_3\\Semestrul_2\\IC\\AniMate\\backend\\AniMATE_backend\\AniMATE_Api\\wwwroot\\",
+      "BasePath": "_content/AniMATE_Api",
+      "RelativePath": "uploads/users/1195d482-a713-4e88-a4dc-2ab43f40be78.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\users\\1195d482-a713-4e88-a4dc-2ab43f40be78.png"
+    },
+    {
+      "Identity": "D:\\ProiecteTeme\\UPT_CURSURI\\Anul_3\\Semestrul_2\\IC\\AniMate\\backend\\AniMATE_backend\\AniMATE_Api\\wwwroot\\uploads\\users\\24788ec1-965b-4cbc-8e9b-a719f4afa645.png",
+      "SourceId": "AniMATE_Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\ProiecteTeme\\UPT_CURSURI\\Anul_3\\Semestrul_2\\IC\\AniMate\\backend\\AniMATE_backend\\AniMATE_Api\\wwwroot\\",
+      "BasePath": "_content/AniMATE_Api",
+      "RelativePath": "uploads/users/24788ec1-965b-4cbc-8e9b-a719f4afa645.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\users\\24788ec1-965b-4cbc-8e9b-a719f4afa645.png"
     }
   ]
 }

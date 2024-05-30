@@ -9,6 +9,14 @@
       "PackagePath": "staticwebassets\\uploads\\pets\\f1869868-6f91-4a77-aba7-b3981fde653d.jpg"
     },
     {
+      "Id": "D:\\ProiecteTeme\\UPT_CURSURI\\Anul_3\\Semestrul_2\\IC\\AniMate\\backend\\AniMATE_backend\\AniMATE_Api\\wwwroot\\uploads\\users\\1195d482-a713-4e88-a4dc-2ab43f40be78.png",
+      "PackagePath": "staticwebassets\\uploads\\users\\1195d482-a713-4e88-a4dc-2ab43f40be78.png"
+    },
+    {
+      "Id": "D:\\ProiecteTeme\\UPT_CURSURI\\Anul_3\\Semestrul_2\\IC\\AniMate\\backend\\AniMATE_backend\\AniMATE_Api\\wwwroot\\uploads\\users\\24788ec1-965b-4cbc-8e9b-a719f4afa645.png",
+      "PackagePath": "staticwebassets\\uploads\\users\\24788ec1-965b-4cbc-8e9b-a719f4afa645.png"
+    },
+    {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.AniMATE_Api.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },
