@@ -14,11 +14,14 @@ import 'package:frontend/services/api_service.dart';
 import 'package:frontend/services/auth_service.dart';
 import 'package:frontend/services/hive_service.dart';
 
+import '../components/my_appbar.dart';
+import '../components/my_drawer.dart';
+
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
 
-  final double topContainerPercentage = 0.3; //bottom percentage will be the rest of the page
+  final double topContainerPercentage = 0.25; //bottom percentage will be the rest of the page
   final double profileHeight = 120;
 
   @override
@@ -33,6 +36,10 @@ class HomePage extends ConsumerWidget {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
+
+
+      appBar: const MyAppBar(),
+      endDrawer: const MyDrawer(),
       body: Container(
         color: backgroundColor,
         child: Column(
@@ -47,16 +54,19 @@ class HomePage extends ConsumerWidget {
                           alignment: Alignment.center,
                           clipBehavior: Clip.none,
                           children: [
-                            Column(
+                            const Column(
                               // mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                SizedBox(
-                                  height:
-                                      (topContainerHeight - profileHeight - profileHeight / 5)
+                                // SizedBox(
+                                //   height:
+                                //       (topContainerHeight - profileHeight - profileHeight / 5)
+                                // ),
+                                Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: Text('Home',
+                                      style: TextStyle(
+                                          fontSize: 40.0, color: primaryTextColor)),
                                 ),
-                                const Text('Home',
-                                    style: TextStyle(
-                                        fontSize: 40.0, color: primaryTextColor)),
                               ],
                             ),
                             Positioned(

@@ -1,0 +1,49 @@
+import 'package:flutter/material.dart';
+import 'package:frontend/constants/style_constants.dart';
+
+class MyDrawer extends StatelessWidget {
+  const MyDrawer({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      backgroundColor: popUpBackgroundColor,
+      child: ListView(
+        children: [
+          ListTile(
+              title: const Row(
+                children: [
+                  Icon(Icons.home),
+                  SizedBox(width: 10,),
+                  Text("Home"),
+                ],
+              ),
+              onTap: () { }
+          ),
+          ListTile(
+              title: const Row(
+                children: [
+                  Icon(Icons.person),
+                  SizedBox(width: 10,),
+                  Text("My Profile"),
+                ],
+              ),
+              onTap: () { }
+          ),
+          ListTile(
+              title: const Row(
+                children: [
+                  Icon(Icons.settings),
+                  SizedBox(width: 10,),
+                  Text("Settings"),
+                ],
+              ),
+              onTap: () { }
+          ),
+        ],
+      ),
+    );
+  }
+}
