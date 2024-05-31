@@ -168,7 +168,7 @@ class ApiService {
   }
 
   static Future<List<Pet>> getPetsByTypeAndGender(String type, String gender, WidgetRef ref) async {
-    int genderAsInt = gender == "male" ? 0 : 1;
+    int genderAsInt = gender == "male" ? 1 : 0;
 
     var url = Uri.https(ApiConstants.baseUrl,
         "${ApiConstants.appGetPetByTypeEndpoint}$type/gender/$genderAsInt");
@@ -218,9 +218,9 @@ class ApiService {
     return response.statusCode;
   }
 
-  static Future<int> createMatch(String petId, String petId2, Future<String> appToken) async {
+  static Future<int> createMatch(String petId, String petId2, WidgetRef ref) async {
     var url = Uri.https(ApiConstants.baseUrl, ApiConstants.appCreateMatchEndpoint);
-    var token = await appToken;
+    var token = _getDefaultHeader(ref);
     var requestBody = {
       'petId': petId,
       'matchedPetId': petId2  

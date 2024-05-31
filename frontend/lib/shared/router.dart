@@ -24,7 +24,7 @@ class RouteGenerator {
       case myProfilePageRoute:
       return MaterialPageRoute(builder: (_) => const UserProfilePage());
       case matchPageRoute:
-        return MaterialPageRoute(builder: (_) => const MatchPage());
+        // return MaterialPageRoute(builder: (_) => const MatchPage());
       ///Add new cases with routes HERE!!!!!!!
 
       default:

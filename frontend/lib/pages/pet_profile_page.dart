@@ -8,6 +8,8 @@ import 'package:frontend/components/my_button.dart';
 import 'package:frontend/components/my_scrollbar.dart';
 import 'package:frontend/components/my_textfield.dart';
 import 'package:frontend/constants/style_constants.dart';
+import 'package:frontend/pages/match_page.dart';
+import 'package:frontend/pages/match_splashart_page.dart';
 import 'package:frontend/providers/token_provider.dart';
 import 'package:frontend/services/api_service.dart';
 import 'package:frontend/services/hive_service.dart';
@@ -17,7 +19,7 @@ import '../components/my_drawer.dart';
 
 SecureStorageNotifier tokenProvider = SecureStorageNotifier();
 
-class PetProfilePage extends StatelessWidget {
+class PetProfilePage extends ConsumerWidget {
   final Pet pet;
 
   const PetProfilePage({
@@ -26,7 +28,7 @@ class PetProfilePage extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     const double topContainerPercentage = 0.25;
     //bottom percentage will be the rest of the page
     const double profileHeight = 120;
@@ -43,6 +45,7 @@ class PetProfilePage extends StatelessWidget {
     // final double screenSizeWidth = MediaQuery.of(context).size.width;
 
     final top = topContainerHeight - profileHeight / 2;
+
 
     return Scaffold(
       resizeToAvoidBottomInset: true,
@@ -74,8 +77,24 @@ class PetProfilePage extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       // MyButton(buttonColor: utilityButtonColor, textColor: primaryTextColor, buttonText: "History", onPressed: (){  }),
-                                      MyButton(buttonColor: matchGreenButtonColor, textColor: primaryTextColor, buttonText: "Match", onPressed: (){ Navigator.of(context)
-                                          .pushNamed(matchPageRoute); }),
+                                      MyButton(buttonColor: matchGreenButtonColor, textColor: primaryTextColor, buttonText: "Match",
+                                          onPressed: () async {
+                                          final List<Pet> wantedPets = await ApiService.getPetsByTypeAndGender(pet.type, pet.gender, ref);
+                                          if (wantedPets.isNotEmpty) {
+                                            Navigator.pushReplacement(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) => MatchPage(petId: pet.id, wantedPets: wantedPets, index: 0)),
+                                            );
+                                          }
+                                          else {
+                                            Navigator.pushReplacement(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) => const MatchSplashPage()),
+                                            );
+                                          }
+                                      }),
 
                                     ],
                                   )
