@@ -1,6 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend/constants/api_constants.dart';
+import 'package:frontend/providers/token_provider.dart';
+import 'package:frontend/services/api_service.dart';
 import 'package:frontend/services/hive_service.dart';
 import '../models/user.dart';
 import 'package:frontend/components/my_button.dart';
@@ -11,6 +14,7 @@ import 'package:frontend/constants/style_constants.dart';
 import '../components/my_appbar.dart';
 import '../components/my_drawer.dart';
 
+SecureStorageNotifier tokenProvider = SecureStorageNotifier();
 
 class UserProfilePage extends ConsumerStatefulWidget {
 
@@ -119,7 +123,22 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage> {
                                     buttonColor: utilityButtonColor,
                                     textColor: buttonTextColor,
                                     buttonText: 'Save',
-                                    onPressed: () {}),
+                                    onPressed: () async {
+                                      User updatedUser = User(
+                                          id: user.id,
+                                          name: userNameController.text.trim(),
+                                          email: userEmailController.text.trim(),
+                                          phoneNumber: userPhoneNumberController.text.trim(),
+                                          country: userCountryController.text.trim(),
+                                          countyOrState: userCountyOrStateController.text.trim(),
+                                          city: userCityController.text.trim(),
+                                          imageLink: user.imageLink
+                                      );
+                                      int responseCode = await ApiService.updateUser(updatedUser, tokenProvider.getApplicationToken());
+                                      if (kDebugMode) {
+                                        print(responseCode);
+                                      }
+                                    }),
                                 MyButton(
                                     buttonColor: importantUtilityButtonColor,
                                     textColor: buttonTextColor,

@@ -75,6 +75,35 @@ class ApiService {
     return {'Authorization': 'Bearer $token', 'accept': '*/*'};
   }
 
+  static Future<int> updateUser(User user, Future<String> applicationToken) async {
+    var url = Uri.https(ApiConstants.baseUrl, ApiConstants.appUpdateUserByIdEndpoint);
+    var token = await applicationToken;
+    var image = await ApiService.getImage();
+    var stream = http.ByteStream(Stream.castFrom(image!.openRead()));
+    final int length = await image!.length();
+
+    var request = http.MultipartRequest('PUT', url)
+      ..headers.addAll({
+        'accept': '*/*',
+        'Content-Type': 'multipart/form-data',
+        'Authorization': 'Bearer $token'})
+      ..files.add(http.MultipartFile('image', stream, length, filename: image!.path.split('/').last))
+      ..fields['email'] = user.email
+      ..fields['name'] = user.name
+      ..fields['country'] = user.country
+      ..fields['countyOrState'] = user.countyOrState
+      ..fields['city'] = user.city
+      ..fields['phoneNumber'] = user.phoneNumber
+      ..fields['id'] = user.id;
+
+
+    var response = await http.Response.fromStream(await request.send());
+    if (kDebugMode) {
+      print(response.body);
+    }
+    return response.statusCode;
+  }
+
   static Future getImage() async {
     image = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (image != null) {
@@ -138,6 +167,54 @@ class ApiService {
     return response.statusCode;
   }
 
+  static Future<List<Pet>> getPetsByTypeAndGender(String type, String gender, WidgetRef ref) async {
+    int genderAsInt = gender == "male" ? 0 : 1;
 
+    var url = Uri.https(ApiConstants.baseUrl,
+        "${ApiConstants.appGetPetByTypeEndpoint}$type/gender/$genderAsInt");
+    var token = _getDefaultHeader(ref);
+    var response = await http.get(url, headers: <String, String>{
+      'accept': '*/*',
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $token'
+    });
 
+    var responseMap = jsonDecode(response.body);
+    List<Pet> petList = [];
+
+    for (int i = 0; i < responseMap.length; ++i) {
+      Pet pet = Pet(
+          id: responseMap[i]["id"],
+          name: responseMap[i]["name"],
+          type: responseMap[i]["animalType"],
+          breed: responseMap[i]["breed"],
+          age: responseMap[i]["age"],
+          gender: responseMap[i]["gender"] == 1 ? "male" : "female",
+          description: responseMap[i]["description"],
+          imageLink: responseMap[i]["image"]
+      );
+
+      petList.add(pet);
+    }
+
+    if (kDebugMode) {
+      print(petList);
+    }
+    return petList;
+  }
+
+  static Future<int> deletePet(String petId, Future<String> appToken) async {
+    var url = Uri.https(ApiConstants.baseUrl, ApiConstants.appDeletePetByIdEndpoint + petId);
+    var token = await appToken;
+    var response = await http.delete(url, headers: <String, String>{
+      'accept': '*/*',
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $token'
+    });
+
+    if (kDebugMode) {
+      print(response.body);
+    }
+    return response.statusCode;
+  }
 }
