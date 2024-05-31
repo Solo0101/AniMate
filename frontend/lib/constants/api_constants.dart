@@ -20,5 +20,8 @@ class ApiConstants {
   static const String appGetPetByBreedEndpoint = 'api/Pet/breed/';
   static const String appGetPetByAgeEndpoint = 'api/Pet/age/';
   static const String appGetPetByGenderEndpoint = 'api/Pet/gender/';
+
+  static const String petResources = 'https://$baseUrl/resources/pets/';
+  static const String userResources = 'https://$baseUrl/resources/users/';
   // TODO: Add more endpoints
 }

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -36,13 +36,16 @@ class ApiService {
             breed: responseMap[i]["breed"],
             age: responseMap[i]["age"],
             gender: responseMap[i]["gender"] == 1 ? "male" : "female",
-            description: responseMap[i]["description"]
+            description: responseMap[i]["description"],
+            imageLink: responseMap[i]["image"]
         );
 
         petList.add(pet);
       }
 
-      print(petList);
+      if (kDebugMode) {
+        print(petList);
+      }
       return petList;
   }
 
