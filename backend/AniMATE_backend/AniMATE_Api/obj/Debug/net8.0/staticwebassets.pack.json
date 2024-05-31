@@ -1,6 +1,10 @@
 {
   "Files": [
     {
+      "Id": "D:\\ProiecteTeme\\UPT_CURSURI\\Anul_3\\Semestrul_2\\IC\\AniMate\\backend\\AniMATE_backend\\AniMATE_Api\\wwwroot\\new_pet.jpg",
+      "PackagePath": "staticwebassets\\new_pet.jpg"
+    },
+    {
       "Id": "D:\\ProiecteTeme\\UPT_CURSURI\\Anul_3\\Semestrul_2\\IC\\AniMate\\backend\\AniMATE_backend\\AniMATE_Api\\wwwroot\\swagger-ui\\SwaggerDark.css",
       "PackagePath": "staticwebassets\\swagger-ui\\SwaggerDark.css"
     },
