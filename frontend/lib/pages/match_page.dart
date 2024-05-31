@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:frontend/components/my_button.dart';
 import 'package:frontend/components/my_scrollbar.dart';
 import 'package:frontend/constants/api_constants.dart';
 import 'package:frontend/models/pet.dart';
@@ -21,7 +22,7 @@ import '../components/my_drawer.dart';
 class MatchPage extends ConsumerWidget {
   const MatchPage({super.key});
 
-  final double topContainerPercentage = 0.25; //bottom percentage will be the rest of the page
+  final double topContainerPercentage = 0; //bottom percentage will be the rest of the page
   final double profileHeight = 120;
 
   @override
@@ -48,12 +49,29 @@ class MatchPage extends ConsumerWidget {
             Container(
               height: topContainerHeight,
               color: primaryGreen,
-              child: Center(
+              child: const Center(
                   child: Column(
                     children: [
                       ],),),),
+            Column(
+              children: [
+                //found image
+                //name
+                //type
+                //breed
+                //age
+                //description
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                MyButton(buttonColor: Colors.deepOrangeAccent, textColor: primaryTextColor, buttonText: "<", onPressed: () {}),//decline
+                MyButton(buttonColor: primaryOverlayBackgroundColor, textColor: primaryTextColor, buttonText: "Filters", onPressed: () {}),//fiters
+                MyButton(buttonColor: matchGreenButtonColor, textColor: primaryTextColor, buttonText: ">", onPressed: (){}),//approve
+              ],
+            )
 
-            SizedBox(height: profileHeight / 2 + 20),
           ],
         ),
       ),

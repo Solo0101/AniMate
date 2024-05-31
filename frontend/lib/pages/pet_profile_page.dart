@@ -73,7 +73,7 @@ class _PetProfilePageState extends ConsumerState<PetProfilePage> {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      MyButton(buttonColor: utilityButtonColor, textColor: primaryTextColor, buttonText: "History", onPressed: (){  }),
+                                      // MyButton(buttonColor: utilityButtonColor, textColor: primaryTextColor, buttonText: "History", onPressed: (){  }),
                                       MyButton(buttonColor: matchGreenButtonColor, textColor: primaryTextColor, buttonText: "Match", onPressed: (){ Navigator.of(context)
                                           .pushNamed(matchPageRoute); }),
 
