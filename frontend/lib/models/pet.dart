@@ -15,7 +15,11 @@ class Pet extends HiveObject{
   @HiveField(4)
   final int age;
   @HiveField(5)
-  final String ownerId;
+  final String gender;
+  @HiveField(6)
+  final String description;
+  @HiveField(7)
+  final String imageLink;
 
   Pet({
     required this.id,
@@ -23,24 +27,30 @@ class Pet extends HiveObject{
     required this.type,
     required this.breed,
     required this.age,
-    required this.ownerId,
+    required this.gender,
+    required this.description,
+    required this.imageLink
   });
 
   factory Pet.fromJson(Map<String, dynamic> json) => Pet(
     id: json['id'],
     name: json['name'],
-    type: json['type'],
+    type: json['animalType'],
     breed: json['breed'],
     age: json['age'],
-    ownerId: json['ownerId'],
+    gender: json['gender'],
+    description: json['description'],
+    imageLink: json['image']
   );
 
   Map<String, dynamic> toJson() => {
     'id': id,
     'name': name,
-    'type': type,
+    'animalType': type,
     'breed': breed,
     'age': age,
-    'ownerId': ownerId,
+    'gender': gender,
+    'description': description,
+    'image': imageLink
   };
 }

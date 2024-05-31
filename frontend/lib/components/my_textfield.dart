@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend/constants/style_constants.dart';
 
-class MyTextField extends StatelessWidget {
+class MyTextField extends ConsumerStatefulWidget {
   final TextEditingController controller;
   final String hintText;
   final bool obscureText;
@@ -10,9 +11,14 @@ class MyTextField extends StatelessWidget {
     super.key,
     required this.controller,
     required this.hintText,
-    required this.obscureText,
+    this.obscureText = false,
   });
 
+  @override
+  ConsumerState<ConsumerStatefulWidget> createState() => _MyTextFieldState();
+}
+
+class _MyTextFieldState extends ConsumerState<MyTextField> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -31,8 +37,9 @@ class MyTextField extends StatelessWidget {
           ],
         ),
         child: TextField(
-          controller: controller,
-          obscureText: obscureText,
+          controller: widget.controller,
+          obscureText: widget.obscureText,
+          textInputAction: TextInputAction.next,
           decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20.0),
@@ -47,11 +54,13 @@ class MyTextField extends StatelessWidget {
               fillColor: primaryOverlayBackgroundColor,
               filled: true,
 
-              hintText: hintText,
+              hintText: widget.hintText,
               hintStyle:
                   TextStyle(color: placeholderTextColor, fontSize: 20.0)),
         ),
       ),
     );
   }
+
+
 }

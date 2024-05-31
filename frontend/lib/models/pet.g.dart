@@ -1,53 +1,53 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user.dart';
+part of 'pet.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class UserAdapter extends TypeAdapter<User> {
+class PetAdapter extends TypeAdapter<Pet> {
   @override
-  final int typeId = 0;
+  final int typeId = 1;
 
   @override
-  User read(BinaryReader reader) {
+  Pet read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return User(
+    return Pet(
       id: fields[0] as String,
-      name: fields[2] as String,
-      email: fields[1] as String,
-      phoneNumber: fields[3] as String,
-      country: fields[4] as String,
-      city: fields[6] as String,
-      countyOrState: fields[5] as String,
-      pets: (fields[7] as List?)?.cast<Pet>(),
+      name: fields[1] as String,
+      type: fields[2] as String,
+      breed: fields[3] as String,
+      age: fields[4] as int,
+      gender: fields[5] as String,
+      description: fields[6] as String,
+      imageLink: fields[7] as String,
     );
   }
 
   @override
-  void write(BinaryWriter writer, User obj) {
+  void write(BinaryWriter writer, Pet obj) {
     writer
       ..writeByte(8)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.email)
-      ..writeByte(2)
       ..write(obj.name)
+      ..writeByte(2)
+      ..write(obj.type)
       ..writeByte(3)
-      ..write(obj.phoneNumber)
+      ..write(obj.breed)
       ..writeByte(4)
-      ..write(obj.country)
+      ..write(obj.age)
       ..writeByte(5)
-      ..write(obj.countyOrState)
+      ..write(obj.gender)
       ..writeByte(6)
-      ..write(obj.city)
+      ..write(obj.description)
       ..writeByte(7)
-      ..write(obj.pets);
+      ..write(obj.imageLink);
   }
 
   @override
@@ -56,7 +56,7 @@ class UserAdapter extends TypeAdapter<User> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is UserAdapter &&
+      other is PetAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
