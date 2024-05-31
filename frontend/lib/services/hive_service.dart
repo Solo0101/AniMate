@@ -59,4 +59,10 @@ class HiveService {
     petBox.clear();
   }
 
+  Future<void> logoutUser() async {
+    await clearBoxes();
+    // Perform any additional cleanup if needed
+    // For example, you might want to reset any in-memory user data or state
+  }
+
 }
