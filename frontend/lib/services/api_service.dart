@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+import 'package:frontend/services/hive_service.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -12,13 +13,14 @@ import 'package:frontend/constants/api_constants.dart';
 import 'package:frontend/providers/token_provider.dart';
 
 import 'package:image_picker/image_picker.dart';
-
+import 'package:frontend/providers/token_provider.dart';
 
 
 class ApiService {
   ApiService._();
 
   static late XFile? image;
+
 
   static Future<List<Pet>> fetchPetsByUser(String ownerId, WidgetRef ref) async {
     var url = Uri.https(ApiConstants.baseUrl, "${ApiConstants.appGetPetByUserIdEndpoint}$ownerId");
@@ -80,10 +82,9 @@ class ApiService {
     }
   }
 
-  static Future<int> addPet(Pet pet, WidgetRef ref) async {
+  static Future<int> addPet(Pet pet, Future<String> appToken) async {
       var url = Uri.https(ApiConstants.baseUrl, ApiConstants.appCreatePetEndpoint);
-      var token = await _getDefaultHeader(ref);
-
+      var token = await appToken;
       var stream = http.ByteStream(Stream.castFrom(image!.openRead()));
       final int length = await image!.length();
 
@@ -109,10 +110,9 @@ class ApiService {
       return response.statusCode;
     }
 
-  static Future<int> updatePet(Pet pet, WidgetRef ref) async {
+  static Future<int> updatePet(Pet pet, Future<String> appToken) async {
     var url = Uri.https(ApiConstants.baseUrl, ApiConstants.appUpdatePetEndpoint + pet.id);
-    var token = await _getDefaultHeader(ref);
-
+    var token = await appToken;
     var stream = http.ByteStream(Stream.castFrom(image!.openRead()));
     final int length = await image!.length();
 
