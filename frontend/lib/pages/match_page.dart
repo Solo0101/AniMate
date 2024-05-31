@@ -82,7 +82,7 @@ class MatchPage extends ConsumerWidget {
       Text("Labrador", style: TextStyle(fontSize: fontSize),),
     Text("4", style: TextStyle(fontSize: fontSize),),
     Text("Dog", style: TextStyle(fontSize: fontSize),),
-    Text("This is a dog's description.", style: TextStyle(fontSize: fontSize),),
+    Text("This is a dog's description.", style: TextStyle(fontSize: fontSize-10),),
     //found image
     //name
     //type

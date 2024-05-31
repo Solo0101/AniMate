@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:frontend/components/my_appbar.dart';
 import 'package:frontend/components/my_button.dart';
+import 'package:frontend/components/my_drawer.dart';
 import 'package:frontend/components/my_scrollbar.dart';
 import 'package:frontend/components/my_textfield.dart';
 import 'package:frontend/constants/api_constants.dart';
@@ -22,7 +24,7 @@ class AddPetPage extends StatefulWidget {
 class _AddPetPageState extends State<AddPetPage> {
   @override
   Widget build(BuildContext context) {
-    const double topContainerPercentage = 0.3;
+    const double topContainerPercentage = 0.25;
     //bottom percentage will be the rest of the page
     const double profileHeight = 120;
 
@@ -43,6 +45,8 @@ class _AddPetPageState extends State<AddPetPage> {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      appBar: const MyAppBar(hasBackButton: true,),
+      endDrawer: const MyDrawer(),
       body: SingleChildScrollView(
         child: Container(
           color: backgroundColor,
