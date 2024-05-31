@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend/constants/api_constants.dart';
+import 'package:frontend/constants/router_constants.dart';
 import 'package:frontend/models/pet.dart';
 import 'package:frontend/components/my_button.dart';
 import 'package:frontend/components/my_scrollbar.dart';
@@ -72,8 +73,9 @@ class _PetProfilePageState extends ConsumerState<PetProfilePage> {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      MyButton(buttonColor: utilityButtonColor, textColor: primaryTextColor, buttonText: "History", onPressed: (){}),
-                                      MyButton(buttonColor: matchGreenButtonColor, textColor: primaryTextColor, buttonText: "Match", onPressed: (){}),
+                                      MyButton(buttonColor: utilityButtonColor, textColor: primaryTextColor, buttonText: "History", onPressed: (){  }),
+                                      MyButton(buttonColor: matchGreenButtonColor, textColor: primaryTextColor, buttonText: "Match", onPressed: (){ Navigator.of(context)
+                                          .pushNamed(matchPageRoute); }),
 
                                     ],
                                   )
