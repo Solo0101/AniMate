@@ -153,7 +153,12 @@ class PetProfilePage extends StatelessWidget {
                                     buttonColor: importantUtilityButtonColor,
                                     textColor: buttonTextColor,
                                     buttonText: 'Delete Pet',
-                                    onPressed: () {}),
+                                    onPressed: () async {
+                                      int responseCode = await ApiService.deletePet(pet.id, tokenProvider.getApplicationToken());
+                                      if (kDebugMode) {
+                                        print(responseCode);
+                                      }
+                                    }),
                               ],
                             )
                           ],
