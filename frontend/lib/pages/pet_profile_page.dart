@@ -69,10 +69,14 @@ class _PetProfilePageState extends ConsumerState<PetProfilePage> {
                                       height: (topContainerHeight -
                                           profileHeight -
                                           profileHeight / 5)),
-                                  const Text('Home',
-                                      style: TextStyle(
-                                          fontSize: 40.0,
-                                          color: primaryTextColor)),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      MyButton(buttonColor: utilityButtonColor, textColor: primaryTextColor, buttonText: "History", onPressed: (){}),
+                                      MyButton(buttonColor: matchGreenButtonColor, textColor: primaryTextColor, buttonText: "Match", onPressed: (){}),
+
+                                    ],
+                                  )
                                 ],
                               ),
                               Positioned(
