@@ -217,4 +217,25 @@ class ApiService {
     }
     return response.statusCode;
   }
+
+  static Future<int> createMatch(String petId, String petId2, Future<String> appToken) async {
+    var url = Uri.https(ApiConstants.baseUrl, ApiConstants.appCreateMatchEndpoint);
+    var token = await appToken;
+    var requestBody = {
+      'petId': petId,
+      'matchedPetId': petId2  
+    };
+
+    var body = jsonEncode(requestBody);
+    var response = await http.post(url, body: body, headers: {
+      'accept': '*/*',
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $token'
+    });
+
+    if (kDebugMode) {
+      print(response.body);
+    }
+    return response.statusCode;
+  }
 }
