@@ -102,15 +102,31 @@ class HomePage extends ConsumerWidget {
                     return const CircularProgressIndicator();
                   } else if(snapshot.hasData && !snapshot.hasError) {
                     return GridView.builder(
-                      itemCount: snapshot.data!.length,
+                      itemCount: snapshot.data!.length + 1,
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
-                        Pet pet = snapshot.data![index];
-                        return PetIcon(
-                          pet: pet
-                        );
-                      }, gridDelegate:
-                    const SliverGridDelegateWithFixedCrossAxisCount(
+                        if(index == snapshot.data!.length) {
+                            return PetIcon(
+                              pet: Pet(
+                                id: '',
+                                name: '',
+                                type: '',
+                                breed: '',
+                                age: 0,
+                                gender: '',
+                                description: '',
+                                imageLink: '',
+                              ),
+                              isAddPet: true,
+                            );
+                        } else {
+                          Pet pet = snapshot.data![index];
+                          return PetIcon(
+                            pet: pet
+                          );
+                          }
+                      },
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       childAspectRatio: 1,
                     ),
@@ -120,14 +136,26 @@ class HomePage extends ConsumerWidget {
                     print(snapshot.data);
                     print(snapshot.error);
                   }
-                  return const Text('No pets found');
+                  return PetIcon(
+                    pet: Pet(
+                      id: '',
+                      name: '',
+                      type: '',
+                      breed: '',
+                      age: 0,
+                      gender: '',
+                      description: '',
+                      imageLink: '',
+                    ),
+                    isAddPet: true,
+                  );
                 },
               ),
               ],
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
-      );
+      ),
+    );
   }
 }

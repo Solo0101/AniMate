@@ -17,7 +17,10 @@ class RouteGenerator {
       // return MaterialPageRoute(builder: (_) => const SplashScreen());
       case settingsPageRoute:
       // return MaterialPageRoute(builder: (_) => const SettingsPage());
+      case myProfilePageRoute:
+      // return MaterialPageRoute(builder: (_) => const MyProfilePage());
       ///Add new cases with routes HERE!!!!!!!
+
       default:
         return _errorRoute();
     }

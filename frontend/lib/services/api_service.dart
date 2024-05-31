@@ -67,4 +67,19 @@ class ApiService {
     var token = await ref.read(secureStorageProvider.notifier).getApplicationToken();
     return {'Authorization': 'Bearer $token', 'accept': '*/*'};
   }
+
+static Future<void> addPet(Pet pet, WidgetRef ref) async {
+    var url = Uri.https(ApiConstants.baseUrl, ApiConstants.appCreatePetEndpoint);
+    var token = await _getDefaultHeader(ref);
+    var response = await http.post(url, headers: {
+      'accept': '*/*',
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $token'
+    }, body: jsonEncode(pet.toJson()));
+
+    if (kDebugMode) {
+      print(response.body);
+    }
+  }
+
 }
