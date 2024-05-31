@@ -119,6 +119,12 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage> {
                                     controller: userCityController = TextEditingController(text: user.city),
                                     hintText: "City"),
 
+                                FloatingActionButton(
+                                  onPressed: () => { ApiService.getImage() },
+                                  tooltip: 'Pick Image',
+                                  child: const Icon(Icons.add_a_photo),
+                                ),
+
                                 MyButton(
                                     buttonColor: utilityButtonColor,
                                     textColor: buttonTextColor,
