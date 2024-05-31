@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/constants/style_constants.dart';
 
@@ -38,6 +39,17 @@ class MyDrawer extends StatelessWidget {
                   Icon(Icons.settings),
                   SizedBox(width: 10,),
                   Text("Settings"),
+                ],
+              ),
+              onTap: () { }
+          ),
+          SizedBox(height: 100),
+          ListTile(
+              title: const Row(
+                children: [
+                  Icon(Icons.output),
+                  SizedBox(width: 10,),
+                  Text("Sign Out"),
                 ],
               ),
               onTap: () { }
