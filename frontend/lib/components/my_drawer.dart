@@ -13,6 +13,7 @@ class MyDrawer extends StatelessWidget {
       backgroundColor: popUpBackgroundColor,
       child: ListView(
         children: [
+          const SizedBox(height: 100),
           ListTile(
               title: const Row(
                 children: [
@@ -43,7 +44,7 @@ class MyDrawer extends StatelessWidget {
               ),
               onTap: () { }
           ),
-          SizedBox(height: 100),
+          const SizedBox(height: 100),
           ListTile(
               title: const Row(
                 children: [
