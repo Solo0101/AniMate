@@ -77,7 +77,7 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage> {
                                 child: CircleAvatar(
                                   radius: profileHeight / 2,
                                   backgroundColor: Colors.grey,
-                                  backgroundImage: Image.network('${ApiConstants.petResources}${user.imageLink}').image,
+                                  backgroundImage: Image.network('${ApiConstants.userResources}${user.imageLink}').image,
                                 ),
                               )
                             ]),
