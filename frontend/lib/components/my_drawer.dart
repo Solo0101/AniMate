@@ -46,7 +46,7 @@ class MyDrawer extends StatelessWidget {
                 ],
               ),
               onTap: () { Navigator.of(context)
-                  .pushReplacementNamed(settingsPageRoute); }
+                  .pushNamed(settingsPageRoute); }
           ),
           const SizedBox(height: 100),
           ListTile(

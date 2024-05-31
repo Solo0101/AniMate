@@ -5,6 +5,7 @@ import 'package:frontend/pages/register_page.dart';
 import 'package:frontend/constants/router_constants.dart';
 import 'package:frontend/pages/user_profile_page.dart';
 
+import '../pages/match_page.dart';
 import '../pages/settings_page.dart';
 
 class RouteGenerator {
@@ -22,6 +23,8 @@ class RouteGenerator {
       return MaterialPageRoute(builder: (_) => const SettingsPage());
       case myProfilePageRoute:
       return MaterialPageRoute(builder: (_) => const UserProfilePage());
+      case matchPageRoute:
+        return MaterialPageRoute(builder: (_) => const MatchPage());
       ///Add new cases with routes HERE!!!!!!!
 
       default:
