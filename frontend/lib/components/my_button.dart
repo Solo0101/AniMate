@@ -5,14 +5,14 @@ class MyButton extends StatelessWidget {
   final Color buttonColor;
   final Color textColor;
   final String buttonText;
-  final Widget widget;
+  final void Function()? onPressed;
 
   const MyButton({
     super.key,
     required this.buttonColor,
     required this.textColor,
     required this.buttonText,
-    required this.widget,
+    required this.onPressed
   });
 
   @override
@@ -21,13 +21,11 @@ class MyButton extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         TextButton(
-            onPressed: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => widget));
-            },
+            onPressed: onPressed,
             child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-              // margin: const EdgeInsets.symmetric(horizontal: 10),
+              padding: const EdgeInsets.symmetric(
+                  vertical: 10, horizontal: 15),
+              margin: const EdgeInsets.symmetric(horizontal: 10),
               decoration: BoxDecoration(
                 color: buttonColor,
                 borderRadius: BorderRadius.circular(8.0),

@@ -3,6 +3,9 @@ import 'package:frontend/pages/home_page.dart';
 import 'package:frontend/pages/login_page.dart';
 import 'package:frontend/pages/register_page.dart';
 import 'package:frontend/constants/router_constants.dart';
+import 'package:frontend/pages/user_profile_page.dart';
+
+import '../pages/settings_page.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -16,8 +19,11 @@ class RouteGenerator {
       case splashScreenPageRoute:
       // return MaterialPageRoute(builder: (_) => const SplashScreen());
       case settingsPageRoute:
-      // return MaterialPageRoute(builder: (_) => const SettingsPage());
+      return MaterialPageRoute(builder: (_) => const SettingsPage());
+      case myProfilePageRoute:
+      return MaterialPageRoute(builder: (_) => const UserProfilePage());
       ///Add new cases with routes HERE!!!!!!!
+
       default:
         return _errorRoute();
     }

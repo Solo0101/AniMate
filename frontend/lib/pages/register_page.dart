@@ -1,27 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/components/my_scrollbar.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend/components/my_textfield.dart';
 import 'package:frontend/constants/router_constants.dart';
 import 'package:flutter/gestures.dart';
 import 'package:frontend/constants/style_constants.dart';
+import 'package:frontend/pages/home_page.dart';
+import 'package:frontend/services/auth_service.dart';
 import 'package:frontend/services/validate_credentials.dart';
 import 'package:frontend/components/my_button.dart';
+import 'package:frontend/components/my_scrollbar.dart';
 
-class RegisterPage extends StatelessWidget {
+class RegisterPage extends ConsumerWidget {
   RegisterPage({super.key});
 
   final emailController = TextEditingController();
   final fullNameController = TextEditingController();
   final phoneNumberController = TextEditingController();
-  final locationController = TextEditingController();
+  final countryController = TextEditingController();
+  final countyOrStateController = TextEditingController();
+  final cityController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
+  final AuthService authService = AuthService();
 
-  final double topContainerPercentage =
-      0.3; //bottom percentage will be the rest of the page
+  final double topContainerPercentage = 0.3; //bottom percentage will be the rest of the page
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
@@ -88,8 +93,18 @@ class RegisterPage extends StatelessWidget {
                         obscureText: false,
                       ),
                       MyTextField(
-                        controller: locationController,
-                        hintText: 'Location',
+                        controller: countryController,
+                        hintText: 'Country',
+                        obscureText: false,
+                      ),
+                      MyTextField(
+                        controller: countyOrStateController,
+                        hintText: 'County/State',
+                        obscureText: false,
+                      ),
+                      MyTextField(
+                        controller: cityController,
+                        hintText: 'City',
                         obscureText: false,
                       ),
                       MyTextField(
@@ -138,8 +153,7 @@ class RegisterPage extends StatelessWidget {
                                         fontSize: 15.0),
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = () {
-                                        Navigator.of(context)
-                                            .pushNamed(loginPageRoute);
+                                        Navigator.pushNamed(context, loginPageRoute);
                                       },
                                   ),
                                 ),
@@ -152,11 +166,77 @@ class RegisterPage extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            const MyButton(
+                            MyButton(
                                 buttonColor: utilityButtonColor,
                                 textColor: buttonTextColor,
-                                buttonText: 'Sign in',
-                                widget: ValidateCredentials()),
+                                buttonText: 'Sign Up',
+                                onPressed: () async {
+                                  var registerResponse = await AuthService.register(
+                                      email: emailController.text,
+                                      name: fullNameController.text,
+                                      phoneNumber: phoneNumberController.text,
+                                      country: countryController.text,
+                                      countyOrState: countyOrStateController.text,
+                                      city: cityController.text,
+                                      password: passwordController.text,
+                                      confirmPassword: confirmPasswordController.text,
+                                      context: ref
+                                  );
+                                  if (context.mounted) {
+                                    if (registerResponse == AuthResponse.success) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                          const SnackBar(
+                                            content: Text(
+                                                'Registered successfully!'),
+                                            duration: Duration(seconds: 2),
+                                          )
+                                      );
+                                      var loginResponse = await AuthService
+                                          .login(
+                                          emailController.text,
+                                          passwordController.text,
+                                          ref
+                                      );
+                                      if (context.mounted) {
+                                        if (loginResponse == AuthResponse.success) {
+                                          Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => const HomePage()),
+                                          );
+                                        } else {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                              const SnackBar(
+                                                content: Text(
+                                                    'Something went wrong!'),
+                                                duration: Duration(seconds: 2),
+                                              )
+                                          );
+                                        }
+                                      }
+                                    } else if (registerResponse == AuthResponse.badRequest) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                          const SnackBar(
+                                            content: Text(
+                                                'Complete all fields!'),
+                                            duration: Duration(seconds: 2),
+                                          )
+                                      );
+                                    } else {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                          const SnackBar(
+                                            content: Text('Bad request!'),
+                                            duration: Duration(seconds: 2),
+                                          )
+                                      );
+                                    }
+                                  }
+                                }
+                            ),
                           ],
                         ),
                       )
