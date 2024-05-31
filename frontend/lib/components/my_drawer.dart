@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/constants/router_constants.dart';
 import 'package:frontend/constants/style_constants.dart';
+import 'package:frontend/services/hive_service.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({
@@ -56,7 +57,7 @@ class MyDrawer extends StatelessWidget {
                   Text("Sign Out"),
                 ],
               ),
-              onTap: () { }
+              onTap: () { HiveService().logoutUser(); }
           ),
         ],
       ),

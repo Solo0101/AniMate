@@ -21,6 +21,7 @@ class ApiConstants {
   static const String appGetPetByAgeEndpoint = 'api/Pet/age/';
   static const String appGetPetByGenderEndpoint = 'api/Pet/gender/';
   static const String appCreatePetEndpoint = 'api/Pet/create/';
+  static const String appUpdatePetEndpoint = 'api/Pet/';
 
   static const String petResources = 'https://$baseUrl/resources/pets/';
   static const String userResources = 'https://$baseUrl/resources/users/';

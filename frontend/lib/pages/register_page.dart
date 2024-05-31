@@ -5,6 +5,7 @@ import 'package:frontend/constants/router_constants.dart';
 import 'package:flutter/gestures.dart';
 import 'package:frontend/constants/style_constants.dart';
 import 'package:frontend/pages/home_page.dart';
+import 'package:frontend/services/api_service.dart';
 import 'package:frontend/services/auth_service.dart';
 import 'package:frontend/services/validate_credentials.dart';
 import 'package:frontend/components/my_button.dart';
@@ -117,6 +118,13 @@ class RegisterPage extends ConsumerWidget {
                         hintText: 'Confirm Password',
                         obscureText: true,
                       ),
+
+                      FloatingActionButton(
+                        onPressed: () => { ApiService.getImage() },
+                        tooltip: 'Pick Image',
+                        child: const Icon(Icons.add_a_photo),
+                      ),
+
                       Padding(
                         padding:
                             const EdgeInsets.fromLTRB(40.0, 15.0, 35.0, 20.0),
@@ -180,7 +188,7 @@ class RegisterPage extends ConsumerWidget {
                                       city: cityController.text,
                                       password: passwordController.text,
                                       confirmPassword: confirmPasswordController.text,
-                                      context: ref
+                                      ref: ref
                                   );
                                   if (context.mounted) {
                                     if (registerResponse == AuthResponse.success) {

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:frontend/models/user.dart';
+import 'package:frontend/services/api_service.dart';
 import 'package:frontend/services/hive_service.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
@@ -54,7 +55,7 @@ class AuthService {
     }
   }
 
-  static Future<AuthResponse> register({required String email, required String name, required String country, required String countyOrState, required String city, required String phoneNumber, required String password, required String confirmPassword, required WidgetRef context}) async {
+  static Future<AuthResponse> register({required String email, required String name, required String country, required String countyOrState, required String city, required String phoneNumber, required String password, required String confirmPassword, required WidgetRef ref}) async {
     Map<String, String> requestBody = {
       'name': name,
       'email': email,
@@ -68,10 +69,28 @@ class AuthService {
 
     var url = Uri.https(ApiConstants.baseUrl, ApiConstants.appRegisterEndpoint);
     var body = jsonEncode(requestBody);
-    var response = await http.post(url, body: body, headers: {
-      'accept': '*/*',
-      'Content-Type': 'application/json'
-    });
+    var image = await ApiService.getImage();
+    var token = await ref.read(secureStorageProvider.notifier).getApplicationToken();
+    var stream = http.ByteStream(Stream.castFrom(image!.openRead()));
+    final int length = await image!.length();
+
+    var request = http.MultipartRequest('POST', url)
+      ..headers.addAll({
+        'accept': '*/*',
+        'Content-Type': 'multipart/form-data',
+        'Authorization': 'Bearer $token'})
+      ..files.add(http.MultipartFile('image', stream, length, filename: image!.path.split('/').last))
+      ..fields['email'] = email
+      ..fields['name'] = name
+      ..fields['country'] = country
+      ..fields['countyOrState'] = countyOrState
+      ..fields['city'] = city
+      ..fields['phoneNumber'] = phoneNumber
+      ..fields['password'] = password
+      ..fields['confirmPassword'] = confirmPassword;
+
+
+    var response = await http.Response.fromStream(await request.send());
     if(response.statusCode == 201) {
       return Future.value(AuthResponse.success);
     } else {
