@@ -188,7 +188,7 @@ class RegisterPage extends ConsumerWidget {
                                       city: cityController.text,
                                       password: passwordController.text,
                                       confirmPassword: confirmPasswordController.text,
-                                      context: ref
+                                      ref: ref
                                   );
                                   if (context.mounted) {
                                     if (registerResponse == AuthResponse.success) {
