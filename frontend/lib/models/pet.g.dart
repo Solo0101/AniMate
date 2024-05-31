@@ -24,13 +24,14 @@ class PetAdapter extends TypeAdapter<Pet> {
       age: fields[4] as int,
       gender: fields[5] as String,
       description: fields[6] as String,
+      imageLink: fields[7] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, Pet obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -44,7 +45,9 @@ class PetAdapter extends TypeAdapter<Pet> {
       ..writeByte(5)
       ..write(obj.gender)
       ..writeByte(6)
-      ..write(obj.description);
+      ..write(obj.description)
+      ..writeByte(7)
+      ..write(obj.imageLink);
   }
 
   @override

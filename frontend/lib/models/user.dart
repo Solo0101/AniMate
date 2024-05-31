@@ -21,6 +21,8 @@ class User extends HiveObject{
   final String city;
   @HiveField(7)
   List<Pet>? pets;
+  @HiveField(8)
+  final String? imageLink;
 
 
   User({
@@ -32,6 +34,7 @@ class User extends HiveObject{
     required this.city,
     required this.countyOrState,
     this.pets,
+    this.imageLink,
   });
 
   // receive data from the server and convert it to a User object
@@ -44,6 +47,7 @@ class User extends HiveObject{
       city: json['city'],
       countyOrState: json['countyOrState'],
       pets: json['pets'] != null ? List<Pet>.from(json['pets'].map((pet) => Pet.fromJson(pet))) : null,
+      imageLink: json['image']
     );
 
   // convert the User object to a JSON object to send to the server
@@ -55,6 +59,7 @@ class User extends HiveObject{
     'country': country,
     'city': city,
     'countyOrState': countyOrState,
+    'image': imageLink,
     'pets': pets != null ? List<dynamic>.from(pets!.map((pet) => pet.toJson())) : null,
   };
 
@@ -68,6 +73,7 @@ class User extends HiveObject{
       city: city,
       countyOrState: countyOrState,
       pets: pets,
+      imageLink: imageLink
     );
   }
 }
