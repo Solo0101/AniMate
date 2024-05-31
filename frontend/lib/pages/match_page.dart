@@ -36,7 +36,7 @@ class MatchPage extends ConsumerWidget {
     final top = topContainerHeight - profileHeight / 2;
 
     // var currentPet = HiveService().getPets(); ??
-
+    const double fontSize = 30;
     return Scaffold(
       resizeToAvoidBottomInset: true,
 
@@ -53,8 +53,13 @@ class MatchPage extends ConsumerWidget {
                   child: Column(
                     children: [
                       ],),),),
-            Column(
+            const Column(
               children: [
+                Text("Cane Corso", style: TextStyle(fontSize: fontSize),),
+                Text("Cane Corso", style: TextStyle(fontSize: fontSize),),
+                Text("Cane Corso", style: TextStyle(fontSize: fontSize),),
+                Text("Cane Corso", style: TextStyle(fontSize: fontSize),),
+                Text("Cane Corso", style: TextStyle(fontSize: fontSize),),
                 //found image
                 //name
                 //type
@@ -64,6 +69,7 @@ class MatchPage extends ConsumerWidget {
               ],
             ),
             Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 MyButton(buttonColor: Colors.deepOrangeAccent, textColor: primaryTextColor, buttonText: "<", onPressed: () {}),//decline
