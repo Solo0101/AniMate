@@ -1,12 +1,12 @@
 {
   "Files": [
     {
-      "Id": "D:\\ProiecteTeme\\UPT_CURSURI\\Anul_3\\Semestrul_2\\IC\\AniMate\\backend\\AniMATE_backend\\AniMATE_Api\\wwwroot\\new_pet.jpg",
-      "PackagePath": "staticwebassets\\new_pet.jpg"
-    },
-    {
       "Id": "D:\\ProiecteTeme\\UPT_CURSURI\\Anul_3\\Semestrul_2\\IC\\AniMate\\backend\\AniMATE_backend\\AniMATE_Api\\wwwroot\\swagger-ui\\SwaggerDark.css",
       "PackagePath": "staticwebassets\\swagger-ui\\SwaggerDark.css"
+    },
+    {
+      "Id": "D:\\ProiecteTeme\\UPT_CURSURI\\Anul_3\\Semestrul_2\\IC\\AniMate\\backend\\AniMATE_backend\\AniMATE_Api\\wwwroot\\uploads\\new_pet.jpg",
+      "PackagePath": "staticwebassets\\uploads\\new_pet.jpg"
     },
     {
       "Id": "D:\\ProiecteTeme\\UPT_CURSURI\\Anul_3\\Semestrul_2\\IC\\AniMate\\backend\\AniMATE_backend\\AniMATE_Api\\wwwroot\\uploads\\pets\\09c0d7a1-4d47-4e48-9ef9-b4e83cebc6a3.jpg",

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "jrTzO/rsjQbXEzVhir9GSHbSOiZ67GkAC3qZeIVEHh0=",
+  "Hash": "Qd0H8Rv1+8HZfcod6093eSnIO2duXU6Zno4/H2uyoWY=",
   "Source": "AniMATE_Api",
   "BasePath": "_content/AniMATE_Api",
   "Mode": "Default",
@@ -16,25 +16,6 @@
     }
   ],
   "Assets": [
-    {
-      "Identity": "D:\\ProiecteTeme\\UPT_CURSURI\\Anul_3\\Semestrul_2\\IC\\AniMate\\backend\\AniMATE_backend\\AniMATE_Api\\wwwroot\\new_pet.jpg",
-      "SourceId": "AniMATE_Api",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\ProiecteTeme\\UPT_CURSURI\\Anul_3\\Semestrul_2\\IC\\AniMate\\backend\\AniMATE_backend\\AniMATE_Api\\wwwroot\\",
-      "BasePath": "_content/AniMATE_Api",
-      "RelativePath": "new_pet.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\new_pet.jpg"
-    },
     {
       "Identity": "D:\\ProiecteTeme\\UPT_CURSURI\\Anul_3\\Semestrul_2\\IC\\AniMate\\backend\\AniMATE_backend\\AniMATE_Api\\wwwroot\\swagger-ui\\SwaggerDark.css",
       "SourceId": "AniMATE_Api",
@@ -53,6 +34,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\swagger-ui\\SwaggerDark.css"
+    },
+    {
+      "Identity": "D:\\ProiecteTeme\\UPT_CURSURI\\Anul_3\\Semestrul_2\\IC\\AniMate\\backend\\AniMATE_backend\\AniMATE_Api\\wwwroot\\uploads\\new_pet.jpg",
+      "SourceId": "AniMATE_Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\ProiecteTeme\\UPT_CURSURI\\Anul_3\\Semestrul_2\\IC\\AniMate\\backend\\AniMATE_backend\\AniMATE_Api\\wwwroot\\",
+      "BasePath": "_content/AniMATE_Api",
+      "RelativePath": "uploads/new_pet.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\new_pet.jpg"
     },
     {
       "Identity": "D:\\ProiecteTeme\\UPT_CURSURI\\Anul_3\\Semestrul_2\\IC\\AniMate\\backend\\AniMATE_backend\\AniMATE_Api\\wwwroot\\uploads\\pets\\09c0d7a1-4d47-4e48-9ef9-b4e83cebc6a3.jpg",

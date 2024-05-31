@@ -13,7 +13,7 @@ public class MatchController : ControllerBase
         _matchService = matchService;
     }
     
-    [HttpGet("getAll")]
+    [HttpGet("api/matches/getAll")]
     [ProducesResponseType(200, Type = typeof(ICollection<Match>))]
     [ProducesResponseType(400)]
     public IActionResult GetAllPets()
@@ -27,7 +27,7 @@ public class MatchController : ControllerBase
         return Ok(matches);
     }
     
-    [HttpGet("{id}")]
+    [HttpGet("api/matches/{id}")]
     [ProducesResponseType(200, Type = typeof(ICollection<Match>))]
     [ProducesResponseType(400)]
     public IActionResult GetMatchById(string id)
@@ -40,7 +40,7 @@ public class MatchController : ControllerBase
         return Ok(response);
     }
     
-    [HttpGet("matches/{petId}")]
+    [HttpGet("api/matches/by-pet/{petId}")]
     [ProducesResponseType(200, Type = typeof(ICollection<Match>))]
     [ProducesResponseType(400)]
     public IActionResult GetMatchesByPetId(string petId)
@@ -51,7 +51,7 @@ public class MatchController : ControllerBase
     }
     
     
-    [HttpGet("matches/confirmed/{petId}")]
+    [HttpGet("api/matches/confirmed/{petId}")]
     [ProducesResponseType(200, Type = typeof(ICollection<Match>))]
     [ProducesResponseType(400)]
     public IActionResult GetConfirmedMatchesByPetId(string petId)
@@ -61,7 +61,7 @@ public class MatchController : ControllerBase
         return Ok(response);
     }
     
-    [HttpGet("matches/pending/{petId}")]
+    [HttpGet("api/matches/pending/{petId}")]
     [ProducesResponseType(200, Type = typeof(Match))]
     [ProducesResponseType(400)]
     public IActionResult GetPendingMatchesByPetId(string petId)
@@ -71,7 +71,7 @@ public class MatchController : ControllerBase
         return Ok(response);
     }
     
-    [HttpGet("match/{petId}/{matchedPetId}")]
+    [HttpGet("api/match/{petId}/{matchedPetId}")]
     [ProducesResponseType(200, Type = typeof(Match))]
     [ProducesResponseType(400)]
     public IActionResult GetMatchByPetIdAndMatchedPetId(string petId, string matchedPetId)
@@ -85,7 +85,7 @@ public class MatchController : ControllerBase
         return Ok(response);
     }
     
-    [HttpPost("create")]
+    [HttpPost("api/matches/create")]
     [ProducesResponseType(204)]
     [ProducesResponseType(400)]
     public IActionResult CreateMatch(string petId, string matchedPetId)
@@ -109,7 +109,7 @@ public class MatchController : ControllerBase
         return Ok("Match created successfully! Matched: " + matched);
     }
     
-    [HttpDelete("{id}")]
+    [HttpDelete("api/matches/delete/{id}")]
     [ProducesResponseType(204)]
     [ProducesResponseType(400)]
     public IActionResult DeleteMatch(string id)

@@ -108,8 +108,12 @@ public class UserController : ControllerBase
             {
                 request!.Image = fileResult.Item2;
             }
+        } else
+        {
+            request!.Image = string.Empty;
         }
-        
+        request.PasswordHash = userRegisterDto.Password;
+        request.UserName = userRegisterDto.Email;
         var newUser = _userService.CreateUser(request!);
         var result = await _userManager.CreateAsync(newUser, newUser.PasswordHash!);
         if(!result.Succeeded)
