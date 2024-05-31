@@ -4,11 +4,15 @@ import 'package:frontend/services/hive_service.dart';
 import 'package:frontend/shared/router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:flutter/services.dart';
 
 import 'constants/style_constants.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent, // transparent status bar
+  ));
   await Hive.initFlutter();
   await HiveService().initHive();
 
