@@ -14,11 +14,14 @@ import 'package:frontend/services/api_service.dart';
 import 'package:frontend/services/auth_service.dart';
 import 'package:frontend/services/hive_service.dart';
 
+import '../components/my_appbar.dart';
+import '../components/my_drawer.dart';
+
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
 
-  final double topContainerPercentage = 0.3; //bottom percentage will be the rest of the page
+  final double topContainerPercentage = 0.25; //bottom percentage will be the rest of the page
   final double profileHeight = 120;
 
   @override
@@ -35,55 +38,8 @@ class HomePage extends ConsumerWidget {
       resizeToAvoidBottomInset: false,
 
 
-      appBar: AppBar(
-        title: const Text("AniMate"),
-        // centerTitle: true,
-        backgroundColor: primaryGreen,
-        foregroundColor: Colors.white,
-        actions: <Widget>[
-        ],
-        // leading: IconButton(
-        //   icon: const Icon(Icons.arrow_back_ios_new),
-        //   onPressed: () => Navigator.of(context).pop(),
-        // ),
-      ),
-      endDrawer: Drawer(
-        backgroundColor: popUpBackgroundColor,
-        child: ListView(
-          children: [
-            ListTile(
-                title: Row(
-                  children: [
-                    const Icon(Icons.home),
-                    const SizedBox(width: 10,),
-                    const Text("Home"),
-                  ],
-                ),
-                onTap: () { }
-            ),
-            ListTile(
-                title: Row(
-                  children: [
-                    const Icon(Icons.person),
-                    const SizedBox(width: 10,),
-                    const Text("My Profile"),
-                  ],
-                ),
-                onTap: () { }
-            ),
-            ListTile(
-                title: Row(
-                  children: [
-                    const Icon(Icons.settings),
-                    const SizedBox(width: 10,),
-                    const Text("Settings"),
-                  ],
-                ),
-                onTap: () { }
-            ),
-          ],
-        ),
-      ),
+      appBar: const MyAppBar(),
+      endDrawer: const MyDrawer(),
       body: Container(
         color: backgroundColor,
         child: Column(

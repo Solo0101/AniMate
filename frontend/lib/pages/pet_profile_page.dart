@@ -7,6 +7,9 @@ import 'package:frontend/components/my_scrollbar.dart';
 import 'package:frontend/components/my_textfield.dart';
 import 'package:frontend/constants/style_constants.dart';
 
+import '../components/my_appbar.dart';
+import '../components/my_drawer.dart';
+
 class PetProfilePage extends ConsumerStatefulWidget {
   final Pet pet;
 
@@ -19,14 +22,11 @@ class PetProfilePage extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() => _PetProfilePageState();
 }
 
-  final double topContainerPercentage =
-      0.25; //bottom percentage will be the rest of the page
-  final double profileHeight = 120;
 class _PetProfilePageState extends ConsumerState<PetProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    const double topContainerPercentage = 0.3;
+    const double topContainerPercentage = 0.25;
     //bottom percentage will be the rest of the page
     const double profileHeight = 120;
 
@@ -45,6 +45,8 @@ class _PetProfilePageState extends ConsumerState<PetProfilePage> {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      appBar: const MyAppBar(hasBackButton: true,),
+      endDrawer: const MyDrawer(),
       body: Container(
         color: backgroundColor,
         child: Column(
