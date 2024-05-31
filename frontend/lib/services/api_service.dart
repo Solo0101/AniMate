@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
@@ -10,10 +11,14 @@ import 'package:frontend/models/pet.dart';
 import 'package:frontend/constants/api_constants.dart';
 import 'package:frontend/providers/token_provider.dart';
 
+import 'package:image_picker/image_picker.dart';
+
 
 
 class ApiService {
   ApiService._();
+
+  static late XFile? image;
 
   static Future<List<Pet>> fetchPetsByUser(String ownerId, WidgetRef ref) async {
     var url = Uri.https(ApiConstants.baseUrl, "${ApiConstants.appGetPetByUserIdEndpoint}$ownerId");
@@ -68,18 +73,71 @@ class ApiService {
     return {'Authorization': 'Bearer $token', 'accept': '*/*'};
   }
 
-static Future<void> addPet(Pet pet, WidgetRef ref) async {
-    var url = Uri.https(ApiConstants.baseUrl, ApiConstants.appCreatePetEndpoint);
+  static Future getImage() async {
+    image = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (image != null) {
+      return;
+    }
+  }
+
+  static Future<int> addPet(Pet pet, WidgetRef ref) async {
+      var url = Uri.https(ApiConstants.baseUrl, ApiConstants.appCreatePetEndpoint);
+      var token = await _getDefaultHeader(ref);
+
+      var stream = http.ByteStream(Stream.castFrom(image!.openRead()));
+      final int length = await image!.length();
+
+      var request = http.MultipartRequest('POST', url)
+        ..headers.addAll({
+          'accept': '*/*',
+          'Content-Type': 'multipart/form-data',
+          'Authorization': 'Bearer $token'})
+      ..files.add(http.MultipartFile('image', stream, length, filename: image!.path.split('/').last))
+      ..fields['name'] = pet.name
+      ..fields['animalType'] = pet.type
+      ..fields['breed'] = pet.breed
+      ..fields['age'] = pet.age.toString as String
+      ..fields['description'] = pet.description
+      ..fields['gender'] = pet.gender == "female" ? "1" : "0";
+
+
+      var response = await http.Response.fromStream(await request.send());
+
+      if (kDebugMode) {
+        print(response.body);
+      }
+      return response.statusCode;
+    }
+
+  static Future<int> updatePet(Pet pet, WidgetRef ref) async {
+    var url = Uri.https(ApiConstants.baseUrl, ApiConstants.appUpdatePetEndpoint + pet.id);
     var token = await _getDefaultHeader(ref);
-    var response = await http.post(url, headers: {
-      'accept': '*/*',
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer $token'
-    }, body: jsonEncode(pet.toJson()));
+
+    var stream = http.ByteStream(Stream.castFrom(image!.openRead()));
+    final int length = await image!.length();
+
+    var request = http.MultipartRequest('PUT', url)
+      ..headers.addAll({
+        'accept': '*/*',
+        'Content-Type': 'multipart/form-data',
+        'Authorization': 'Bearer $token'})
+      ..files.add(http.MultipartFile('imageFile', stream, length, filename: image!.path.split('/').last))
+      ..fields['name'] = pet.name
+      ..fields['animalType'] = pet.type
+      ..fields['breed'] = pet.breed
+      ..fields['age'] = pet.age.toString()
+      ..fields['description'] = pet.description
+      ..fields['gender'] = pet.gender == "female" ? "1" : "0";
+
+
+    var response = await http.Response.fromStream(await request.send());
 
     if (kDebugMode) {
       print(response.body);
     }
+    return response.statusCode;
   }
+
+
 
 }

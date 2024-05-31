@@ -35,7 +35,11 @@ class HomePage extends ConsumerWidget {
     final top = topContainerHeight - profileHeight / 2;
 
     return Scaffold(
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: false,
+
+
+      appBar: const MyAppBar(),
+      endDrawer: const MyDrawer(),
       body: SingleChildScrollView(
         child: Container(
           color: backgroundColor,
@@ -51,16 +55,19 @@ class HomePage extends ConsumerWidget {
                             alignment: Alignment.center,
                             clipBehavior: Clip.none,
                             children: [
-                              Column(
+                              const Column(
                                 // mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  SizedBox(
-                                    height:
-                                        (topContainerHeight - profileHeight - profileHeight / 5)
+                                  // SizedBox(
+                                  //   height:
+                                  //       (topContainerHeight - profileHeight - profileHeight / 5)
+                                  // ),
+                                  Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('Home',
+                                        style: TextStyle(
+                                            fontSize: 40.0, color: primaryTextColor)),
                                   ),
-                                  const Text('Home',
-                                      style: TextStyle(
-                                          fontSize: 40.0, color: primaryTextColor)),
                                 ],
                               ),
                               Positioned(
@@ -95,20 +102,34 @@ class HomePage extends ConsumerWidget {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return const CircularProgressIndicator();
                     } else if(snapshot.hasData && !snapshot.hasError) {
-                      return Scrollbar(
-                        child: GridView.builder(
-                          itemCount: snapshot.data!.length,
-                          shrinkWrap: true,
-                          itemBuilder: (context, index) {
+                      return GridView.builder(
+                        itemCount: snapshot.data!.length + 1,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          if(index == snapshot.data!.length) {
+                            return PetIcon(
+                              pet: Pet(
+                                id: '',
+                                name: '',
+                                type: '',
+                                breed: '',
+                                age: 0,
+                                gender: '',
+                                description: '',
+                                imageLink: '',
+                              ),
+                              isAddPet: true,
+                            );
+                          } else {
                             Pet pet = snapshot.data![index];
                             return PetIcon(
-                              pet: pet
+                                pet: pet
                             );
-                          }, gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
+                          }
+                        },
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           childAspectRatio: 1,
-                        ),
                         ),
                       );
                     }
@@ -116,16 +137,27 @@ class HomePage extends ConsumerWidget {
                       print(snapshot.data);
                       print(snapshot.error);
                     }
-                    return const Text('No pets found');
+                    return PetIcon(
+                      pet: Pet(
+                        id: '',
+                        name: '',
+                        type: '',
+                        breed: '',
+                        age: 0,
+                        gender: '',
+                        description: '',
+                        imageLink: '',
+                      ),
+                      isAddPet: true,
+                    );
                   },
                 ),
-                ],
-                ),
-              SizedBox(height: profileHeight / 2 + 20)
               ],
-            ),
+              ),
+            ],
           ),
+        ),
       ),
-      );
+    );
   }
 }

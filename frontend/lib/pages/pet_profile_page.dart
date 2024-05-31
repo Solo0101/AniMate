@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend/constants/api_constants.dart';
@@ -6,6 +7,7 @@ import 'package:frontend/components/my_button.dart';
 import 'package:frontend/components/my_scrollbar.dart';
 import 'package:frontend/components/my_textfield.dart';
 import 'package:frontend/constants/style_constants.dart';
+import 'package:frontend/services/api_service.dart';
 
 import '../components/my_appbar.dart';
 import '../components/my_drawer.dart';
@@ -47,92 +49,114 @@ class _PetProfilePageState extends ConsumerState<PetProfilePage> {
       resizeToAvoidBottomInset: false,
       appBar: const MyAppBar(hasBackButton: true,),
       endDrawer: const MyDrawer(),
-      body: Container(
-        color: backgroundColor,
-        child: Column(
-          children: <Widget>[
-            Container(
-              height: topContainerHeight,
-              color: primaryGreen,
-              child: Center(
-                  child: Column(
-                    children: [
-                      Stack(
-                          alignment: Alignment.center,
-                          clipBehavior: Clip.none,
+      body: SingleChildScrollView(
+        child: Container(
+          color: backgroundColor,
+          child: Column(
+            children: <Widget>[
+              Container(
+                height: topContainerHeight,
+                color: primaryGreen,
+                child: Center(
+                    child: Column(
+                      children: [
+                        Stack(
+                            alignment: Alignment.center,
+                            clipBehavior: Clip.none,
+                            children: [
+                              Column(
+                                // mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                      height: (topContainerHeight -
+                                          profileHeight -
+                                          profileHeight / 5)),
+                                  const Text('Home',
+                                      style: TextStyle(
+                                          fontSize: 40.0,
+                                          color: primaryTextColor)),
+                                ],
+                              ),
+                              Positioned(
+                                top: top,
+                                child: CircleAvatar(
+                                  radius: profileHeight / 2,
+                                  backgroundColor: Colors.grey,
+                                  backgroundImage: Image.network('${ApiConstants.petResources}${widget.pet.imageLink}').image,
+                                ),
+                              )
+                            ]),
+                      ],
+                    )),
+              ),
+              const SizedBox(height: 60),
+              Text(widget.pet.name,
+                  style: const TextStyle(fontSize: 30, color: primaryGreen)),
+              SizedBox(
+                  height: bottomContainerHeight - (profileHeight / 2 + 43),
+                  child: MyScrollbar(
+                      child: SingleChildScrollView(
+                        child: Column(
                           children: [
                             Column(
-                              // mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                SizedBox(
-                                    height: (topContainerHeight -
-                                        profileHeight -
-                                        profileHeight / 5)),
-                                const Text('Home',
-                                    style: TextStyle(
-                                        fontSize: 40.0,
-                                        color: primaryTextColor)),
-                              ],
-                            ),
-                            Positioned(
-                              top: top,
-                              child: CircleAvatar(
-                                radius: profileHeight / 2,
-                                backgroundColor: Colors.grey,
-                                backgroundImage: Image.network('${ApiConstants.petResources}${widget.pet.imageLink}').image,
-                              ),
-                            )
-                          ]),
-                    ],
-                  )),
-            ),
-            const SizedBox(height: 60),
-            Text(widget.pet.name,
-                style: const TextStyle(fontSize: 30, color: primaryGreen)),
-            SizedBox(
-                height: bottomContainerHeight - (profileHeight / 2 + 43),
-                child: MyScrollbar(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              MyTextField(
-                                  controller: petNameController,
-                                  hintText: "Name"),
-                              MyTextField(
-                                  controller: petTypeController = TextEditingController(text: widget.pet.type),
-                                  hintText: "Animal Type"),
-                              MyTextField(
-                                  controller: petAgeController = TextEditingController(text: widget.pet.age.toString()),
-                                  hintText: "Age"),
-                              MyTextField(
-                                  controller: petGenderController = TextEditingController(text: widget.pet.gender),
-                                  hintText: "Gender"),
-                              MyTextField(
-                                  controller: petBreedController = TextEditingController(text: widget.pet.breed),
-                                  hintText: "Breed"),
-                              MyTextField(
-                                  controller: petDescriptionController = TextEditingController(text: widget.pet.description),
-                                  hintText: "Description"),
+                                MyTextField(
+                                    controller: petNameController,
+                                    hintText: "Name"),
+                                MyTextField(
+                                    controller: petTypeController = TextEditingController(text: widget.pet.type),
+                                    hintText: "Animal Type"),
+                                MyTextField(
+                                    controller: petAgeController = TextEditingController(text: widget.pet.age.toString()),
+                                    hintText: "Age"),
+                                MyTextField(
+                                    controller: petGenderController = TextEditingController(text: widget.pet.gender),
+                                    hintText: "Gender"),
+                                MyTextField(
+                                    controller: petBreedController = TextEditingController(text: widget.pet.breed),
+                                    hintText: "Breed"),
+                                MyTextField(
+                                    controller: petDescriptionController = TextEditingController(text: widget.pet.description),
+                                    hintText: "Description"),
 
-                              MyButton(
-                                  buttonColor: utilityButtonColor,
-                                  textColor: buttonTextColor,
-                                  buttonText: 'Save',
-                                  onPressed: () {}),
-                              MyButton(
-                                  buttonColor: importantUtilityButtonColor,
-                                  textColor: buttonTextColor,
-                                  buttonText: 'Delete Pet',
-                                  onPressed: () {}),
-                            ],
-                          )
-                        ],
-                      ),
-                    )))
-          ],
+                                FloatingActionButton(
+                                    onPressed: () => { ApiService.getImage() },
+                                    tooltip: 'Pick Image',
+                                    child: const Icon(Icons.add_a_photo),
+                                ),
+
+                                MyButton(
+                                    buttonColor: utilityButtonColor,
+                                    textColor: buttonTextColor,
+                                    buttonText: 'Save',
+                                    onPressed: () async {
+                                      Pet pet = Pet(
+                                        id: widget.pet.id,
+                                        name: petNameController.text.trim(),
+                                        type: petTypeController.text.trim(),
+                                        age: int.parse(petAgeController.text.trim()),
+                                        breed: petBreedController.text.trim(),
+                                        description: petDescriptionController.text.trim(),
+                                        gender: petGenderController.text.trim(),
+                                        imageLink: '');
+                                        int responseCode = await ApiService.updatePet(pet, ref);
+                                        if (kDebugMode) {
+                                          print(responseCode);
+                                        }
+                                    }),
+                                MyButton(
+                                    buttonColor: importantUtilityButtonColor,
+                                    textColor: buttonTextColor,
+                                    buttonText: 'Delete Pet',
+                                    onPressed: () {}),
+                              ],
+                            )
+                          ],
+                        ),
+                      )))
+            ],
+          ),
         ),
       ),
     );
