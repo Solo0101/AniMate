@@ -1,70 +1,79 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend/components/my_textfield.dart';
 import 'package:frontend/constants/router_constants.dart';
 import 'package:flutter/gestures.dart';
+import 'package:frontend/constants/style_constants.dart';
+import 'package:frontend/pages/home_page.dart';
+import 'package:frontend/services/api_service.dart';
+import 'package:frontend/services/auth_service.dart';
 import 'package:frontend/services/validate_credentials.dart';
+import 'package:frontend/components/my_button.dart';
+import 'package:frontend/components/my_scrollbar.dart';
 
-class RegisterPage extends StatelessWidget {
+class RegisterPage extends ConsumerWidget {
   RegisterPage({super.key});
 
   final emailController = TextEditingController();
   final fullNameController = TextEditingController();
   final phoneNumberController = TextEditingController();
-  final locationController = TextEditingController();
+  final countryController = TextEditingController();
+  final countyOrStateController = TextEditingController();
+  final cityController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
+  final AuthService authService = AuthService();
+
+  final double topContainerPercentage = 0.3; //bottom percentage will be the rest of the page
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
-        color: Colors.white,
+        color: backgroundColor,
         child: Column(
           children: <Widget>[
             Container(
-              height: MediaQuery.of(context).size.height * 0.35,
-              color: const Color(0xFF626353),
+              height:
+                  MediaQuery.of(context).size.height * topContainerPercentage,
+              color: primaryGreen,
               child: const Center(
                 child: SafeArea(
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(
-                        height: 50,
-                      ),
                       Text('AniMATE',
-                          style:
-                              TextStyle(fontSize: 40.0, color: Colors.white)),
+                          style: TextStyle(
+                              fontSize: 40.0, color: primaryTextColor)),
                       SizedBox(
                         height: 20,
                       ),
                       Text('Welcome!',
-                          style: TextStyle(fontSize: 25.0, color: Colors.white))
+                          style: TextStyle(
+                              fontSize: 25.0, color: primaryTextColor))
                     ],
                   ),
                 ),
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.65,
-              child: Scrollbar(
-                thickness: 5.0,
-                thumbVisibility: true,
-                radius: const Radius.circular(20.0),
+              height: MediaQuery.of(context).size.height *
+                  (1 - topContainerPercentage),
+              child: MyScrollbar(
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Padding(
-                        padding:
-                            EdgeInsets.fromLTRB(35.0, 30.0, 0.0, 15.0),
+                        padding: EdgeInsets.fromLTRB(35.0, 30.0, 0.0, 15.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Text('Sign in',
                                 style: TextStyle(
                                   fontSize: 30.0,
-                                  color: Color(0xFF626353),
+                                  color: primaryGreen,
                                 )),
                           ],
                         ),
@@ -85,8 +94,18 @@ class RegisterPage extends StatelessWidget {
                         obscureText: false,
                       ),
                       MyTextField(
-                        controller: locationController,
-                        hintText: 'Location',
+                        controller: countryController,
+                        hintText: 'Country',
+                        obscureText: false,
+                      ),
+                      MyTextField(
+                        controller: countyOrStateController,
+                        hintText: 'County/State',
+                        obscureText: false,
+                      ),
+                      MyTextField(
+                        controller: cityController,
+                        hintText: 'City',
                         obscureText: false,
                       ),
                       MyTextField(
@@ -99,9 +118,16 @@ class RegisterPage extends StatelessWidget {
                         hintText: 'Confirm Password',
                         obscureText: true,
                       ),
+
+                      FloatingActionButton(
+                        onPressed: () => { ApiService.getImage() },
+                        tooltip: 'Pick Image',
+                        child: const Icon(Icons.add_a_photo),
+                      ),
+
                       Padding(
                         padding:
-                            const EdgeInsets.fromLTRB(35.0, 15.0, 35.0, 20.0),
+                            const EdgeInsets.fromLTRB(40.0, 15.0, 35.0, 20.0),
                         child: Column(
                           children: [
                             const Row(
@@ -111,12 +137,11 @@ class RegisterPage extends StatelessWidget {
                                   'Already have an account?',
                                   style: TextStyle(
                                     fontSize: 15.0,
-                                    color: Color(0xFF626353),
+                                    color: primaryGreen,
                                   ),
                                 ),
                               ],
                             ),
-
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
@@ -124,58 +149,102 @@ class RegisterPage extends StatelessWidget {
                                   'Login ',
                                   style: TextStyle(
                                     fontSize: 15.0,
-                                    color: Color(0xFF626353),
+                                    color: primaryGreen,
                                   ),
                                 ),
                                 RichText(
                                   text: TextSpan(
-                                      text: 'here',
-                                      style: const TextStyle(
+                                    text: 'here',
+                                    style: const TextStyle(
                                         fontFamily: 'HappyMonkey',
                                         color: Colors.blue,
-                                        fontSize: 15.0
-                                      ),
-                                      recognizer: TapGestureRecognizer()
-                                        ..onTap = () {
-                                          Navigator.of(context).pushNamed(loginPageRoute);
-                                                  },
-                                        ),
+                                        fontSize: 15.0),
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () {
+                                        Navigator.pushNamed(context, loginPageRoute);
+                                      },
+                                  ),
                                 ),
                                 const Text(
                                   '!',
                                   style: TextStyle(
                                     fontSize: 10.0,
-                                    color: Color(0xFF626353),
+                                    color: primaryGreen,
                                   ),
                                 ),
                               ],
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  TextButton(onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => const ValidateCredentials()));
-                                  }, child: Container(
-                                    decoration: const BoxDecoration(color: Color(0xFFBEC7C6), ),
-                                    child: const Row(
-                                        children: [
-                                          Text(
-                                              'Sign in',
-                                                  style: TextStyle(fontSize: 20.0, color: Colors.black),
+                            MyButton(
+                                buttonColor: utilityButtonColor,
+                                textColor: buttonTextColor,
+                                buttonText: 'Sign Up',
+                                onPressed: () async {
+                                  var registerResponse = await AuthService.register(
+                                      email: emailController.text,
+                                      name: fullNameController.text,
+                                      phoneNumber: phoneNumberController.text,
+                                      country: countryController.text,
+                                      countyOrState: countyOrStateController.text,
+                                      city: cityController.text,
+                                      password: passwordController.text,
+                                      confirmPassword: confirmPasswordController.text,
+                                      ref: ref
+                                  );
+                                  if (context.mounted) {
+                                    if (registerResponse == AuthResponse.success) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                          const SnackBar(
+                                            content: Text(
+                                                'Registered successfully!'),
+                                            duration: Duration(seconds: 2),
                                           )
-                                        ]
-
-                                    ),
-                                  )),
-                                ],
-                              ),
-                            )
-
+                                      );
+                                      var loginResponse = await AuthService
+                                          .login(
+                                          emailController.text,
+                                          passwordController.text,
+                                          ref
+                                      );
+                                      if (context.mounted) {
+                                        if (loginResponse == AuthResponse.success) {
+                                          Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => const HomePage()),
+                                          );
+                                        } else {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                              const SnackBar(
+                                                content: Text(
+                                                    'Something went wrong!'),
+                                                duration: Duration(seconds: 2),
+                                              )
+                                          );
+                                        }
+                                      }
+                                    } else if (registerResponse == AuthResponse.badRequest) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                          const SnackBar(
+                                            content: Text(
+                                                'Complete all fields!'),
+                                            duration: Duration(seconds: 2),
+                                          )
+                                      );
+                                    } else {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                          const SnackBar(
+                                            content: Text('Bad request!'),
+                                            duration: Duration(seconds: 2),
+                                          )
+                                      );
+                                    }
+                                  }
+                                }
+                            ),
                           ],
                         ),
                       )

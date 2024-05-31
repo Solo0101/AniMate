@@ -1,10 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/constants/style_constants.dart';
 
 class MyButton extends StatelessWidget {
-  const MyButton({super.key});
+  final Color buttonColor;
+  final Color textColor;
+  final String buttonText;
+  final void Function()? onPressed;
+
+  const MyButton({
+    super.key,
+    required this.buttonColor,
+    required this.textColor,
+    required this.buttonText,
+    required this.onPressed
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        TextButton(
+            onPressed: onPressed,
+            child: Container(
+              padding: const EdgeInsets.symmetric(
+                  vertical: 10, horizontal: 15),
+              margin: const EdgeInsets.symmetric(horizontal: 10),
+              decoration: BoxDecoration(
+                color: buttonColor,
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              child: Row(children: [
+                Text(
+                  buttonText,
+                  style:
+                      const TextStyle(fontSize: 20.0, color: buttonTextColor),
+                )
+              ]),
+            )),
+      ],
+    );
   }
 }

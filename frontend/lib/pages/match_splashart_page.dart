@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ValidateCredentials extends StatelessWidget {
-  const ValidateCredentials({super.key});
+class MatchSplashPage extends StatelessWidget {
+  const MatchSplashPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,11 +15,11 @@ class ValidateCredentials extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Credentials successfully validated!',
-              style: TextStyle(
-                color: Colors.green,
-                fontSize: 17.0
-              ),),
+              Text('No other pets to show! Try again later!',
+                style: TextStyle(
+                    color: Colors.green,
+                    fontSize: 17.0
+                ),),
             ],
           )
         ],

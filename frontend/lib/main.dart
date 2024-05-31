@@ -1,19 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/pages/register_page.dart';
+import 'package:frontend/services/auth_service.dart';
+import 'package:frontend/services/hive_service.dart';
 import 'package:frontend/shared/router.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:flutter/services.dart';
 
 import 'constants/style_constants.dart';
 
-void main() {
-  runApp(const AniMATEApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent, // transparent status bar
+  ));
+  await Hive.initFlutter();
+  await HiveService().initHive();
+
+  runApp(const ProviderScope(child: AniMATEApp()));
 }
 
-class AniMATEApp extends StatelessWidget {
+class AniMATEApp extends ConsumerWidget {
   const AniMATEApp({super.key});
 
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
 
     final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
     return MaterialApp(
@@ -25,8 +36,9 @@ class AniMATEApp extends StatelessWidget {
         primarySwatch: Colors.deepOrange,
         fontFamily: fontFamily
       ),
-      darkTheme: ThemeData.dark(),
-      home: RegisterPage(),
+      // darkTheme: ThemeData.dark(),
+      home: AuthService.initialRouting(ref),
     );
   }
+
 }
