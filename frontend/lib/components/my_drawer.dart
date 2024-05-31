@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:frontend/constants/router_constants.dart';
 import 'package:frontend/constants/style_constants.dart';
 
 class MyDrawer extends StatelessWidget {
@@ -13,6 +14,7 @@ class MyDrawer extends StatelessWidget {
       backgroundColor: popUpBackgroundColor,
       child: ListView(
         children: [
+          const SizedBox(height: 100),
           ListTile(
               title: const Row(
                 children: [
@@ -21,7 +23,8 @@ class MyDrawer extends StatelessWidget {
                   Text("Home"),
                 ],
               ),
-              onTap: () { }
+              onTap: () { Navigator.of(context)
+                  .pushReplacementNamed(homePageRoute);}
           ),
           ListTile(
               title: const Row(
@@ -31,7 +34,8 @@ class MyDrawer extends StatelessWidget {
                   Text("My Profile"),
                 ],
               ),
-              onTap: () { }
+              onTap: () { Navigator.of(context)
+                  .pushNamed(myProfilePageRoute);}
           ),
           ListTile(
               title: const Row(
@@ -41,9 +45,10 @@ class MyDrawer extends StatelessWidget {
                   Text("Settings"),
                 ],
               ),
-              onTap: () { }
+              onTap: () { Navigator.of(context)
+                  .pushReplacementNamed(settingsPageRoute); }
           ),
-          SizedBox(height: 100),
+          const SizedBox(height: 100),
           ListTile(
               title: const Row(
                 children: [
