@@ -4,9 +4,12 @@
         <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="AutoMapper" Version="13.0.1" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.4" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.3" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.3" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.3" />
@@ -20,7 +23,14 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Database\" />
+      <Content Include="..\.dockerignore">
+        <Link>.dockerignore</Link>
+      </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="wwwroot\swagger-ui\" />
+      <Folder Include="wwwroot\uploads\" />
     </ItemGroup>
 
 </Project>

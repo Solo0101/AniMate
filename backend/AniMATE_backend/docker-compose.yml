@@ -1,0 +1,12 @@
+﻿services:
+  animate_api:
+    image: animate_api
+    restart: always
+    build:
+      context: .
+      dockerfile: AniMATE_Api/Dockerfile
+    ports:
+    - "8080:8080"
+#    - "8081:8081"
+    volumes: 
+    - /opt/docker/AniMATE/backend/AniMATE_backend/AniMATE_Api/Database.db:/app/Database.db

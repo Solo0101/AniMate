@@ -1,0 +1,57 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\ProiecteTeme\\UPT_CURSURI\\Anul_3\\Semestrul_2\\IC\\AniMate\\backend\\AniMATE_backend\\AniMATE_Api\\wwwroot\\swagger-ui\\SwaggerDark.css",
+      "PackagePath": "staticwebassets\\swagger-ui\\SwaggerDark.css"
+    },
+    {
+      "Id": "D:\\ProiecteTeme\\UPT_CURSURI\\Anul_3\\Semestrul_2\\IC\\AniMate\\backend\\AniMATE_backend\\AniMATE_Api\\wwwroot\\uploads\\new_pet.jpg",
+      "PackagePath": "staticwebassets\\uploads\\new_pet.jpg"
+    },
+    {
+      "Id": "D:\\ProiecteTeme\\UPT_CURSURI\\Anul_3\\Semestrul_2\\IC\\AniMate\\backend\\AniMATE_backend\\AniMATE_Api\\wwwroot\\uploads\\pets\\09c0d7a1-4d47-4e48-9ef9-b4e83cebc6a3.jpg",
+      "PackagePath": "staticwebassets\\uploads\\pets\\09c0d7a1-4d47-4e48-9ef9-b4e83cebc6a3.jpg"
+    },
+    {
+      "Id": "D:\\ProiecteTeme\\UPT_CURSURI\\Anul_3\\Semestrul_2\\IC\\AniMate\\backend\\AniMATE_backend\\AniMATE_Api\\wwwroot\\uploads\\pets\\163777f7-4c42-4b67-8e2b-d5694e1b7774.webp",
+      "PackagePath": "staticwebassets\\uploads\\pets\\163777f7-4c42-4b67-8e2b-d5694e1b7774.webp"
+    },
+    {
+      "Id": "D:\\ProiecteTeme\\UPT_CURSURI\\Anul_3\\Semestrul_2\\IC\\AniMate\\backend\\AniMATE_backend\\AniMATE_Api\\wwwroot\\uploads\\pets\\5d819189-a805-4287-ae57-683728bb2096.jpg",
+      "PackagePath": "staticwebassets\\uploads\\pets\\5d819189-a805-4287-ae57-683728bb2096.jpg"
+    },
+    {
+      "Id": "D:\\ProiecteTeme\\UPT_CURSURI\\Anul_3\\Semestrul_2\\IC\\AniMate\\backend\\AniMATE_backend\\AniMATE_Api\\wwwroot\\uploads\\pets\\d4ea2201-f495-43b1-9732-1c52ab1b28d0.jpg",
+      "PackagePath": "staticwebassets\\uploads\\pets\\d4ea2201-f495-43b1-9732-1c52ab1b28d0.jpg"
+    },
+    {
+      "Id": "D:\\ProiecteTeme\\UPT_CURSURI\\Anul_3\\Semestrul_2\\IC\\AniMate\\backend\\AniMATE_backend\\AniMATE_Api\\wwwroot\\uploads\\pets\\f1869868-6f91-4a77-aba7-b3981fde653d.jpg",
+      "PackagePath": "staticwebassets\\uploads\\pets\\f1869868-6f91-4a77-aba7-b3981fde653d.jpg"
+    },
+    {
+      "Id": "D:\\ProiecteTeme\\UPT_CURSURI\\Anul_3\\Semestrul_2\\IC\\AniMate\\backend\\AniMATE_backend\\AniMATE_Api\\wwwroot\\uploads\\users\\1195d482-a713-4e88-a4dc-2ab43f40be78.png",
+      "PackagePath": "staticwebassets\\uploads\\users\\1195d482-a713-4e88-a4dc-2ab43f40be78.png"
+    },
+    {
+      "Id": "D:\\ProiecteTeme\\UPT_CURSURI\\Anul_3\\Semestrul_2\\IC\\AniMate\\backend\\AniMATE_backend\\AniMATE_Api\\wwwroot\\uploads\\users\\24788ec1-965b-4cbc-8e9b-a719f4afa645.png",
+      "PackagePath": "staticwebassets\\uploads\\users\\24788ec1-965b-4cbc-8e9b-a719f4afa645.png"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.AniMATE_Api.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.AniMATE_Api.props",
+      "PackagePath": "build\\AniMATE_Api.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.AniMATE_Api.props",
+      "PackagePath": "buildMultiTargeting\\AniMATE_Api.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.AniMATE_Api.props",
+      "PackagePath": "buildTransitive\\AniMATE_Api.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

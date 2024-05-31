@@ -1,5 +1,5 @@
-﻿using AniMATE_Api.AuthModels;
-using AniMATE_Api.Data;
+﻿using AniMATE_Api.Data;
+using AniMATE_Api.DTOs;
 using AniMATE_Api.Interfaces;
 using AniMATE_Api.Models;
 
@@ -8,10 +8,12 @@ namespace AniMATE_Api.Services;
 public class UserService : IUserService
 {
     private readonly DataContext _context;
-    
-    public UserService(DataContext context)
+    private readonly IFileService _fileService;
+
+    public UserService(DataContext context, IFileService fileService)
     {
         _context = context;
+        _fileService = fileService;
     }
     public List<User> GetAllUsers()
     {
@@ -25,35 +27,40 @@ public class UserService : IUserService
 
     public User? GetUserByEmail(string email)
     {
-       return _context.Users.Where(u => u.Email == email).FirstOrDefault();
+       return _context.Users.FirstOrDefault(u => u.Email == email);
     }
 
-    public User CreateUser(RegisterModel model)
+    public User CreateUser(User newUser)
     {
-        var user = new User();
+        return _context.Users.Add(newUser).Entity;
+    }
+
+    public bool UpdateUser(User newUser)
+    {
+        var oldUser = GetUserById(newUser.Id);
+        oldUser!.City = newUser.City;
+        oldUser.Country = newUser.Country;
+        oldUser.Email = newUser.Email;
+        oldUser.Name = newUser.Name;
+        oldUser.PhoneNumber = newUser.PhoneNumber;
+        oldUser.CountyOrState = newUser.CountyOrState;
+        oldUser.UserName = newUser.Email;
+        oldUser.NormalizedEmail = newUser.Email?.ToUpper();
+        oldUser.NormalizedUserName = newUser.UserName?.ToUpper();
+        _context.Users.Update(oldUser);
+        if (oldUser.Image != newUser.Image)
         {
-            user.Email = model.Email;
-            user.PasswordHash = model.Password;
-            user.Name = model.Name;
-            user.UserName = model.Email;
-            user.Country = model.Country;
-            user.CountyOrState = model.CountyOrState;
-            user.City = model.City;
-            user.PhoneNumber = model.PhoneNumber;
+            if (oldUser.Image != string.Empty)
+                _fileService.DeleteImage(newUser.Image, "users");
+            oldUser.Image = newUser.Image;
         }
-        return _context.Users.Add(user).Entity;
-    }
-
-    public bool UpdateUser(User user)
-    {
-        // TODO: Solve the issue with updating the user
-        _context.Users.Update(user);
         return Save();
     }
 
-    public void DeleteUser(string id)
+    public bool DeleteUser(string id)
     {
        _context.Users.Remove(GetUserById(id)!);
+       return Save(); 
     }
 
     public bool UserExists(string id)
@@ -62,6 +69,16 @@ public class UserService : IUserService
     }
     public bool Save()
     {
-        return _context.SaveChanges() >= 0;
+        var saved = 0;
+        try
+        {
+            saved = _context.SaveChanges();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+            return false;    
+        }
+        return saved > 0;
     }
 }

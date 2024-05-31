@@ -7,71 +7,92 @@ namespace AniMATE_Api.Services;
 public class PetService : IPetService
 {
     private readonly DataContext _context;
-    
-    public PetService(DataContext context)
+    private readonly IFileService _fileService;
+
+    public PetService(DataContext context, IFileService fileService)
     {
         _context = context;
+        _fileService = fileService;
     }
-    public ICollection<Pet?> GetAllPets()
+    public ICollection<Pet> GetAllPets()
     {
-        return _context.Pets.ToList()!;
+        return _context.Pets.ToList();
     }
 
     public Pet? GetPetById(string id)
     {
-        return _context.Pets.Where(p => p.Id == id).FirstOrDefault();
+        return _context.Pets.FirstOrDefault(p => p.Id == id);
     }
 
-    public ICollection<Pet?> GetPetsByOwner(string ownerId)
+    public ICollection<Pet> GetPetsByOwner(string ownerId)
     {
-        return _context.Pets.Where(p => p.Owner!.Id == ownerId).ToList()!;
+        return _context.Pets.Where(p => p.Owner.Id == ownerId).ToList();
     }
 
-    public ICollection<Pet?> GetPetsByType(string type)
+    public ICollection<Pet> GetPetsByType(string type)
     {
-        return _context.Pets.Where(p => p.AnimalType == type).ToList()!;
+        return _context.Pets.Where(p => p.AnimalType == type).ToList();
     }
 
-    public ICollection<Pet?> GetPetsByBreed(string breed)
+    public ICollection<Pet> GetPetsByBreed(string breed)
     {
-        return _context.Pets.Where(p => p.Breed == breed).ToList()!;
+        return _context.Pets.Where(p => p.Breed == breed).ToList();
     }
 
-    public ICollection<Pet?> GetPetsByAge(int age)
+    public ICollection<Pet> GetPetsByAge(int age)
     {
-       return _context.Pets.Where(p => p.Age == age).ToList()!;
+       return _context.Pets.Where(p => p.Age == age).ToList();
     }
 
-    public ICollection<Pet?> GetPetsByGender(GenderType gender)
+    public ICollection<Pet> GetPetsByGender(GenderType gender)
     {
-        return _context.Pets.Where(p => p.Gender == gender).ToList()!;
+        return _context.Pets.Where(p => p.Gender == gender).ToList();
     }
 
-    public ICollection<Pet?> GetPetsByTypeAndGender(string type, GenderType gender)
+    public ICollection<Pet> GetPetsByTypeAndGender(string type, GenderType gender)
     {
-        return _context.Pets.Where(p => p.AnimalType == type && p.Gender == gender).ToList()!;
+        return _context.Pets.Where(p => p.AnimalType == type && p.Gender == gender).ToList();
     }
 
-    public ICollection<Pet?> GetPetsByTypeBreedAndGender(string type, string breed, GenderType gender)
+    public ICollection<Pet> GetPetsByTypeBreedAndGender(string type, string breed, GenderType gender)
     {
-        return _context.Pets.Where(p => p.AnimalType == type && p.Breed == breed && p.Gender == gender).ToList()!;
+        return _context.Pets.Where(p => p.AnimalType == type && p.Breed == breed && p.Gender == gender).ToList();
     }
 
     public bool CreatePet(Pet pet, string ownerId)
     { 
+        pet.Id = Guid.NewGuid().ToString();
+        pet.Owner = _context.Users.FirstOrDefault(u => u.Id == ownerId)!;
         _context.Pets.Add(pet);
         return Save();
     }
 
     public bool UpdatePet(Pet pet)
     {
-       _context.Pets.Update(pet);
-       return Save();
+        var oldPet = GetPetById(pet.Id);
+        if (oldPet != null)
+        {
+            oldPet.Name = pet.Name;
+            oldPet.AnimalType = pet.AnimalType;
+            oldPet.Breed = pet.Breed;
+            oldPet.Age = pet.Age;
+            oldPet.Description = pet.Description;
+            if (oldPet.Image != pet.Image)
+            {
+                if (oldPet.Image != string.Empty)
+                    _fileService.DeleteImage(oldPet.Image, "pets");
+                oldPet.Image = pet.Image;
+            }
+            _context.Pets.Update(oldPet);
+        }
+
+        return Save();
     }
 
-    public void DeletePet(string id)
+    public bool DeletePet(string id)
     {
         _context.Pets.Remove(GetPetById(id)!);
+        return Save();
     }
 
     public bool PetExists(string id)
@@ -81,7 +102,16 @@ public class PetService : IPetService
 
     public bool Save()
     {
-        var saved = _context.SaveChanges();
+        var saved = 0;
+        try
+        {
+            saved = _context.SaveChanges();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+            return false;    
+        }
         return saved > 0;
     }
 }

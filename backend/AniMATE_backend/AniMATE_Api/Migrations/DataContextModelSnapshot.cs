@@ -17,6 +17,30 @@ namespace AniMATE_Api.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.3");
 
+            modelBuilder.Entity("AniMATE_Api.Models.Match", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasMaxLength(1024)
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("Matched")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("MatchedPetId")
+                        .IsRequired()
+                        .HasMaxLength(1024)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PetId")
+                        .IsRequired()
+                        .HasMaxLength(1024)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Matches");
+                });
+
             modelBuilder.Entity("AniMATE_Api.Models.Pet", b =>
                 {
                     b.Property<string>("Id")
@@ -37,11 +61,17 @@ namespace AniMATE_Api.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasMaxLength(1024)
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Gender")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasMaxLength(1024)
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -91,6 +121,11 @@ namespace AniMATE_Api.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasMaxLength(1024)
+                        .HasColumnType("TEXT");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("INTEGER");
