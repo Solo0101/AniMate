@@ -13,7 +13,7 @@ class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   final double topContainerPercentage =
-      0.3; //bottom percentage will be the rest of the page
+      0.25; //bottom percentage will be the rest of the page
   final double profileHeight = 120;
 
   @override
@@ -61,6 +61,57 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
+
+
+      appBar: AppBar(
+        title: const Text("AniMate"),
+        // centerTitle: true,
+        backgroundColor: primaryGreen,
+        foregroundColor: Colors.white,
+        actions: <Widget>[
+        ],
+        // leading: IconButton(
+        //   icon: const Icon(Icons.arrow_back_ios_new),
+        //   onPressed: () => Navigator.of(context).pop(),
+        // ),
+      ),
+      endDrawer: Drawer(
+        backgroundColor: popUpBackgroundColor,
+        child: ListView(
+          children: [
+            ListTile(
+                title: Row(
+                  children: [
+                    const Icon(Icons.home),
+                    const SizedBox(width: 10,),
+                    const Text("Home"),
+                  ],
+                ),
+                onTap: () { }
+            ),
+            ListTile(
+                title: Row(
+                  children: [
+                    const Icon(Icons.person),
+                    const SizedBox(width: 10,),
+                    const Text("My Profile"),
+                  ],
+                ),
+                onTap: () { }
+            ),
+            ListTile(
+                title: Row(
+                  children: [
+                    const Icon(Icons.settings),
+                    const SizedBox(width: 10,),
+                    const Text("Settings"),
+                  ],
+                ),
+                onTap: () { }
+            ),
+          ],
+        ),
+      ),
       body: Container(
         color: backgroundColor,
         child: Column(
@@ -75,16 +126,19 @@ class HomePage extends StatelessWidget {
                           alignment: Alignment.center,
                           clipBehavior: Clip.none,
                           children: [
-                            Column(
+                            const Column(
                               // mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                SizedBox(
-                                  height:
-                                      (topContainerHeight - profileHeight - profileHeight / 5)
+                                // SizedBox(
+                                //   height:
+                                //       (topContainerHeight - profileHeight - profileHeight / 5)
+                                // ),
+                                Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: Text('Home',
+                                      style: TextStyle(
+                                          fontSize: 40.0, color: primaryTextColor)),
                                 ),
-                                const Text('Home',
-                                    style: TextStyle(
-                                        fontSize: 40.0, color: primaryTextColor)),
                               ],
                             ),
                             Positioned(

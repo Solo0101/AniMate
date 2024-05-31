@@ -21,7 +21,7 @@ class PetProfilePage extends StatelessWidget {
   final petDescriptionController = TextEditingController();
 
   final double topContainerPercentage =
-      0.3; //bottom percentage will be the rest of the page
+      0.25; //bottom percentage will be the rest of the page
   final double profileHeight = 120;
 
   @override
