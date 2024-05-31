@@ -34,8 +34,8 @@ class MyDrawer extends StatelessWidget {
                   Text("My Profile"),
                 ],
               ),
-              onTap: () { /*Navigator.of(context)
-                  .pushReplacementNamed(userProfilePage);*/ }
+              onTap: () { Navigator.of(context)
+                  .pushNamed(myProfilePageRoute);}
           ),
           ListTile(
               title: const Row(
@@ -45,8 +45,8 @@ class MyDrawer extends StatelessWidget {
                   Text("Settings"),
                 ],
               ),
-              onTap: () { /*Navigator.of(context)
-                  .pushReplacementNamed(settingsPage);*/ }
+              onTap: () { Navigator.of(context)
+                  .pushReplacementNamed(settingsPageRoute); }
           ),
           const SizedBox(height: 100),
           ListTile(
